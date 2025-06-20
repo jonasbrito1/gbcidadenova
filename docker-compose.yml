@@ -1,0 +1,77 @@
+services:
+  gb-website:
+    build: .
+    container_name: gb-cidade-nova-website
+    ports:
+      - "8800:80"
+    volumes:
+      - ./src:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    restart: unless-stopped
+    networks:
+      - gb-network
+
+  gb-dev-server:
+    image: node:18-alpine
+    container_name: gb-cidade-nova-dev
+    working_dir: /app
+    volumes:
+      - ./src:/app
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+    ports:
+      - "8801:3001"
+    command: >
+      sh -c "
+        if [ ! -d node_modules ]; then
+          npm install
+        fi &&
+        npm run dev
+      "
+    networks:
+      - gb-network
+    profiles:
+      - dev
+
+  gb-database:
+    image: mysql:8.0
+    container_name: gb-cidade-nova-db
+    environment:
+      MYSQL_ROOT_PASSWORD: graciebarra123
+      MYSQL_DATABASE: gb_cidade_nova
+      MYSQL_USER: gb_user
+      MYSQL_PASSWORD: gb_password
+    ports:
+      - "8802:3306"
+    volumes:
+      - gb_mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - gb-network
+    profiles:
+      - database
+
+  gb-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: gb-cidade-nova-phpmyadmin
+    environment:
+      PMA_HOST: gb-database
+      PMA_USER: gb_user
+      PMA_PASSWORD: gb_password
+      MYSQL_ROOT_PASSWORD: graciebarra123
+    ports:
+      - "8803:80"
+    depends_on:
+      - gb-database
+    networks:
+      - gb-network
+    profiles:
+      - database
+
+networks:
+  gb-network:
+    driver: bridge
+
+volumes:
+  gb_mysql_data:

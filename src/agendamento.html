@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Aula Experimental - Gracie Barra Cidade Nova</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: #dc143c;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background: url('gb_logo.jpg') center/cover;
+            border-radius: 4px;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            color: #dc143c;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .step-subtitle {
+            color: #666;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+        }
+
+        .progress-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .progress-circle.active {
+            background: #dc143c;
+        }
+
+        .progress-circle.completed {
+            background: #2c5aa0;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .required {
+            color: #dc143c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #dc143c;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Radio and Checkbox Groups */
+        .radio-group,
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            border-color: #dc143c;
+            background: #fff5f5;
+        }
+
+        .radio-item.selected,
+        .checkbox-item.selected {
+            border-color: #dc143c;
+            background: #fff5f5;
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            margin-right: 0.5rem;
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .time-slot:hover {
+            border-color: #dc143c;
+            background: #fff5f5;
+        }
+
+        .time-slot.selected {
+            border-color: #dc143c;
+            background: #dc143c;
+            color: white;
+        }
+
+        .time-slot.unavailable {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #dc143c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b91c3c;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Summary Section */
+        .booking-summary {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .summary-value {
+            color: #666;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .success-text {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #bee5eb;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box ul {
+            margin-left: 1rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 1rem;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-bar {
+                flex-wrap: wrap;
+            }
+
+            .progress-step {
+                margin: 0.5rem;
+            }
+
+            .radio-group,
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-img"></div>
+                <div>
+                    <div>Gracie Barra</div>
+                    <div style="font-size: 0.8rem; font-weight: normal;">Cidade Nova</div>
+                </div>
+            </div>
+            <a href="#" class="back-link">← Voltar ao Site</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Agendar Aula Experimental</h1>
+            <p class="page-subtitle">Dê o primeiro passo em sua jornada no Jiu-Jitsu. Agende sua aula experimental gratuita e descubra todos os benefícios que esta arte marcial pode proporcionar.</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-step">
+                <div class="progress-circle active" id="step1-circle">1</div>
+                <span class="progress-label">Dados Pessoais</span>
+            </div>
+            <div class="progress-step">
+                <div class="progress-circle" id="step2-circle">2</div>
+                <span class="progress-label">Programa</span>
+            </div>
+            <div class="progress-step">
+                <div class="progress-circle" id="step3-circle">3</div>
+                <span class="progress-label">Agendamento</span>
+            </div>
+            <div class="progress-step">
+                <div class="progress-circle" id="step4-circle">4</div>
+                <span class="progress-label">Confirmação</span>
+            </div>
+        </div>
+
+        <form id="bookingForm" class="form-container">
+            <!-- Etapa 1: Dados Pessoais -->
+            <div class="form-step active" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title">Dados Pessoais</h2>
+                    <p class="step-subtitle">Precisamos de algumas informações básicas para seu agendamento</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nome <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="birthDate">Data de Nascimento</label>
+                        <input type="date" id="birthDate" name="birthDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gênero</label>
+                        <select id="gender" name="gender">
+                            <option value="">Selecione</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Experiência anterior com artes marciais?</label>
+                    <div class="radio-group">
+                        <div class="radio-item" onclick="selectRadio('experience', 'nenhuma')">
+                            <input type="radio" id="exp-none" name="experience" value="nenhuma">
+                            <label for="exp-none">Nenhuma experiência</label>
+                        </div>
+                        <div class="radio-item" onclick="selectRadio('experience', 'pouca')">
+                            <input type="radio" id="exp-little" name="experience" value="pouca">
+                            <label for="exp-little">Pouca experiência</label>
+                        </div>
+                        <div class="radio-item" onclick="selectRadio('experience', 'moderada')">
+                            <input type="radio" id="exp-moderate" name="experience" value="moderada">
+                            <label for="exp-moderate">Experiência moderada</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <div></div>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 2: Escolha do Programa -->
+            <div class="form-step" id="step2">
+                <div class="step-header">
+                    <h2 class="step-title">Escolha seu Programa</h2>
+                    <p class="step-subtitle">Selecione o programa mais adequado para você</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Programa de Interesse <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item" onclick="selectRadio('program', 'gb1')">
+                            <input type="radio" id="program-gb1" name="program" value="gb1">
+                            <div>
+                                <strong>GB1 - Fundamentals</strong><br>
+                                <small>Iniciantes - Fundamentos básicos</small>
+                            </div>
+                        </div>
+                        <div class="radio-item" onclick="selectRadio('program', 'gb2')">
+                            <input type="radio" id="program-gb2" name="program" value="gb2">
+                            <div>
+                                <strong>GB2 - Advanced</strong><br>
+                                <small>Intermediário - Técnicas avançadas</small>
+                            </div>
+                        </div>
+                        <div class="radio-item" onclick="selectRadio('program', 'kids')">
+                            <input type="radio" id="program-kids" name="program" value="kids">
+                            <div>
+                                <strong>Little/Junior Champions</strong><br>
+                                <small>Crianças e adolescentes</small>
+                            </div>
+                        </div>
+                        <div class="radio-item" onclick="selectRadio('program', 'women')">
+                            <input type="radio" id="program-women" name="program" value="women">
+                            <div>
+                                <strong>Women's Program</strong><br>
+                                <small>Programa feminino</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>O que esperar na sua aula experimental:</h4>
+                    <ul>
+                        <li>Apresentação da metodologia Gracie Barra</li>
+                        <li>Aula prática adaptada ao seu nível</li>
+                        <li>Conversa com instrutores qualificados</li>
+                        <li>Tour pelas instalações</li>
+                        <li>Informações sobre planos e modalidades</li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="goals">Objetivos com o Jiu-Jitsu (opcional)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" onclick="toggleCheckbox('goal-fitness')">
+                            <input type="checkbox" id="goal-fitness" name="goals" value="fitness">
+                            <label for="goal-fitness">Condicionamento físico</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox('goal-defense')">
+                            <input type="checkbox" id="goal-defense" name="goals" value="defense">
+                            <label for="goal-defense">Defesa pessoal</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox('goal-competition')">
+                            <input type="checkbox" id="goal-competition" name="goals" value="competition">
+                            <label for="goal-competition">Competição</label>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox('goal-discipline')">
+                            <input type="checkbox" id="goal-discipline" name="goals" value="discipline">
+                            <label for="goal-discipline">Disciplina mental</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Agendamento -->
+            <div class="form-step" id="step3">
+                <div class="step-header">
+                    <h2 class="step-title">Escolha Data e Horário</h2>
+                    <p class="step-subtitle">Selecione o melhor horário para sua aula experimental</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferredDate">Data Preferida <span class="required">*</span></label>
+                    <input type="date" id="preferredDate" name="preferredDate" required onchange="loadAvailableSlots()">
+                </div>
+
+                <div class="form-group">
+                    <label>Horários Disponíveis <span class="required">*</span></label>
+                    <div class="schedule-grid" id="timeSlots">
+                        <!-- Horários serão carregados dinamicamente -->
+                        <div class="time-slot" onclick="selectTimeSlot(this)" data-time="06:00">06:00</div>
+                        <div class="time-slot" onclick="selectTimeSlot(this)" data-time="07:00">07:00</div>
+                        <div class="time-slot" onclick="selectTimeSlot(this)" data-time="08:00">08:00</div>
+                        <div class="time-slot" onclick="selectTimeSlot(this)" data-time="18:00">18:00</div>
+                        <div class="time-slot" onclick="selectTimeSlot(this)" data-time="19:00">19:00</div>
+                        <div class="time-slot unavailable" data-time="20:00">20:00 (Ocupado)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comentários ou observações (opcional)</label>
+                    <textarea id="comments" name="comments" placeholder="Alguma informação adicional que gostaria de compartilhar..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">Revisar Agendamento</button>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Confirmação -->
+            <div class="form-step" id="step4">
+                <div class="step-header">
+                    <h2 class="step-title">Confirmar Agendamento</h2>
+                    <p class="step-subtitle">Revise as informações antes de confirmar</p>
+                </div>
+
+                <div class="booking-summary" id="bookingSummary">
+                    <!-- Resumo será preenchido dinamicamente -->
+                </div>
+
+                <div class="info-box">
+                    <h4>Informações Importantes:</h4>
+                    <ul>
+                        <li>A aula experimental é totalmente gratuita</li>
+                        <li>Traga roupas confortáveis para exercícios</li>
+                        <li>Chegue 15 minutos antes do horário agendado</li>
+                        <li>Em caso de cancelamento, avise com pelo menos 2 horas de antecedência</li>
+                    </ul>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar Agendamento</button>
+                </div>
+            </div>
+
+            <!-- Etapa 5: Sucesso -->
+            <div class="form-step" id="step5">
+                <div class="success-message">
+                    <div class="success-icon">✅</div>
+                    <h2 class="success-title">Agendamento Confirmado!</h2>
+                    <p class="success-text">
+                        Seu agendamento foi realizado com sucesso. Você receberá um email de confirmação em breve com todos os detalhes.<br><br>
+                        Estamos ansiosos para recebê-lo na Gracie Barra Cidade Nova!
+                    </p>
+                    <button type="button" class="btn btn-primary" onclick="window.history.back()">Voltar ao Site</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function nextStep(step) {
+            if (validateStep(step)) {
+                document.getElementById(`step${step}`).classList.remove('active');
+                document.getElementById(`step${step + 1}`).classList.add('active');
+                
+                // Atualizar círculos de progresso
+                document.getElementById(`step${step}-circle`).classList.remove('active');
+                document.getElementById(`step${step}-circle`).classList.add('completed');
+                document.getElementById(`step${step + 1}-circle`).classList.add('active');
+                
+                currentStep = step + 1;
+
+                // Se chegou na etapa de confirmação, carregar resumo
+                if (currentStep === 4) {
+                    loadBookingSummary();
+                }
+            }
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.remove('active');
+            document.getElementById(`step${step - 1}`).classList.add('active');
+            
+            // Atualizar círculos de progresso
+            document.getElementById(`step${step}-circle`).classList.remove('active');
+            document.getElementById(`step${step - 1}-circle`).classList.remove('completed');
+            document.getElementById(`step${step - 1}-circle`).classList.add('active');
+            
+            currentStep = step - 1;
+        }
+
+        function validateStep(step) {
+            const form = document.getElementById('bookingForm');
+            let isValid = true;
+
+            switch(step) {
+                case 1:
+                    const requiredFields = ['firstName', 'lastName', 'email', 'phone'];
+                    requiredFields.forEach(field => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (!input.value.trim()) {
+                            input.style.borderColor = '#dc143c';
+                            isValid = false;
+                        } else {
+                            input.style.borderColor = '#e0e0e0';
+                        }
+                    });
+                    break;
+                    
+                case 2:
+                    const program = form.querySelector('input[name="program"]:checked');
+                    if (!program) {
+                        alert('Por favor, selecione um programa.');
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 3:
+                    const date = form.querySelector('[name="preferredDate"]').value;
+                    const timeSlot = document.querySelector('.time-slot.selected');
+                    if (!date) {
+                        alert('Por favor, selecione uma data.');
+                        isValid = false;
+                    } else if (!timeSlot) {
+                        alert('Por favor, selecione um horário.');
+                        isValid = false;
+                    }
+                    break;
+            }
+
+            return isValid;
+        }
+
+        function selectRadio(name, value) {
+            // Remover seleção anterior
+            document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+                input.closest('.radio-item').classList.remove('selected');
+            });
+            
+            // Selecionar novo item
+            const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+            radio.checked = true;
+            radio.closest('.radio-item').classList.add('selected');
+        }
+
+        function toggleCheckbox(id) {
+            const checkbox = document.getElementById(id);
+            const item = checkbox.closest('.checkbox-item');
+            
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        }
+
+        function selectTimeSlot(slot) {
+            if (slot.classList.contains('unavailable')) return;
+            
+            // Remover seleção anterior
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            
+            // Selecionar novo horário
+            slot.classList.add('selected');
+        }
+
+        function loadAvailableSlots() {
+            // Simular carregamento de horários disponíveis
+            const slotsContainer = document.getElementById('timeSlots');
+            slotsContainer.innerHTML = `
+                <div class="time-slot" onclick="selectTimeSlot(this)" data-time="06:00">06:00</div>
+                <div class="time-slot" onclick="selectTimeSlot(this)" data-time="07:00">07:00</div>
+                <div class="time-slot" onclick="selectTimeSlot(this)" data-time="08:00">08:00</div>
+                <div class="time-slot" onclick="selectTimeSlot(this)" data-time="18:00">18:00</div>
+                <div class="time-slot" onclick="selectTimeSlot(this)" data-time="19:00">19:00</div>
+                <div class="time-slot unavailable" data-time="20:00">20:00 (Ocupado)</div>
+            `;
+        }
+
+        function loadBookingSummary() {
+            const form = document.getElementById('bookingForm');
+            const formData = new FormData(form);
+            
+            const firstName = formData.get('firstName');
+            const lastName = formData.get('lastName');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const program = formData.get('program');
+            const date = formData.get('preferredDate');
+            const timeSlot = document.querySelector('.time-slot.selected')?.getAttribute('data-time');
+            
+            const programNames = {
+                'gb1': 'GB1 - Fundamentals',
+                'gb2': 'GB2 - Advanced',
+                'kids': 'Little/Junior Champions',
+                'women': "Women's Program"
+            };
+
+            const summaryHTML = `
+                <div class="summary-item">
+                    <span class="summary-label">Nome:</span>
+                    <span class="summary-value">${firstName} ${lastName}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Email:</span>
+                    <span class="summary-value">${email}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Telefone:</span>
+                    <span class="summary-value">${phone}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Programa:</span>
+                    <span class="summary-value">${programNames[program] || program}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Data:</span>
+                    <span class="summary-value">${formatDate(date)}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Horário:</span>
+                    <span class="summary-value">${timeSlot}</span>
+                </div>
+            `;
+            
+            document.getElementById('bookingSummary').innerHTML = summaryHTML;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function submitForm() {
+            // Simular envio do formulário
+            document.getElementById('step4').classList.remove('active');
+            document.getElementById('step5').classList.add('active');
+            
+            // Atualizar progresso
+            document.getElementById('step4-circle').classList.remove('active');
+            document.getElementById('step4-circle').classList.add('completed');
+            
+            // Aqui você enviaria os dados para o servidor
+            console.log('Formulário enviado com sucesso!');
+            
+            // Simular envio de email de confirmação
+            setTimeout(() => {
+                console.log('Email de confirmação enviado!');
+            }, 1000);
+        }
+
+        // Definir data mínima como hoje
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('preferredDate').setAttribute('min', today);
+            
+            // Definir data máxima como 30 dias a partir de hoje
+            const maxDate = new Date();
+            maxDate.setDate(maxDate.getDate() + 30);
+            document.getElementById('preferredDate').setAttribute('max', maxDate.toISOString().split('T')[0]);
+        });
+
+        // Validação de email em tempo real
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = '#dc143c';
+                if (!document.querySelector('.email-error')) {
+                    const errorMsg = document.createElement('small');
+                    errorMsg.className = 'email-error';
+                    errorMsg.style.color = '#dc143c';
+                    errorMsg.textContent = 'Por favor, insira um email válido';
+                    this.parentNode.appendChild(errorMsg);
+                }
+            } else {
+                this.style.borderColor = '#e0e0e0';
+                const errorMsg = document.querySelector('.email-error');
+                if (errorMsg) {
+                    errorMsg.remove();
+                }
+            }
+        });
+
+        // Máscara para telefone
+        document.getElementById('phone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                if (value.length < 14) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                }
+            }
+            
+            this.value = value;
+        });
+
+        // Navegação com teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                const nextButton = document.querySelector('.form-step.active .btn-primary');
+                if (nextButton && nextButton.textContent !== 'Confirmar Agendamento') {
+                    nextButton.click();
+                }
+            }
+        });
+
+        // Salvar dados no localStorage para recuperação
+        function saveFormData() {
+            const form = document.getElementById('bookingForm');
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            localStorage.setItem('gbBookingForm', JSON.stringify(data));
+        }
+
+        // Recuperar dados salvos
+        function loadFormData() {
+            const savedData = localStorage.getItem('gbBookingForm');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                const form = document.getElementById('bookingForm');
+                
+                Object.keys(data).forEach(key => {
+                    const input = form.querySelector(`[name="${key}"]`);
+                    if (input) {
+                        input.value = data[key];
+                        if (input.type === 'radio' && input.value === data[key]) {
+                            input.checked = true;
+                            input.closest('.radio-item').classList.add('selected');
+                        }
+                    }
+                });
+            }
+        }
+
+        // Salvar dados a cada mudança
+        document.getElementById('bookingForm').addEventListener('input', saveFormData);
+        document.getElementById('bookingForm').addEventListener('change', saveFormData);
+
+        // Carregar dados salvos ao inicializar
+        document.addEventListener('DOMContentLoaded', loadFormData);
+
+        // Limpar dados salvos após envio bem-sucedido
+        function clearSavedData() {
+            localStorage.removeItem('gbBookingForm');
+        }
+
+        // Atualizar função submitForm para limpar dados
+        const originalSubmitForm = submitForm;
+        submitForm = function() {
+            originalSubmitForm();
+            clearSavedData();
+        };
+    </script>
+</body>
+</html>

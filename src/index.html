@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracie Barra Cidade Nova - Jiu-Jitsu para Todos</title>
+    <style>
+        :root {
+            --primary-red: #dc143c;
+            --primary-blue: #2c5aa0;
+            --dark-red: #b91c3c;
+            
+            /* Light Mode Colors */
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #666;
+            --background-primary: #ffffff;
+            --background-secondary: #f8f9fa;
+            --background-tertiary: #e9ecef;
+            --card-background: #ffffff;
+            --border-color: rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.2);
+            
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Mode Colors */
+        [data-theme="dark"] {
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-light: #888;
+            --background-primary: #1a1a1a;
+            --background-secondary: #2d2d2d;
+            --background-tertiary: #404040;
+            --card-background: #2d2d2d;
+            --border-color: rgba(255,255,255,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.3);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-primary);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        /* Textos justificados */
+        p {
+            text-align: justify;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Header - NÃO FIXO */
+        .header {
+            background: var(--background-primary);
+            color: var(--text-primary);
+            padding: 1rem 0;
+            position: relative;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .logo-img {
+            width: clamp(60px, 8vw, 80px);
+            height: clamp(60px, 8vw, 80px);
+            margin-right: clamp(0.8rem, 2vw, 1.5rem);
+            background: url('assets/images/gb_logo.jpg') center/cover,
+                        linear-gradient(135deg, var(--primary-red), var(--primary-blue));
+            border-radius: 8px;
+            border: 3px solid var(--background-primary);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            color: var(--primary-red);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-sub {
+            font-size: clamp(0.7rem, 1.8vw, 1rem);
+            font-weight: 400;
+            color: var(--text-light);
+            margin-top: -2px;
+        }
+
+        /* Container para navegação e tema */
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            position: relative;
+            padding: 0.5rem 0;
+            white-space: nowrap;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-red);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--card-background);
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .theme-toggle:hover {
+            background: var(--background-secondary);
+            border-color: var(--primary-red);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .mobile-menu:hover {
+            color: var(--primary-red);
+            transform: scale(1.1);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--background-primary);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transform: translateY(-100%);
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            transform: translateY(0);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--background-secondary);
+            color: var(--primary-red);
+            transform: translateX(10px);
+        }
+
+        /* Hero Section com imagem de fundo */
+        .hero {
+            background: 
+                linear-gradient(135deg, rgba(220, 20, 60, 0.8), rgba(44, 90, 160, 0.6)), 
+                url('assets/images/gb1.png'),
+                linear-gradient(45deg, #1a1a1a, #333);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(220, 20, 60, 0.1), rgba(44, 90, 160, 0.1));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            max-width: 900px;
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #ffffff;
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.95;
+            color: #ffffff;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: clamp(12px, 3vw, 18px) clamp(24px, 6vw, 40px);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+            gap: clamp(2rem, 6vw, 4rem);
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-red);
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: clamp(250px, 40vw, 350px);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .image-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Imagens específicas com URLs locais */
+        .academia-img {
+            background: url('assets/images/gb2.png') center/cover;
+        }
+
+        .metodo-img {
+            background: url('assets/images/gb3.png') center/cover;
+        }
+
+        .comunidade-img {
+            background: url('assets/images/gb4.png') center/cover;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-blue));
+        }
+
+        .program-card:hover {
+            box-shadow: var(--shadow-strong);
+            transform: translateY(-8px);
+        }
+
+        .program-card h3 {
+            color: var(--primary-red);
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .program-card p {
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .program-icon {
+            width: clamp(50px, 10vw, 70px);
+            height: clamp(50px, 10vw, 70px);
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: bold;
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--background-secondary);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .benefit-icon {
+            width: clamp(60px, 12vw, 90px);
+            height: clamp(60px, 12vw, 90px);
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-blue));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .benefit-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+        }
+
+        .benefit-item p {
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: 
+                linear-gradient(135deg, rgba(44, 90, 160, 0.9), rgba(44, 90, 160, 0.7)),
+                url('assets/images/carlos_gracie.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            text-align: center;
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem);
+            position: relative;
+        }
+
+        .quote {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-style: italic;
+            margin-bottom: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.6;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .quote-author {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: var(--card-background);
+            border-left: 4px solid var(--primary-red);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-light);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .value-card:hover {
+            border-left-width: 8px;
+            transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .value-card h3 {
+            color: var(--primary-blue);
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Instructors Section */
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .instructor-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .instructor-info p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .instructor-img {
+            width: 100%;
+            height: clamp(200px, 30vw, 280px);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Imagens específicas dos instrutores */
+        .instructor-1 {
+            background: url('assets/images/instructor1.png') center/cover;
+        }
+
+        .instructor-2 {
+            background: url('assets/images/instructor2.png') center/cover;
+        }
+
+        .instructor-3 {
+            background: url('assets/images/instructor3.png') center/cover;
+        }
+
+        .instructor-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+        }
+
+        .instructor-info {
+            padding: clamp(1rem, 3vw, 2rem);
+        }
+
+        .instructor-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+
+        .instructor-info .rank {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .news-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .news-img {
+            width: 100%;
+            height: clamp(150px, 25vw, 220px);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Imagens específicas das notícias */
+        .news-1 {
+            background: url('assets/images/news1.jpg') center/cover;
+        }
+
+        .news-2 {
+            background: url('assets/images/news2.jpg') center/cover;
+        }
+
+        .news-3 {
+            background: url('assets/images/news3.jpg') center/cover;
+        }
+
+        .news-content {
+            padding: clamp(1rem, 3vw, 2rem);
+        }
+
+        .news-date {
+            color: var(--text-light);
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            color: var(--text-primary);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .news-content p {
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Contact Section - OCUPAÇÃO TOTAL E RESPONSIVA */
+        .contact-section {
+            background: 
+                linear-gradient(135deg, rgba(51, 51, 51, 0.9), rgba(51, 51, 51, 0.7)),
+                url('assets/images/contact_gb.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: clamp(3rem, 8vw, 6rem) 0;
+        }
+
+        .contact-section .section-title {
+            color: #ffffff;
+        }
+
+        .contact-section .section-subtitle {
+            color: #ffffff;
+        }
+
+        .contact-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: clamp(2rem, 6vw, 4rem);
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-red);
+            background: rgba(220, 20, 60, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: clamp(2rem, 4vw, 3rem);
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: clamp(20px, 4vw, 30px);
+            right: clamp(20px, 4vw, 30px);
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: clamp(45px, 8vw, 60px);
+            height: clamp(45px, 8vw, 60px);
+            cursor: pointer;
+            display: none;
+            transition: var(--transition);
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            box-shadow: var(--shadow-medium);
+            z-index: 999;
+        }
+
+        .scroll-to-top:hover {
+            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+            transform: scale(1.1);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-wrapper {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .theme-toggle {
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .theme-toggle {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-wrapper {
+                width: auto;
+                margin-top: 0;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .programs-grid,
+            .benefits-grid,
+            .instructors-grid,
+            .news-grid,
+            .contact-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-nav .theme-toggle {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+                padding: 1rem;
+                background: var(--background-secondary);
+                border: 2px solid var(--border-color);
+                border-radius: 12px;
+                color: var(--text-primary);
+                font-size: 1rem;
+                cursor: pointer;
+            }
+
+            .contact-section {
+                padding: clamp(3rem, 8vw, 6rem) 0;
+                margin-left: calc(-50vw + 50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo-img {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .contact-content {
+                padding: 0 1rem;
+            }
+
+            .contact-grid {
+                gap: clamp(1.5rem, 4vw, 2rem);
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading spinner for images */
+        .loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-img"></div>
+                <div class="logo-text">
+                    <div class="logo-main">Gracie Barra</div>
+                    <div class="logo-sub">Cidade Nova</div>
+                </div>
+            </div>
+            
+            <div class="nav-wrapper">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#programas">Programas</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#filosofia">Filosofia</a></li>
+                        <li><a href="#professores">Professores</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">Escuro</span>
+                </button>
+            </div>
+            
+            <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+        </div>
+        
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#programas">Programas</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#filosofia">Filosofia</a></li>
+                <li><a href="#professores">Professores</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="mobileThemeIcon">🌙</span>
+                Alternar Tema
+            </button>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content reveal">
+            <h1>Gracie Barra Cidade Nova</h1>
+            <div class="subtitle">Jiu-Jitsu para Todos</div>
+            <a href="#contato" class="cta-button">Começar a Treinar</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="section">
+        <h2 class="section-title reveal">Sobre a Gracie Barra</h2>
+        <p class="section-subtitle reveal">Gracie Barra é uma comunidade mundial de instrutores, estudantes e atletas do Jiu-Jitsu. Nossa organização é constituída por mais de 700 escolas em seis continentes.</p>
+        
+        <div class="two-column">
+            <div class="content-block reveal">
+                <h3>Nossa Unidade</h3>
+                <p>A Gracie Barra Cidade Nova representa a excelência do ensino de Jiu-Jitsu em Manaus. Seguimos os padrões globais da Gracie Barra, oferecendo um ambiente estruturado e acolhedor para todos os níveis de experiência.</p>
+                <p>Localizada estrategicamente na Cidade Nova, nossa academia conta com infraestrutura moderna e professores qualificados, proporcionando a melhor experiência de aprendizado do Jiu-Jitsu brasileiro em toda a região amazônica.</p>
+            </div>
+            <div class="image-placeholder academia-img reveal"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="two-column">
+            <div class="image-placeholder metodo-img reveal"></div>
+            <div class="content-block reveal">
+                <h3>Nosso Método</h3>
+                <p>A partir da ideia de que o Jiu-Jitsu deve ser adotado como uma jornada por toda a vida, Mestre Carlos Gracie Jr. criou um plano estruturado que permite aos alunos progredirem sistematicamente da faixa-branca à faixa-preta.</p>
+                <p>A estrutura das aulas é a marca registrada de todas as escolas Gracie Barra mundialmente. As aulas começam na hora marcada e seguem uma estrutura curricular padronizada, garantindo qualidade e consistência no ensino.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="two-column">
+            <div class="content-block reveal">
+                <h3>Por que Gracie Barra</h3>
+                <p>Os membros da GB fazem as escolas ser o que são, e você logo será parte também desta grande família. Você ficará impressionado com o comprometimento de cada membro da equipe com o seu desenvolvimento pessoal e técnico.</p>
+                <p>Nossa comunidade em Cidade Nova reflete fielmente os valores fundamentais da Gracie Barra: Irmandade, Expansão e Integridade, criando um ambiente único e transformador para seu crescimento como pessoa e atleta.</p>
+            </div>
+            <div class="image-placeholder comunidade-img reveal"></div>
+        </div>
+    </section>
+
+    <section id="programas" class="section">
+        <h2 class="section-title reveal">Programa Gracie Barra</h2>
+        <p class="section-subtitle reveal">Programas estruturados para todas as idades e níveis de experiência, seguindo o método oficial Gracie Barra</p>
+        
+        <div class="programs-grid">
+            <div class="program-card reveal">
+                <div class="program-icon">GB1</div>
+                <h3>GB1 - Fundamentals</h3>
+                <p>Programa para iniciantes com foco nos fundamentos básicos do Jiu-Jitsu e defesa pessoal. Ideal para quem está começando sua jornada no mundo das artes marciais e busca aprender as técnicas essenciais.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-icon">GB2</div>
+                <h3>GB2 - Advanced</h3>
+                <p>Para alunos com experiência intermediária, desenvolvendo técnicas avançadas e sparring controlado. Aprofundamento das habilidades técnicas e introdução a conceitos mais complexos do Jiu-Jitsu.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-icon">GB3</div>
+                <h3>GB3 - Black Belt</h3>
+                <p>Programa avançado para faixas marrons e pretas, com foco em competição e refinamento técnico. Desenvolvimento de alta performance e preparação para competições de elite.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-icon">🧒</div>
+                <h3>Little Champions</h3>
+                <p>Jiu-Jitsu para crianças de 4 a 6 anos, desenvolvendo coordenação motora, disciplina e valores sociais fundamentais. Introdução lúdica às artes marciais com foco no desenvolvimento integral da criança.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-icon">👦</div>
+                <h3>Junior Champions</h3>
+                <p>Para jovens de 7 a 15 anos, combinando técnicas de Jiu-Jitsu com desenvolvimento do caráter. Formação de jovens atletas com base sólida em valores e técnicas marciais.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-icon">👩</div>
+                <h3>Women's Program</h3>
+                <p>Programa especial para mulheres, focando em defesa pessoal e empoderamento feminino. Ambiente seguro e acolhedor para o desenvolvimento da autoconfiança e habilidades de autodefesa.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="benefits-section section">
+        <h2 class="section-title reveal">Benefícios do Jiu-Jitsu</h2>
+        <p class="section-subtitle reveal">Transforme sua vida através da prática regular do Jiu-Jitsu e descubra todos os benefícios desta arte marcial</p>
+        
+        <div class="benefits-grid">
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">💪</div>
+                <h3>Condicionamento Físico</h3>
+                <p>Melhora significativa da força, flexibilidade, resistência cardiovascular e coordenação motora. O Jiu-Jitsu proporciona um treino completo que trabalha todo o corpo de forma harmoniosa.</p>
+            </div>
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">🧠</div>
+                <h3>Desenvolvimento Mental</h3>
+                <p>Aumenta o foco, disciplina, autocontrole e capacidade de resolução de problemas. A prática regular desenvolve a mente estratégica e a capacidade de tomar decisões sob pressão.</p>
+            </div>
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Defesa Pessoal</h3>
+                <p>Aprenda técnicas eficazes de autodefesa e desenvolva confiança para se proteger. O Jiu-Jitsu ensina como neutralizar agressores maiores e mais fortes usando técnica e alavancagem.</p>
+            </div>
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">🤝</div>
+                <h3>Socialização</h3>
+                <p>Faça parte de uma comunidade unida e desenvolva amizades duradouras. O ambiente da Gracie Barra promove o respeito mútuo e a formação de laços verdadeiros entre os praticantes.</p>
+            </div>
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">⚖️</div>
+                <h3>Equilíbrio Emocional</h3>
+                <p>Reduza o estresse, ansiedade e desenvolva maior estabilidade emocional. A prática do Jiu-Jitsu serve como uma válvula de escape saudável para as pressões do dia a dia.</p>
+            </div>
+            <div class="benefit-item reveal">
+                <div class="benefit-icon">🏆</div>
+                <h3>Conquistas Pessoais</h3>
+                <p>Estabeleça e alcance metas progressivas, celebrando cada evolução em sua jornada. O sistema de graduação motiva o crescimento contínuo e o desenvolvimento pessoal.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="quote reveal">
+            "Minha vida é dedicada ao Jiu-Jitsu. Meu objetivo sempre foi construir uma irmandade para liderar a expansão do Jiu-Jitsu, respeitando sempre a essência da nossa arte. Meus alunos são uma extensão da minha família."
+        </div>
+        <div class="quote-author reveal">- Carlos Gracie Jr.</div>
+    </section>
+
+    <section id="filosofia" class="section">
+        <h2 class="section-title reveal">Nossos Valores</h2>
+        <p class="section-subtitle reveal">Os pilares fundamentais que sustentam a Gracie Barra em todo o mundo e orientam nossa missão</p>
+        
+        <div class="values-grid">
+            <div class="value-card reveal">
+                <h3>Irmandade</h3>
+                <p>Construímos uma comunidade forte baseada no respeito mútuo, apoio incondicional e crescimento conjunto, onde cada membro é valorizado, respeitado e considerado parte de uma grande família marcial que transcende diferenças sociais, culturais e econômicas.</p>
+            </div>
+            <div class="value-card reveal">
+                <h3>Expansão</h3>
+                <p>Compartilhamos o Jiu-Jitsu como ferramenta de transformação social e pessoal, levando seus benefícios para toda a comunidade de Manaus e região amazônica, democratizando o acesso a esta arte marcial e seus valores transformadores.</p>
+            </div>
+            <div class="value-card reveal">
+                <h3>Integridade</h3>
+                <p>Mantemos os mais altos padrões éticos e morais em todas nossas ações, preservando fielmente a tradição e os valores autênticos do Jiu-Jitsu Brasileiro, honrando o legado deixado pela família Gracie e transmitindo-o com responsabilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="professores" class="section">
+        <h2 class="section-title reveal">Nossos Professores</h2>
+        <p class="section-subtitle reveal">Instrutores qualificados e certificados pela Gracie Barra, dedicados ao seu desenvolvimento</p>
+        
+        <div class="instructors-grid">
+            <div class="instructor-card reveal">
+                <div class="instructor-img instructor-1"></div>
+                <div class="instructor-info">
+                    <h3>Professor Principal</h3>
+                    <div class="rank">Faixa Preta 2º Grau</div>
+                    <p>Mais de 15 anos de experiência no Jiu-Jitsu, especialista em competição e formação de atletas de alto nível. Graduado diretamente no sistema Gracie Barra, com certificação internacional e vasta experiência em ensino técnico e desenvolvimento de praticantes.</p>
+                </div>
+            </div>
+            <div class="instructor-card reveal">
+                <div class="instructor-img instructor-2"></div>
+                <div class="instructor-info">
+                    <h3>Professor Assistente</h3>
+                    <div class="rank">Faixa Marrom</div>
+                    <p>Especialista em Jiu-Jitsu infantil e juvenil, com certificação em primeiros socorros e pedagogia esportiva. Dedicado ao desenvolvimento técnico e educacional de crianças e adolescentes, promovendo valores e disciplina através da arte marcial.</p>
+                </div>
+            </div>
+            <div class="instructor-card reveal">
+                <div class="instructor-img instructor-3"></div>
+                <div class="instructor-info">
+                    <h3>Professora Feminino</h3>
+                    <div class="rank">Faixa Preta</div>
+                    <p>Campeã estadual e nacional, especialista no programa feminino e defesa pessoal para mulheres. Referência no empoderamento feminino através do Jiu-Jitsu, promovendo autoconfiança e independência através do treinamento especializado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title reveal">Últimas Notícias</h2>
+        <p class="section-subtitle reveal">Fique por dentro das novidades da GB Cidade Nova e nossa comunidade</p>
+        
+        <div class="news-grid">
+            <div class="news-card reveal">
+                <div class="news-img news-1"></div>
+                <div class="news-content">
+                    <div class="news-date">15 de Junho, 2024</div>
+                    <div class="news-title">Inauguração da Nova Área de Treinamento</div>
+                    <p>Expandimos nossas instalações para oferecer ainda mais espaço e conforto para nossos alunos. A nova área inclui tatames de última geração e equipamentos modernos para um treinamento ainda mais eficiente e seguro.</p>
+                </div>
+            </div>
+            <div class="news-card reveal">
+                <div class="news-img news-2"></div>
+                <div class="news-content">
+                    <div class="news-date">10 de Junho, 2024</div>
+                    <div class="news-title">Competição Regional de Jiu-Jitsu</div>
+                    <p>Nossos atletas se destacaram na competição regional, conquistando diversas medalhas de ouro, prata e bronze. Resultado do trabalho dedicado de nossos professores e do comprometimento exemplar de nossos competidores.</p>
+                </div>
+            </div>
+            <div class="news-card reveal">
+                <div class="news-img news-3"></div>
+                <div class="news-content">
+                    <div class="news-date">5 de Junho, 2024</div>
+                    <div class="news-title">Seminário com Faixa Preta Visitante</div>
+                    <p>Recebemos um faixa preta internacional para um seminário exclusivo sobre técnicas de guarda. Uma oportunidade única de aprendizado com um dos maiores especialistas mundiais na modalidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact-section">
+        <div class="contact-content">
+            <h2 class="section-title reveal">Entre em Contato</h2>
+            <p class="section-subtitle reveal">Comece sua jornada no Jiu-Jitsu hoje mesmo e transforme sua vida</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Informações de Contato</h3>
+                    <p>📍 <strong>Endereço:</strong> Av. Atroaris, quadra 20, n. 129, Conj. Renato Souza, R. Cap. Braule Pinto - Cidade Nova, Manaus - AM</p>
+                    <p>📞 <strong>Telefone:</strong> (92) 99999-9999</p>
+                    <p>📧 <strong>Email:</strong> cidadenova@graciebarra.com.br</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/gb_cidadenova/" target="_blank" title="Instagram">📷</a>
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+                <div class="contact-info reveal">
+                    <h3>Horários de Funcionamento</h3>
+                    <p><strong>Segunda a Sexta:</strong> 06:00 - 22:00</p>
+                    <p><strong>Sábado:</strong> 08:00 - 16:00</p>
+                    <p><strong>Domingo:</strong> Fechado</p>
+                    <br>
+                    <a href="#contato" class="cta-button">Agendar Aula Experimental</a>
+                </div>  
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Gracie Barra Cidade Nova. Todos os direitos reservados.</p>
+        <p>Parte da rede mundial Gracie Barra - Jiu-Jitsu para Todos</p>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+    <script>
+        // Variables
+        const header = document.getElementById('header');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Theme Management
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            updateThemeToggle(newTheme);
+        }
+
+        function updateThemeToggle(theme) {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+            
+            if (theme === 'dark') {
+                if (themeIcon) themeIcon.textContent = '☀️';
+                if (themeText) themeText.textContent = 'Claro';
+                if (mobileThemeIcon) mobileThemeIcon.textContent = '☀️';
+            } else {
+                if (themeIcon) themeIcon.textContent = '🌙';
+                if (themeText) themeText.textContent = 'Escuro';
+                if (mobileThemeIcon) mobileThemeIcon.textContent = '🌙';
+            }
+        }
+
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', initialTheme);
+            updateThemeToggle(initialTheme);
+        }
+
+        // Theme toggle event listener
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // Initialize theme on page load
+        initTheme();
+
+        // Scroll to top button visibility
+        window.addEventListener('scroll', () => {
+            if (scrollToTopBtn) {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = 'block';
+                } else {
+                    scrollToTopBtn.style.display = 'none';
+                }
+            }
+        });
+
+        // Mobile menu toggle
+        if (mobileMenuBtn && mobileNav) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                const isActive = mobileNav.classList.contains('active');
+                mobileMenuBtn.textContent = isActive ? '✕' : '☰';
+                mobileMenuBtn.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        if (mobileNav) {
+            mobileNav.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileNav.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.textContent = '☰';
+                        mobileMenuBtn.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileNav && mobileMenuBtn && !mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileNav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+                mobileMenuBtn.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const targetPosition = target.offsetTop - 80; // Offset para header não fixo
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top function
+        if (scrollToTopBtn) {
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Enhanced CTA button interaction
+        document.querySelectorAll('.cta-button').forEach(button => {
+            if (button) {
+                button.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255,255,255,0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add fade-in class to hero content after page load
+            setTimeout(() => {
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    heroContent.classList.add('fade-in');
+                }
+            }, 300);
+        });
+
+        // Intersection Observer for section navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+        
+        if (sections.length > 0 && navLinks.length > 0) {
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSection = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${currentSection}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '-100px 0px -100px 0px'
+            });
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        }
+
+        // Accessibility improvements
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.textContent = '☰';
+                    mobileMenuBtn.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        // Focus management for mobile menu
+        if (mobileMenuBtn && mobileNav) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isActive = mobileNav.classList.contains('active');
+                if (isActive) {
+                    const firstLink = mobileNav.querySelector('a');
+                    if (firstLink) firstLink.focus();
+                }
+            });
+        }
+
+        // Performance optimization
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.warn('Erro detectado:', e.message);
+        });
+
+        // Page load optimization
+        window.addEventListener('load', () => {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            console.log('Tempo de carregamento:', loadTime + 'ms');
+        });
+
+        // Lazy loading for background images
+        const imageElements = document.querySelectorAll('.image-placeholder, .instructor-img, .news-img');
+        
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    imageObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        imageElements.forEach(img => {
+            img.style.opacity = '0.8';
+            img.style.transition = 'opacity 0.5s ease';
+            imageObserver.observe(img);
+        });
+
+        // Add smooth transitions to all interactive elements
+        document.querySelectorAll('.program-card, .benefit-item, .instructor-card, .news-card, .value-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('program-card') ? 'translateY(-12px) scale(1.02)' : 
+                                     this.classList.contains('instructor-card') ? 'translateY(-15px)' :
+                                     'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = this.classList.contains('value-card') ? 'translateX(0)' : 'translateY(0) scale(1)';
+            });
+        });
+
+        // Responsive navigation adjustments
+        function handleResize() {
+            const navContainer = document.querySelector('.nav-container');
+            const navWrapper = document.querySelector('.nav-wrapper');
+            
+            if (window.innerWidth <= 1024) {
+                navContainer.style.flexWrap = 'wrap';
+                if (navWrapper) {
+                    navWrapper.style.width = '100%';
+                    navWrapper.style.justifyContent = 'space-between';
+                    navWrapper.style.marginTop = '1rem';
+                }
+            } else {
+                navContainer.style.flexWrap = 'nowrap';
+                if (navWrapper) {
+                    navWrapper.style.width = 'auto';
+                    navWrapper.style.marginTop = '0';
+                }
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call on load
+
+        // Enhanced theme toggle functionality
+        function enhancedThemeToggle() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Add transition class
+            document.body.classList.add('theme-transitioning');
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggle(newTheme);
+            
+            // Remove transition class after animation
+            setTimeout(() => {
+                document.body.classList.remove('theme-transitioning');
+            }, 300);
+        }
+
+        // Replace the existing toggle function
+        if (themeToggle) {
+            themeToggle.removeEventListener('click', toggleTheme);
+            themeToggle.addEventListener('click', enhancedThemeToggle);
+        }
+
+        // Add CSS for theme transition
+        const themeTransitionStyle = document.createElement('style');
+        themeTransitionStyle.textContent = `
+            .theme-transitioning * {
+                transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+            }
+        `;
+        document.head.appendChild(themeTransitionStyle);
+    </script>
+</body>
+</html>
