@@ -1,0 +1,22 @@
+{
+  "name": "gracie-barra-cidade-nova",
+  "version": "1.0.0",
+  "description": "Site oficial da Gracie Barra Cidade Nova - Jiu-Jitsu para Todos",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Build complete - static site'"
+  },
+  "keywords": [
+    "jiu-jitsu",
+    "gracie-barra",
+    "artes-marciais",
+    "manaus",
+    "cidade-nova"
+  ],
+  "author": "Gracie Barra Cidade Nova",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
