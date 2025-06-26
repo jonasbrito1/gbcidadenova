@@ -3,26 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <title>Gracie Barra Cidade Nova - Jiu-Jitsu para Todos</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/gb_logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/gb_logo.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/gb_logo.png">
-    <link rel="shortcut icon" href="assets/images/gb_logo.png">
-    
-    <!-- Meta tags para SEO -->
-    <meta name="description" content="Gracie Barra Cidade Nova - Academia de Jiu-Jitsu em Manaus. Aulas para todas as idades e níveis. Venha fazer parte da maior rede de Jiu-Jitsu do mundo.">
-    <meta name="keywords" content="Jiu-Jitsu, Gracie Barra, Manaus, Cidade Nova, Artes Marciais, Academia, BJJ">
-    <meta name="author" content="Gracie Barra Cidade Nova">
-    
-    <!-- Open Graph para redes sociais -->
-    <meta property="og:title" content="Gracie Barra Cidade Nova - Jiu-Jitsu para Todos">
-    <meta property="og:description" content="Academia de Jiu-Jitsu em Manaus. Aulas para todas as idades e níveis. Venha fazer parte da maior rede de Jiu-Jitsu do mundo.">
-    <meta property="og:image" content="assets/images/gb_logo.png">
-    <meta property="og:type" content="website">
-    
     <style>
         :root {
             --primary-red: #dc143c;
@@ -120,7 +101,8 @@
             width: clamp(60px, 8vw, 80px);
             height: clamp(60px, 8vw, 80px);
             margin-right: clamp(0.8rem, 2vw, 1.5rem);
-            background: url('assets/images/gb_logo.png') center/cover;
+            background: url('assets/images/gb_logo.jpg') center/cover,
+                        linear-gradient(135deg, var(--primary-red), var(--primary-blue));
             border-radius: 8px;
             border: 3px solid var(--background-primary);
             box-shadow: var(--shadow-light);
@@ -738,98 +720,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Botão Ler mais */
-        .read-more-btn {
-            background: linear-gradient(135deg, var(--primary-blue), #1e3a8a);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 0.5rem;
-        }
-
-        .read-more-btn:hover {
-            background: linear-gradient(135deg, #1e3a8a, var(--primary-blue));
-            transform: translateY(-2px);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: var(--card-background);
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            box-shadow: var(--shadow-strong);
-            border: 1px solid var(--border-color);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .close {
-            color: var(--text-light);
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .close:hover {
-            color: var(--primary-red);
-        }
-
-        .modal h3 {
-            color: var(--primary-red);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .modal .rank {
-            color: var(--primary-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .modal p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-
-        .modal ul {
-            color: var(--text-secondary);
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal ul li {
-            margin-bottom: 0.3rem;
-        }
-
         /* News Section */
         .news-grid {
             display: grid;
@@ -893,169 +783,6 @@
         .news-content p {
             color: var(--text-secondary);
             text-align: justify;
-        }
-
-        /* Schedule Section */
-        .schedule-container {
-            margin-top: 3rem;
-            overflow-x: auto;
-            background: var(--card-background);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            border: 1px solid var(--border-color);
-        }
-
-        .schedule-wrapper {
-            min-width: 800px;
-            overflow-x: auto;
-        }
-
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: clamp(0.8rem, 2vw, 0.95rem);
-        }
-
-        .schedule-table th {
-            background: linear-gradient(135deg, #1565c0, #0d47a1);
-            color: white;
-            padding: clamp(0.8rem, 2vw, 1.2rem);
-            text-align: center;
-            font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-
-        .time-column {
-            width: 80px;
-            min-width: 80px;
-        }
-
-        .schedule-table td {
-            padding: clamp(0.6rem, 1.5vw, 1rem);
-            text-align: center;
-            border: 1px solid var(--border-color);
-            vertical-align: middle;
-            transition: var(--transition);
-        }
-
-        .time-cell {
-            background: var(--background-secondary);
-            color: var(--text-primary);
-            font-weight: 600;
-            width: 80px;
-            min-width: 80px;
-        }
-
-        .class-cell {
-            font-weight: 600;
-            color: white;
-            position: relative;
-            cursor: pointer;
-            min-height: 60px;
-            line-height: 1.2;
-        }
-
-        .class-cell:hover {
-            transform: scale(1.02);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-        }
-
-        .class-cell .instructor {
-            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-            font-weight: 400;
-            opacity: 0.9;
-            display: block;
-            margin-top: 2px;
-        }
-
-        /* Class Colors - Atualizadas */
-        .gb1 {
-            background: linear-gradient(135deg, var(--primary-red), #c41e3a);
-        }
-
-        .gb2 {
-            background: linear-gradient(135deg, #7c2d12, #a16207);
-        }
-
-        .gb3 {
-            background: linear-gradient(135deg, #7c2d12, #a16207);
-        }
-
-        .gb-kids {
-            background: linear-gradient(135deg, #eab308, #ca8a04);
-        }
-
-        .gb-little {
-            background: linear-gradient(135deg, #ca8a04, #eab308);
-        }
-
-        .women {
-            background: linear-gradient(135deg, #a855f7, #9333ea);
-        }
-
-        .competition {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-        }
-
-        .open-mat {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
-        }
-
-        .closed {
-            background: linear-gradient(135deg, #374151, #1f2937);
-            color: #9ca3af;
-        }
-
-        /* Schedule Legend */
-        .schedule-legend {
-            margin-top: 2rem;
-            padding: clamp(1.5rem, 4vw, 2rem);
-            background: var(--background-secondary);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-        }
-
-        .schedule-legend h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            text-align: center;
-        }
-
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: clamp(0.8rem, 2vw, 1.2rem);
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.5rem;
-            background: var(--card-background);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .legend-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-light);
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            min-width: 20px;
-        }
-
-        .legend-item span:last-child {
-            color: var(--text-secondary);
-            font-size: clamp(0.85rem, 2vw, 0.95rem);
-            font-weight: 500;
         }
 
         /* Contact Section - OCUPAÇÃO TOTAL E RESPONSIVA */
@@ -1238,34 +965,6 @@
                 padding: clamp(3rem, 8vw, 6rem) 0;
                 margin-left: calc(-50vw + 50%);
             }
-
-            /* Responsive adjustments for schedule */
-            .schedule-container {
-                margin: 2rem -1rem 0 -1rem;
-                border-radius: 0;
-            }
-
-            .schedule-wrapper {
-                min-width: 600px;
-            }
-
-            .schedule-table th,
-            .schedule-table td {
-                padding: 0.5rem 0.3rem;
-                font-size: 0.75rem;
-            }
-
-            .class-cell .instructor {
-                font-size: 0.65rem;
-            }
-
-            .legend-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .legend-item {
-                justify-content: flex-start;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1297,30 +996,6 @@
 
             .contact-grid {
                 gap: clamp(1.5rem, 4vw, 2rem);
-            }
-
-            .schedule-wrapper {
-                min-width: 500px;
-            }
-
-            .schedule-table th,
-            .schedule-table td {
-                padding: 0.4rem 0.2rem;
-                font-size: 0.7rem;
-            }
-
-            .time-cell {
-                width: 60px;
-                min-width: 60px;
-            }
-
-            .time-column {
-                width: 60px;
-                min-width: 60px;
-            }
-
-            .class-cell .instructor {
-                display: none;
             }
         }
 
@@ -1411,7 +1086,6 @@
                         <li><a href="#beneficios">Benefícios</a></li>
                         <li><a href="#filosofia">Filosofia</a></li>
                         <li><a href="#professores">Professores</a></li>
-                        <li><a href="#horarios">Horários</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </nav>
@@ -1433,7 +1107,6 @@
                 <li><a href="#beneficios">Benefícios</a></li>
                 <li><a href="#filosofia">Filosofia</a></li>
                 <li><a href="#professores">Professores</a></li>
-                <li><a href="#horarios">Horários</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
             <button class="theme-toggle" id="mobileThemeToggle">
@@ -1447,7 +1120,7 @@
         <div class="hero-content reveal">
             <h1>Gracie Barra Cidade Nova</h1>
             <div class="subtitle">Jiu-Jitsu para Todos</div>
-            <a href="https://wa.me/559281136742?text=Olá!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20na%20Gracie%20Barra%20Cidade%20Nova.%20Poderia%20me%20ajudar%20com%20mais%20informações?" target="_blank" class="cta-button">Começar a Treinar</a>
+            <a href="#contato" class="cta-button">Começar a Treinar</a>
         </div>
     </section>
 
@@ -1598,10 +1271,9 @@
             <div class="instructor-card reveal">
                 <div class="instructor-img instructor-1"></div>
                 <div class="instructor-info">
-                    <h3>Professor Victor César</h3>
+                    <h3>Professor Principal</h3>
                     <div class="rank">Faixa Preta 2º Grau</div>
-                    <p>Faixa preta desde 2018, formado em Educação Física e especialista em ensino infantil. Bicampeão Brasileiro com experiência internacional nos EUA.</p>
-                    <button class="read-more-btn" onclick="openModal('victor')">Ler mais</button>
+                    <p>Em manutenção</p>
                 </div>
             </div>
             <div class="instructor-card reveal">
@@ -1655,119 +1327,6 @@
         </div>
     </section>
 
-    <section id="horarios" class="section">
-        <h2 class="section-title reveal">Cronograma de Aulas</h2>
-        <p class="section-subtitle reveal">Confira os horários das nossas aulas e escolha o melhor programa para você</p>
-        
-        <div class="schedule-container reveal">
-            <div class="schedule-wrapper">
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th class="time-column">Horário</th>
-                            <th>Segunda</th>
-                            <th>Terça</th>
-                            <th>Quarta</th>
-                            <th>Quinta</th>
-                            <th>Sexta</th>
-                            <th>Sábado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="time-cell">07:00</td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">08:00</td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb1">GB1<br><span class="instructor">Adulto Iniciantes</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">09:00</td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">17:00</td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids NO GI<br><span class="instructor">3-7 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">18:00</td>
-                            <td class="class-cell gb1">GB K 2<br><span class="instructor">8-13 anos</span></td>
-                            <td class="class-cell gb1">GB K 2<br><span class="instructor">8-13 anos</span></td>
-                            <td class="class-cell gb1">GB K 2<br><span class="instructor">8-13 anos</span></td>
-                            <td class="class-cell gb1">GB K 2<br><span class="instructor">8-13 anos</span></td>
-                            <td class="class-cell gb1">GB K 2<br><span class="instructor">8-13 anos</span></td>
-                            <td class="class-cell gb-kids">GB Kids<br><span class="instructor">3-7 anos</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">19:00</td>
-                            <td class="class-cell gb2">GB1 + GB2<br><span class="instructor">Adultos</span></td>
-                            <td class="class-cell gb2">GB1 + GB2<br><span class="instructor">Adultos</span></td>
-                            <td class="class-cell gb2">GB1 + GB2<br><span class="instructor">Adultos</span></td>
-                            <td class="class-cell gb2">GB1 + GB2<br><span class="instructor">Adultos</span></td>
-                            <td class="class-cell gb2">GB1 + GB2<br><span class="instructor">Adultos</span></td>
-                            <td class="class-cell open-mat">Open Mat<br><span class="instructor">Treino Livre</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="schedule-legend">
-                <h3>Legenda dos Programas</h3>
-                <div class="legend-grid">
-                    <div class="legend-item">
-                        <span class="legend-color gb1"></span>
-                        <span>GB1 - Adultos Iniciantes</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color gb2"></span>
-                        <span>GB2 - Adultos (3+ graus faixa branca)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color gb-kids"></span>
-                        <span>GB Kids - Infantil (3-7 anos)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color gb1"></span>
-                        <span>GB K2 - Infanto Juvenil (8-13 anos)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color gb2"></span>
-                        <span>GI - Com Kimono</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color gb-kids"></span>
-                        <span>NO GI - Sem Kimono</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color open-mat"></span>
-                        <span>Open Mat - Treino Livre</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="contato" class="contact-section">
         <div class="contact-content">
             <h2 class="section-title reveal">Entre em Contato</h2>
@@ -1777,32 +1336,13 @@
                 <div class="contact-info reveal">
                     <h3>Informações de Contato</h3>
                     <p>📍 <strong>Endereço:</strong> Av. Atroaris, quadra 20, n. 129, Conj. Renato Souza, R. Cap. Braule Pinto - Cidade Nova, Manaus - AM</p>
-                    <p>📞 <strong>Telefone:</strong> 
-                        <a href="https://wa.me/559281136742?text=Olá!%20Vi%20o%20número%20no%20site%20da%20Gracie%20Barra%20Cidade%20Nova." 
-                        target="_blank" 
-                        class="phone-link">
-                        (92) 98113-6742
-                        </a>
-                    </p>         
-                    <p>📞 <strong>Telefone:</strong> 
-                        <a href="https://wa.me/559281501174?text=Olá!%20Vi%20o%20número%20no%20site%20da%20Gracie%20Barra%20Cidade%20Nova." 
-                        target="_blank" 
-                        class="phone-link">
-                           (92) 98150-1174
-                        </a>
-                    </p>           
+                    <p>📞 <strong>Telefone:</strong> (92) 8113-6742</p>
                     <p>📧 <strong>Email:</strong> email@graciebarra.com.br</p>
                     <div class="social-links">
-                    <a href="https://www.instagram.com/gb_cidadenova/" target="_blank" title="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>                        
-                    <a href="#" title="Facebook">
-                        <i class="bi bi-facebook"></i>
-                    </a>                        
-                    <a href="https://wa.me/559281136742" title="WhatsApp">
-                        <i class="bi bi-whatsapp"></i>
-                    </a>                    
-                </div>
+                        <a href="https://www.instagram.com/gb_cidadenova/" target="_blank" title="Instagram">📷</a>
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
                 </div>
                 <div class="contact-info reveal">
                     <h3>Horários de Funcionamento</h3>
@@ -1810,40 +1350,11 @@
                     <p><strong>Sábado:</strong> 08:00 - 16:00</p>
                     <p><strong>Domingo:</strong> Fechado</p>
                     <br>
-                    <a href="https://wa.me/559281136742?text=Olá!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20na%20Gracie%20Barra%20Cidade%20Nova.%20Poderia%20me%20ajudar%20com%20mais%20informações?" target="_blank" class="cta-button">Agendar Aula Experimental</a>
+                    <a href="#contato" class="cta-button">Agendar Aula Experimental</a>
                 </div>  
             </div>
         </div>
     </section>
-
-    <!-- Modal Professor Victor -->
-    <div id="victorModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Professor Victor César</h3>
-            <div class="rank">Faixa Preta 2º Grau • Gracie Barra Cidade Nova</div>
-            
-            <p>Victor César é faixa preta de Jiu-Jitsu 2º grau desde 2018, com mais de uma década de experiência dedicada ao ensino da arte suave, especialmente com crianças. Formado em Educação Física desde 2016, alia conhecimento técnico e pedagógico para oferecer aulas seguras, divertidas e eficazes para todas as idades.</p>
-            
-            <p>Sua trajetória no Jiu-Jitsu é marcada por conquistas expressivas e vivências internacionais. Atuou como professor por dois anos nos Estados Unidos, onde também competiu e obteve excelentes resultados.</p>
-            
-            <p><strong>Principais Títulos:</strong></p>
-            <ul>
-                <li>Bicampeão Brasileiro</li>
-                <li>3º lugar no Campeonato Brasileiro</li>
-                <li>3º lugar no American National</li>
-                <li>4× Campeão Amazonense</li>
-                <li>Campeão da Seletiva de Abu Dhabi</li>
-                <li>5× Campeão do Manaus Open</li>
-                <li>Vice-campeão no Charlotte Open (EUA)</li>
-                <li>Vice-campeão no Boise Open (EUA)</li>
-                <li>Vice-campeão no Oklahoma Open (EUA)</li>
-                <li>3º lugar no Atlanta Open (EUA)</li>
-            </ul>
-            
-            <p>Como Professor infantil da Gracie Barra Cidade Nova, o professor Victor César acredita que o Jiu-Jitsu vai muito além das vitórias no tatame: é uma ferramenta poderosa de formação de caráter, disciplina e autoconfiança. Seu compromisso é oferecer um ambiente acolhedor, respeitoso e de alto nível técnico para todos os alunos.</p>
-        </div>
-    </div>
 
     <footer class="footer">
         <p>&copy; 2024 Gracie Barra Cidade Nova. Todos os direitos reservados.</p>
@@ -1878,18 +1389,15 @@
             const themeIcon = document.getElementById('themeIcon');
             const themeText = document.getElementById('themeText');
             const mobileThemeIcon = document.getElementById('mobileThemeIcon');
-            const mobileThemeText = document.getElementById('mobileThemeText');
             
             if (theme === 'dark') {
                 if (themeIcon) themeIcon.textContent = '☀️';
                 if (themeText) themeText.textContent = 'Claro';
                 if (mobileThemeIcon) mobileThemeIcon.textContent = '☀️';
-                if (mobileThemeText) mobileThemeText.textContent = 'Claro';
             } else {
                 if (themeIcon) themeIcon.textContent = '🌙';
                 if (themeText) themeText.textContent = 'Escuro';
                 if (mobileThemeIcon) mobileThemeIcon.textContent = '🌙';
-                if (mobileThemeText) mobileThemeText.textContent = 'Escuro';
             }
         }
 
@@ -2208,211 +1716,6 @@
         if (mobileThemeToggle) {
             mobileThemeToggle.addEventListener('click', toggleTheme);
         }
-
-        // Schedule table interactivity
-        document.querySelectorAll('.class-cell:not(.closed)').forEach(cell => {
-            cell.addEventListener('mouseenter', function() {
-                const className = this.textContent.split('\n')[0];
-                const instructor = this.querySelector('.instructor')?.textContent || '';
-                
-                // Create tooltip
-                const tooltip = document.createElement('div');
-                tooltip.className = 'schedule-tooltip';
-                tooltip.innerHTML = `
-                    <strong>${className}</strong><br>
-                    ${instructor}<br>
-                    <small>Clique para mais informações</small>
-                `;
-                
-                tooltip.style.cssText = `
-                    position: absolute;
-                    background: var(--card-background);
-                    color: var(--text-primary);
-                    padding: 0.8rem;
-                    border-radius: 8px;
-                    box-shadow: var(--shadow-strong);
-                    border: 1px solid var(--border-color);
-                    z-index: 1000;
-                    font-size: 0.85rem;
-                    line-height: 1.4;
-                    max-width: 200px;
-                    pointer-events: none;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                `;
-                
-                document.body.appendChild(tooltip);
-                
-                // Position tooltip
-                const rect = this.getBoundingClientRect();
-                tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
-                tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
-                
-                // Show tooltip
-                setTimeout(() => tooltip.style.opacity = '1', 50);
-                
-                this.setAttribute('data-tooltip', 'true');
-            });
-            
-            cell.addEventListener('mouseleave', function() {
-                document.querySelectorAll('.schedule-tooltip').forEach(tooltip => {
-                    tooltip.style.opacity = '0';
-                    setTimeout(() => {
-                        if (tooltip.parentNode) {
-                            tooltip.parentNode.removeChild(tooltip);
-                        }
-                    }, 300);
-                });
-                this.removeAttribute('data-tooltip');
-            });
-            
-            // Click handler for more information
-            cell.addEventListener('click', function() {
-                const className = this.textContent.split('\n')[0];
-                
-                // Scroll to programs section to show more info
-                if (className.includes('GB1') || className.includes('GB2') || className.includes('GB3') || 
-                    className.includes('Kids') || className.includes('Little') || className.includes('Women')) {
-                    const programsSection = document.getElementById('programas');
-                    if (programsSection) {
-                        programsSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        
-                        // Highlight the corresponding program card
-                        setTimeout(() => {
-                            const cards = document.querySelectorAll('.program-card');
-                            cards.forEach(card => {
-                                if (className.includes('GB1') && card.textContent.includes('GB1')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(220, 20, 60, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                } else if (className.includes('GB2') && card.textContent.includes('GB2')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(44, 90, 160, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                } else if (className.includes('GB3') && card.textContent.includes('GB3')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(124, 45, 18, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                } else if (className.includes('Little') && card.textContent.includes('Little')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(202, 138, 4, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                } else if (className.includes('Kids') && card.textContent.includes('Junior')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(22, 163, 74, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                } else if (className.includes('Women') && card.textContent.includes('Women')) {
-                                    card.style.transform = 'translateY(-12px) scale(1.05)';
-                                    card.style.boxShadow = '0 20px 50px rgba(168, 85, 247, 0.3)';
-                                    setTimeout(() => {
-                                        card.style.transform = '';
-                                        card.style.boxShadow = '';
-                                    }, 2000);
-                                }
-                            });
-                        }, 500);
-                    }
-                }
-            });
-        });
-
-        // Smooth scroll enhancement for schedule section
-        const scheduleLink = document.querySelector('a[href="#horarios"]');
-        if (scheduleLink) {
-            scheduleLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                const scheduleSection = document.getElementById('horarios');
-                if (scheduleSection) {
-                    scheduleSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Add a subtle animation to the schedule table
-                    setTimeout(() => {
-                        const scheduleTable = document.querySelector('.schedule-table');
-                        if (scheduleTable) {
-                            scheduleTable.style.transform = 'scale(1.02)';
-                            setTimeout(() => {
-                                scheduleTable.style.transform = 'scale(1)';
-                            }, 300);
-                        }
-                    }, 500);
-                }
-            });
-        }
-
-        // Modal functionality
-        function openModal(instructor) {
-            const modal = document.getElementById(instructor + 'Modal');
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal(instructor) {
-            const modal = document.getElementById(instructor + 'Modal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Close modal when clicking outside or on X
-        document.addEventListener('DOMContentLoaded', function() {
-            const modals = document.querySelectorAll('.modal');
-            
-            modals.forEach(modal => {
-                const closeBtn = modal.querySelector('.close');
-                
-                // Close on X click
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', function() {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    });
-                }
-                
-                // Close on outside click
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-            });
-            
-            // Close on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    modals.forEach(modal => {
-                        if (modal.style.display === 'block') {
-                            modal.style.display = 'none';
-                            document.body.style.overflow = 'auto';
-                        }
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
