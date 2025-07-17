@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Gracie Barra Cidade Nova</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="../assets/images/gb_logo.png">
+    
+    <style>
+        :root {
+            --primary-red: #dc143c;
+            --primary-blue: #2c5aa0;
+            --dark-red: #b91c3c;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #666;
+            --background-primary: #ffffff;
+            --background-secondary: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-light: #888;
+            --background-primary: #1a1a1a;
+            --background-secondary: #2d2d2d;
+            --card-background: #2d2d2d;
+            --border-color: rgba(255,255,255,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.3);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, rgba(44, 90, 160, 0.1), rgba(220, 20, 60, 0.1)),
+                        url('../assets/images/gb3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition);
+            padding: 2rem 0;
+        }
+
+        .cadastro-container {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-strong);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cadastro-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-blue));
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            background: url('../assets/images/gb_logo.png') center/cover;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.3rem;
+        }
+
+        .logo-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .step.active {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .step.completed {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--background-primary);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-icon .form-input {
+            padding-left: 2.5rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-red);
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.3rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: var(--transition);
+            width: 0%;
+        }
+
+        .strength-weak { background: #dc3545; width: 33%; }
+        .strength-medium { background: #ffc107; width: 66%; }
+        .strength-strong { background: #28a745; width: 100%; }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-red);
+            margin-top: 0.2rem;
+        }
+
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .checkbox-group a {
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--background-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .back-home:hover {
+            color: var(--primary-red);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            color: var(--primary-red);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(25, 135, 84, 0.2);
+            display: none;
+            text-align: center;
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            display: none;
+            text-align: center;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .graduation-info {
+            background: rgba(44, 90, 160, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(44, 90, 160, 0.2);
+        }
+
+        .graduation-info h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .belt-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .belt-option {
+            padding: 0.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .belt-option:hover {
+            border-color: var(--primary-red);
+        }
+
+        .belt-option.selected {
+            border-color: var(--primary-red);
+            background: rgba(220, 20, 60, 0.1);
+            color: var(--primary-red);
+        }
+
+        .belt-white { background: linear-gradient(to right, #ffffff, #f8f9fa); }
+        .belt-blue { background: linear-gradient(to right, #0d47a1, #1565c0); color: white; }
+        .belt-purple { background: linear-gradient(to right, #4a148c, #7b1fa2); color: white; }
+        .belt-brown { background: linear-gradient(to right, #3e2723, #5d4037); color: white; }
+        .belt-black { background: linear-gradient(to right, #000000, #424242); color: white; }
+
+        @media (max-width: 480px) {
+            .cadastro-container {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .step-indicator {
+                gap: 0.5rem;
+            }
+
+            .step {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-home" title="Voltar ao site">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <div class="cadastro-container">
+        <div class="logo-section">
+            <div class="logo-img"></div>
+            <div class="logo-text">Gracie Barra</div>
+            <div class="logo-subtitle">Cidade Nova</div>
+        </div>
+
+        <div class="welcome-text">Junte-se à nossa família!</div>
+
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="bi bi-check-circle"></i>
+            <strong>Cadastro realizado com sucesso!</strong><br>
+            Você receberá um email de confirmação em breve.
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="bi bi-exclamation-triangle"></i>
+            <span id="errorText">Erro ao processar cadastro. Tente novamente.</span>
+        </div>
+
+        <form id="cadastroForm">
+            <!-- Etapa 1: Dados Pessoais -->
+            <div class="form-section active" id="section1">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="nome">Nome Completo</label>
+                        <div class="input-icon">
+                            <i class="bi bi-person"></i>
+                            <input type="text" id="nome" class="form-input" placeholder="Digite seu nome completo" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <div class="input-icon">
+                            <i class="bi bi-envelope"></i>
+                            <input type="email" id="email" class="form-input" placeholder="Digite seu email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="cpf">CPF</label>
+                        <div class="input-icon">
+                            <i class="bi bi-card-text"></i>
+                            <input type="text" id="cpf" class="form-input" placeholder="000.000.000-00" maxlength="14" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="telefone">Telefone</label>
+                        <div class="input-icon">
+                            <i class="bi bi-phone"></i>
+                            <input type="tel" id="telefone" class="form-input" placeholder="(00) 00000-0000" maxlength="15" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="nascimento">Data de Nascimento</label>
+                        <div class="input-icon">
+                            <i class="bi bi-calendar"></i>
+                            <input type="date" id="nascimento" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="genero">Gênero</label>
+                        <select id="genero" class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 2: Dados do Jiu-Jitsu -->
+            <div class="form-section" id="section2">
+                <div class="graduation-info">
+                    <h4>Informações sobre sua experiência no Jiu-Jitsu</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+                        Selecione sua graduação atual para adequarmos o programa ideal para você.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Graduação Atual</label>
+                    <div class="belt-options">
+                        <div class="belt-option belt-white" data-belt="branca">
+                            <div>Faixa Branca</div>
+                            <small>Iniciante</small>
+                        </div>
+                        <div class="belt-option belt-blue" data-belt="azul">
+                            <div>Faixa Azul</div>
+                            <small>Básico</small>
+                        </div>
+                        <div class="belt-option belt-purple" data-belt="roxa">
+                            <div>Faixa Roxa</div>
+                            <small>Intermediário</small>
+                        </div>
+                        <div class="belt-option belt-brown" data-belt="marrom">
+                            <div>Faixa Marrom</div>
+                            <small>Avançado</small>
+                        </div>
+                        <div class="belt-option belt-black" data-belt="preta">
+                            <div>Faixa Preta</div>
+                            <small>Expert</small>
+                        </div>
+                    </div>
+                    <input type="hidden" id="graduacao" name="graduacao" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="tempoTreino">Tempo de Treino</label>
+                        <select id="tempoTreino" class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="iniciante">Primeiro contato</option>
+                            <option value="6meses">Até 6 meses</option>
+                            <option value="1ano">6 meses a 1 ano</option>
+                            <option value="2anos">1 a 2 anos</option>
+                            <option value="3anos">2 a 3 anos</option>
+                            <option value="mais3">Mais de 3 anos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="objetivo">Objetivo Principal</label>
+                        <select id="objetivo" class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="fitness">Condicionamento Físico</option>
+                            <option value="defesa">Defesa Pessoal</option>
+                            <option value="competicao">Competição</option>
+                            <option value="social">Socialização</option>
+                            <option value="disciplina">Disciplina Mental</option>
+                            <option value="hobby">Hobby/Lazer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="restricoes">Restrições Médicas ou Lesões</label>
+                    <textarea id="restricoes" class="form-input" placeholder="Descreva qualquer restrição médica ou lesão que devemos saber (opcional)" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Senha e Confirmação -->
+            <div class="form-section" id="section3">
+                <div class="form-group">
+                    <label class="form-label" for="senha">Senha</label>
+                    <div class="input-icon">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" id="senha" class="form-input" placeholder="Digite sua senha" required>
+                        <i class="bi bi-eye password-toggle" id="toggleSenha"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthBar"></div>
+                        </div>
+                        <div id="strengthText" style="margin-top: 0.3rem; font-size: 0.8rem;"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmSenha">Confirmar Senha</label>
+                    <div class="input-icon">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" id="confirmSenha" class="form-input" placeholder="Confirme sua senha" required>
+                        <i class="bi bi-eye password-toggle" id="toggleConfirmSenha"></i>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termos" required>
+                    <label for="termos">
+                        Li e concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter">
+                    <label for="newsletter">
+                        Desejo receber novidades sobre a academia e o mundo do Jiu-Jitsu
+                    </label>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                    <i class="bi bi-arrow-left"></i>
+                    Anterior
+                </button>
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                    Próximo
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+
+        <div class="loading" id="loading">
+            <i class="bi bi-arrow-clockwise"></i>
+            Processando cadastro...
+        </div>
+
+        <div class="login-link">
+            Já tem uma conta? <a href="login.html">Faça login aqui</a>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        // Theme functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', initialTheme);
+            updateThemeIcon(initialTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById('themeIcon');
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Step navigation
+        function changeStep(direction) {
+            const newStep = currentStep + direction;
+            
+            if (newStep < 1 || newStep > totalSteps) return;
+            
+            if (direction === 1 && !validateCurrentStep()) return;
+            
+            // Hide current section
+            document.getElementById(`section${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            if (direction === 1) {
+                document.getElementById(`step${currentStep}`).classList.add('completed');
+            }
+            
+            currentStep = newStep;
+            
+            // Show new section
+            document.getElementById(`section${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.style.display = currentStep === 1 ? 'none' : 'block';
+            
+            if (currentStep === totalSteps) {
+                nextBtn.innerHTML = '<i class="bi bi-check-circle"></i> Finalizar Cadastro';
+                nextBtn.onclick = submitForm;
+            } else {
+                nextBtn.innerHTML = 'Próximo <i class="bi bi-arrow-right"></i>';
+                nextBtn.onclick = () => changeStep(1);
+            }
+        }
+
+        function validateCurrentStep() {
+            const currentSection = document.getElementById(`section${currentStep}`);
+            const requiredFields = currentSection.querySelectorAll('input[required], select[required]');
+            
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.focus();
+                    isValid = false;
+                    return;
+                }
+            });
+            
+            if (currentStep === 2) {
+                const graduacao = document.getElementById('graduacao').value;
+                if (!graduacao) {
+                    alert('Por favor, selecione sua graduação atual.');
+                    return false;
+                }
+            }
+            
+            if (currentStep === 3) {
+                const senha = document.getElementById('senha').value;
+                const confirmSenha = document.getElementById('confirmSenha').value;
+                
+                if (senha !== confirmSenha) {
+                    alert('As senhas não coincidem.');
+                    return false;
+                }
+                
+                if (!document.getElementById('termos').checked) {
+                    alert('Você deve aceitar os termos de uso.');
+                    return false;
+                }
+            }
+            
+            return isValid;
+        }
+
+        // Belt selection
+        document.querySelectorAll('.belt-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.belt-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('graduacao').value = this.dataset.belt;
+            });
+        });
+
+        // Password toggle
+        document.getElementById('toggleSenha').addEventListener('click', function() {
+            const passwordInput = document.getElementById('senha');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        document.getElementById('toggleConfirmSenha').addEventListener('click', function() {
+            const passwordInput = document.getElementById('confirmSenha');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        // Password strength
+        document.getElementById('senha').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            let text = '';
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            strengthBar.className = 'strength-fill';
+            
+            if (strength <= 2) {
+                strengthBar.classList.add('strength-weak');
+                text = 'Senha fraca';
+            } else if (strength <= 4) {
+                strengthBar.classList.add('strength-medium');
+                text = 'Senha média';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                text = 'Senha forte';
+            }
+            
+            strengthText.textContent = text;
+        });
+
+        // Form submission
+        function submitForm() {
+            if (!validateCurrentStep()) return;
+            
+            const formData = new FormData(document.getElementById('cadastroForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Add additional data
+            data.graduacao = document.getElementById('graduacao').value;
+            data.nome = document.getElementById('nome').value;
+            data.email = document.getElementById('email').value;
+            data.cpf = document.getElementById('cpf').value;
+            data.telefone = document.getElementById('telefone').value;
+            data.nascimento = document.getElementById('nascimento').value;
+            data.genero = document.getElementById('genero').value;
+            data.tempoTreino = document.getElementById('tempoTreino').value;
+            data.objetivo = document.getElementById('objetivo').value;
+            data.restricoes = document.getElementById('restricoes').value;
+            data.senha = document.getElementById('senha').value;
+            data.newsletter = document.getElementById('newsletter').checked;
+            
+            const nextBtn = document.getElementById('nextBtn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            nextBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                loading.style.display = 'none';
+                nextBtn.disabled = false;
+                
+                // Simulate success (in real app, handle actual response)
+                if (Math.random() > 0.1) { // 90% success rate for demo
+                    successMessage.style.display = 'block';
+                    document.getElementById('cadastroForm').style.display = 'none';
+                    document.querySelector('.navigation-buttons').style.display = 'none';
+                    document.querySelector('.login-link').innerHTML = 
+                        '<a href="login.html" class="btn btn-primary" style="display: inline-block; padding: 0.8rem 2rem; text-decoration: none; margin-top: 1rem;">Fazer Login</a>';
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            }, 3000);
+        }
+
+        // Input formatting
+        document.getElementById('cpf').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            this.value = value;
+        });
+
+        document.getElementById('telefone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            this.value = value;
+        });
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            updateNavigationButtons();
+        });
+    </script>
+</body>
+</html>

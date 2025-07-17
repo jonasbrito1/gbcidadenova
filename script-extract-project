@@ -1,0 +1,243 @@
+
+PS C:\Users\Home\Desktop\Projects\gbcidadenova> # ===============================================
+>> # SCRIPT DE EXTRAÇÃO COMPLETA DO PROJETO
+>> # ===============================================
+>> 
+>> Write-Host "🚀 Iniciando extração das informações do projeto..." -ForegroundColor Green
+>> Write-Host "📁 Diretório atual: $(Get-Location)" -ForegroundColor Yellow
+>> Write-Host ""
+>>
+>> # Configurar arquivo de saída
+>> $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+>> $outputFile = "projeto_analise_$timestamp.txt"
+>> $outputPath = Join-Path (Get-Location) $outputFile
+>>
+>> Write-Host "💾 Arquivo de saída: $outputFile" -ForegroundColor Magenta
+>> Write-Host ""
+>>
+>> # Função para escrever tanto no console quanto no arquivo
+>> function Write-Both {
+    >>     param($Message, $ForegroundColor = "White")
+    >>     Write-Host $Message -ForegroundColor $ForegroundColor
+    >>     Add-Content -Path $outputPath -Value $Message -Encoding UTF8
+    >> }
+>>
+>> # Inicializar arquivo
+>> "" | Out-File -FilePath $outputPath -Encoding UTF8
+>> Write-Both "==============================================="
+>> Write-Both "ANÁLISE COMPLETA DO PROJETO"
+>> Write-Both "==============================================="
+>> Write-Both "Gerado em: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
+>> Write-Both "Diretório: $(Get-Location)"
+>> Write-Both ""
+>>
+>> # Arquivos e extensões a ignorar
+>> $ignoredExtensions = @('.exe', '.dll', '.bin', '.obj', '.pdb', '.cache', '.tmp', '.log', '.lock')
+>> $ignoredFolders = @('node_modules', '.git', 'bin', 'obj', '.vs', '.vscode', 'dist', 'build', '__pycache__', '.next', 'coverage')
+>> $ignoredFiles = @('.gitignore', '.env', '.env.local', '.env.production', 'package-lock.json', 'yarn.lock')
+>>
+>> # Função para verificar se deve ignorar o item
+>> function Should-Ignore {
+    >>     param($Path, $Name)
+    >>
+    >>     # Verificar pastas ignoradas
+    >>     foreach ($folder in $ignoredFolders) {
+        >>         if ($Path -like "*\$folder\*" -or $Name -eq $folder) {
+            >>             return $true
+            >> }
+        >> }
+    >>
+    >>     # Verificar extensões ignoradas
+    >>     $extension = [System.IO.Path]::GetExtension($Name).ToLower()
+    >>     if ($ignoredExtensions -contains $extension) {
+        >>         return $true
+        >> }
+    >>
+    >>     # Verificar arquivos específicos ignorados
+    >>     if ($ignoredFiles -contains $Name) {
+        >>         return $true
+        >> }
+    >>
+    >>     # Ignorar arquivos muito grandes (>1MB)
+    >>     if (Test-Path $Path -PathType Leaf) {
+        >>         $size = (Get-Item $Path).Length
+        >>         if ($size -gt 1MB) {
+            >>             return $true
+            >> }
+        >> }
+    >>
+    >>     return $false
+    >> 
+}
+>>
+>> # ===============================================
+>> # 1. INFORMAÇÕES GERAIS DO PROJETO
+>> # ===============================================
+>> Write-Both "INFORMAÇÕES GERAIS DO PROJETO" "Cyan"
+>> Write-Both "================================="
+>>
+>> $projectRoot = Get-Location
+>> Write-Both "Caminho do projeto: $projectRoot"
+>>
+>> # Detectar tipo de projeto
+>> $projectTypes = @()
+>> if (Test-Path "package.json") { $projectTypes += "Node.js/JavaScript" }
+>> if (Test-Path "*.csproj") { $projectTypes += "C#/.NET" }
+>> if (Test-Path "*.sln") { $projectTypes += ".NET Solution" }
+>> if (Test-Path "requirements.txt") { $projectTypes += "Python" }
+>> if (Test-Path "Cargo.toml") { $projectTypes += "Rust" }
+>> if (Test-Path "go.mod") { $projectTypes += "Go" }
+>> if (Test-Path "pom.xml") { $projectTypes += "Java/Maven" }
+>> if (Test-Path "build.gradle") { $projectTypes += "Java/Gradle" }
+>>
+>> if ($projectTypes.Count -gt 0) {
+    >>     Write-Both "Tipo(s) de projeto detectado(s): $($projectTypes -join ', ')"
+    >> } else {
+    >>     Write-Both "Tipo de projeto: Não identificado"
+    >> }
+>>
+>> Write-Both ""
+>>
+>> # ===============================================
+>> # 2. ESTRUTURA DE PASTAS
+>> # ===============================================
+>> Write-Both "ESTRUTURA DE PASTAS" "Cyan"
+>> Write-Both "======================"
+>>
+>> function Show-DirectoryTree {
+    >>     param($Path, $Prefix = "", $IsLast = $true)
+    >>
+    >>     $items = Get-ChildItem $Path | Where-Object { -not (Should-Ignore $_.FullName $_.Name) }
+    >>     $folders = $items | Where-Object { $_.PSIsContainer }
+    >>     $files = $items | Where-Object { -not $_.PSIsContainer }
+    >>
+    >>     # Mostrar pastas primeiro
+    >>     for ($i = 0; $i -lt $folders.Count; $i++) {
+        >>         $folder = $folders[$i]
+        >>         $isLastFolder = ($i -eq ($folders.Count - 1)) -and ($files.Count -eq 0)
+        >>         $connector = if ($isLastFolder) { "└── " } else { "├── " }
+        >>
+        >>         Write-Both "$Prefix$connector[PASTA] $($folder.Name)" "Yellow"
+        >>
+        >>         $newPrefix = if ($isLastFolder) { "$Prefix    " } else { "$Prefix│   " }
+        >>         Show-DirectoryTree $folder.FullName $newPrefix $isLastFolder
+        >> }
+    >>
+    >>     # Mostrar arquivos
+    >>     for ($i = 0; $i -lt $files.Count; $i++) {
+        >>         $file = $files[$i]
+        >>         $isLastFile = ($i -eq ($files.Count - 1))
+        >>         $connector = if ($isLastFile) { "└── " } else { "├── " }
+        >>
+        >>         $size = if ($file.Length -gt 0) { " ($([math]::Round($file.Length/1KB, 1))KB)" } else { "" }
+        >>         Write-Both "$Prefix$connector$($file.Name)$size" "White"
+        >> }
+    >> 
+}
+>>
+>> Show-DirectoryTree $projectRoot
+>> Write-Both ""
+>>
+>> # ===============================================
+>> # 3. ARQUIVOS PRINCIPAIS E CONFIGURAÇÕES
+>> # ===============================================
+>> Write-Both "ARQUIVOS DE CONFIGURAÇÃO" "Cyan"
+>> Write-Both "============================"
+>>
+>> $configFiles = @(
+    >>     "package.json", "package-lock.json", "yarn.lock",
+    >>     "*.csproj", "*.sln", "appsettings.json", "web.config",
+    >>     "requirements.txt", "setup.py", "pyproject.toml",
+    >>     "Dockerfile", "docker-compose.yml", "docker-compose.yaml",
+    >>     "README.md", "README.txt",
+    >>     "tsconfig.json", "jsconfig.json",
+    >>     "webpack.config.js", "vite.config.js", "next.config.js",
+    >>     ".gitignore", "makefile", "Makefile"
+    >> )
+>>
+>> foreach ($pattern in $configFiles) {
+    >>     $files = Get-ChildItem -Path . -Name $pattern -Recurse -ErrorAction SilentlyContinue |
+    >>              Where-Object { -not (Should-Ignore (Resolve-Path $_).Path $_) } |
+    >>              Select-Object -First 5
+    >>
+    >>     foreach ($file in $files) {
+        >>         if (Test-Path $file) {
+            >>             Write-Both "Encontrado: $file" "Green"
+            >> }
+        >> }
+    >> 
+}
+>>
+>> Write-Both ""
+>>
+>> # ===============================================
+>> # 4. CONTEÚDO DOS ARQUIVOS
+>> # ===============================================
+>> Write-Both "CONTEÚDO DOS ARQUIVOS" "Cyan"
+>> Write-Both "========================"
+>>
+>> $allFiles = Get-ChildItem -Recurse -File | Where-Object { -not (Should-Ignore $_.FullName $_.Name) }
+>>
+>> foreach ($file in $allFiles) {
+    >>     $relativePath = $file.FullName.Substring($projectRoot.Path.Length + 1)
+    >>
+    >>     Write-Both ""
+    >>     Write-Both "═══════════════════════════════════════════════════════════════" "Magenta"
+    >>     Write-Both "ARQUIVO: $relativePath" "Yellow"
+    >>     Write-Both "Tamanho: $([math]::Round($file.Length/1KB, 2))KB" "Gray"
+    >>     Write-Both "Modificado: $($file.LastWriteTime)" "Gray"
+    >>     Write-Both "═══════════════════════════════════════════════════════════════" "Magenta"
+    >>
+    >>     try {
+        >>         # Verificar se é arquivo de texto
+        >>         $content = Get-Content $file.FullName -Raw -ErrorAction Stop
+        >>
+        >>         # Verificar se contém caracteres de controle (arquivo binário)
+        >>         $isBinary = $content -match "[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]"
+        >>
+        >>         if ($isBinary -or $file.Length -gt 500KB) {
+            >>             Write-Both "[ARQUIVO BINÁRIO OU MUITO GRANDE - CONTEÚDO NÃO EXIBIDO]" "Red"
+            >> } else {
+            >>             # Adicionar números de linha
+            >>             $lines = $content -split "`n"
+            >>             for ($i = 0; $i -lt $lines.Count; $i++) {
+                >>                 $lineNum = ($i + 1).ToString().PadLeft(4)
+                >>                 Write-Both "$lineNum │ $($lines[$i])" "White"
+                >> }
+            >>         
+        }
+        >>     
+    }
+    >>     catch {
+        >>         Write-Both "[ERRO AO LER ARQUIVO: $($_.Exception.Message)]" "Red"
+        >> }
+    >> 
+}
+>>
+>> # ===============================================
+>> # 5. ESTATÍSTICAS FINAIS
+>> # ===============================================
+>> Write-Both ""
+>> Write-Both "ESTATÍSTICAS DO PROJETO" "Cyan"
+>> Write-Both "=========================="
+>>
+>> $totalFiles = $allFiles.Count
+>> $totalSize = ($allFiles | Measure-Object Length -Sum).Sum
+>> $filesByExtension = $allFiles | Group-Object Extension | Sort-Object Count -Descending
+>>
+>> Write-Both "Total de arquivos: $totalFiles"
+>> Write-Both "Tamanho total: $([math]::Round($totalSize/1MB, 2))MB"
+>> Write-Both ""
+>> Write-Both "Arquivos por extensão:"
+>> foreach ($group in $filesByExtension) {
+    >>     $ext = if ($group.Name) { $group.Name } else { "(sem extensão)" }
+    >>     Write-Both "   $ext : $($group.Count) arquivo(s)" "Gray"
+    >> }
+>>
+>> Write-Both ""
+>> Write-Both "Extração concluída com sucesso!" "Green"
+>> Write-Both "Arquivo salvo como: $outputFile" "Green"
+>> Write-Host ""
+>> Write-Host "💾 Arquivo gerado: $outputFile" -ForegroundColor Magenta
+>> Write-Host "📄 Localização: $outputPath" -ForegroundColor Yellow
+>> Write-Host "💡 Dica: O arquivo contém todas as informações exibidas no terminal" -ForegroundColor Cyan

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gracie Barra Cidade Nova</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="../assets/images/gb_logo.png">
+    
+    <style>
+        :root {
+            --primary-red: #dc143c;
+            --primary-blue: #2c5aa0;
+            --dark-red: #b91c3c;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #666;
+            --background-primary: #ffffff;
+            --background-secondary: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-light: #888;
+            --background-primary: #1a1a1a;
+            --background-secondary: #2d2d2d;
+            --card-background: #2d2d2d;
+            --border-color: rgba(255,255,255,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.3);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(44, 90, 160, 0.1)),
+                        url('../assets/images/gb1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .login-container {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-strong);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-blue));
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            background: url('../assets/images/gb_logo.png') center/cover;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--background-primary);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-icon .form-input {
+            padding-left: 2.5rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-red);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-red);
+        }
+
+        .forgot-password {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--dark-red);
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            margin: 0 1rem;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .back-home:hover {
+            color: var(--primary-red);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(25, 135, 84, 0.2);
+            display: none;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            color: var(--primary-red);
+        }
+
+        .demo-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-background);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.8rem;
+            max-width: 300px;
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .demo-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .demo-info .credential {
+            margin-bottom: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .demo-info .credential:hover {
+            background: rgba(220, 20, 60, 0.1);
+        }
+
+        .demo-info .credential strong {
+            color: var(--text-primary);
+        }
+
+        .demo-info .credential span {
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+            }
+
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .welcome-text {
+                font-size: 1.1rem;
+            }
+
+            .demo-info {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-home" title="Voltar ao site">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo-img"></div>
+            <div class="logo-text">Gracie Barra</div>
+            <div class="logo-subtitle">Cidade Nova</div>
+        </div>
+
+        <div class="welcome-text">Bem-vindo de volta!</div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="bi bi-exclamation-triangle"></i>
+            <span id="errorText">Credenciais inválidas. Tente novamente.</span>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="bi bi-check-circle"></i>
+            <span id="successText">Login realizado com sucesso!</span>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="email">Email ou CPF</label>
+                <div class="input-icon">
+                    <i class="bi bi-person"></i>
+                    <input type="text" id="email" class="form-input" placeholder="Digite seu email ou CPF" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Senha</label>
+                <div class="input-icon">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" id="password" class="form-input" placeholder="Digite sua senha" required>
+                    <i class="bi bi-eye password-toggle" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <div class="form-options">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Lembrar-me</label>
+                </div>
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Entrar
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <i class="bi bi-arrow-clockwise"></i>
+            Entrando...
+        </div>
+
+        <div class="divider">
+            <span>ou</span>
+        </div>
+
+        <div class="register-link">
+            Não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a>
+        </div>
+    </div>
+
+    <!-- Demo Info Panel -->
+    <div class="demo-info">
+        <h4>🎯 Credenciais de Demonstração</h4>
+        <div class="credential" onclick="fillCredentials('admin@graciebarra.com', 'admin123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Admin:</strong>
+            <span>admin@graciebarra.com</span>
+        </div>
+        <div class="credential" onclick="fillCredentials('admin@graciebarra.com', 'admin123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Senha:</strong>
+            <span>admin123</span>
+        </div>
+        <hr style="margin: 0.5rem 0; border: 1px solid var(--border-color);">
+        <div class="credential" onclick="fillCredentials('professor@graciebarra.com', 'prof123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Professor:</strong>
+            <span>professor@graciebarra.com</span>
+        </div>
+        <div class="credential" onclick="fillCredentials('professor@graciebarra.com', 'prof123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Senha:</strong>
+            <span>prof123</span>
+        </div>
+        <hr style="margin: 0.5rem 0; border: 1px solid var(--border-color);">
+        <div class="credential" onclick="fillCredentials('aluno@graciebarra.com', 'aluno123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Aluno:</strong>
+            <span>aluno@graciebarra.com</span>
+        </div>
+        <div class="credential" onclick="fillCredentials('aluno@graciebarra.com', 'aluno123')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Senha:</strong>
+            <span>aluno123</span>
+        </div>
+        <hr style="margin: 0.5rem 0; border: 1px solid var(--border-color);">
+        <div class="credential" onclick="fillCredentials('111.111.111-11', '123456')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>CPF:</strong>
+            <span>111.111.111-11</span>
+        </div>
+        <div class="credential" onclick="fillCredentials('111.111.111-11', '123456')" style="cursor: pointer; padding: 0.3rem; border-radius: 4px; transition: background 0.2s;">
+            <strong>Senha:</strong>
+            <span>123456</span>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 0.7rem; color: var(--text-light); text-align: center;">
+            👆 Clique para preencher automaticamente
+        </div>
+    </div>
+
+    <script>
+        // Theme functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', initialTheme);
+            updateThemeIcon(initialTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById('themeIcon');
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Password toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        // Utility functions
+        function showMessage(type, message) {
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Hide all messages first
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            if (type === 'error') {
+                document.getElementById('errorText').textContent = message;
+                errorMessage.style.display = 'block';
+            } else if (type === 'success') {
+                document.getElementById('successText').textContent = message;
+                successMessage.style.display = 'block';
+            }
+        }
+
+        function normalizeInput(input) {
+            // Remove formatting from CPF
+            return input.replace(/\D/g, '');
+        }
+
+        function validateCredentials(email, password) {
+            const normalizedPassword = password.trim();
+            
+            // Demo credentials with correct paths
+            const validCredentials = [
+                { 
+                    email: 'admin@graciebarra.com', 
+                    password: 'admin123', 
+                    role: 'admin',
+                    name: 'Administrador',
+                    redirectPath: '../admin/dashboard.html'
+                },
+                { 
+                    email: 'professor@graciebarra.com', 
+                    password: 'prof123', 
+                    role: 'professor',
+                    name: 'Professor',
+                    redirectPath: '../admin/dashboard_professor.html'
+                },
+                { 
+                    email: 'aluno@graciebarra.com', 
+                    password: 'aluno123', 
+                    role: 'aluno',
+                    name: 'Aluno',
+                    redirectPath: '../admin/dashboard_aluno.html'
+                },
+                { 
+                    email: '11111111111', 
+                    password: '123456', 
+                    role: 'aluno',
+                    name: 'Aluno Demo',
+                    redirectPath: '../admin/dashboard_aluno.html'
+                }
+            ];
+            
+            // Normalize email input
+            let emailToCheck = email.toLowerCase().trim();
+            
+            // If input contains only numbers (CPF), remove formatting
+            if (/^\d/.test(email.replace(/\D/g, ''))) {
+                emailToCheck = email.replace(/\D/g, '');
+            }
+            
+            console.log('Checking credentials:', { emailToCheck, normalizedPassword });
+            
+            const user = validCredentials.find(cred => 
+                cred.email === emailToCheck && cred.password === normalizedPassword
+            );
+            
+            console.log('User found:', user);
+            return user;
+        }
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const loading = document.getElementById('loading');
+            
+            // Validation
+            if (!email || !password) {
+                showMessage('error', 'Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            // Show loading
+            loginBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            // Debug log
+            console.log('Login attempt:', { email, password });
+            
+            // Simulate API call
+            setTimeout(() => {
+                const user = validateCredentials(email, password);
+                
+                loading.style.display = 'none';
+                loginBtn.disabled = false;
+                
+                if (user) {
+                    showMessage('success', `Bem-vindo, ${user.name}!`);
+                    
+                    // Store user data in localStorage
+                    const userData = {
+                        email: user.email,
+                        role: user.role,
+                        name: user.name,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+                    localStorage.setItem('isLoggedIn', 'true');
+                    
+                    // Debug log
+                    console.log('User authenticated:', userData);
+                    console.log('Redirecting to:', user.redirectPath);
+                    
+                    // Redirect after success message
+                    setTimeout(() => {
+                        window.location.href = user.redirectPath;
+                    }, 1500);
+                } else {
+                    showMessage('error', 'Email/CPF ou senha incorretos. Verifique suas credenciais.');
+                    console.log('Authentication failed for:', { email, password });
+                }
+            }, 1500); // Simulate network delay
+        });
+
+        // Auto-fill credentials function
+        function fillCredentials(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            
+            // Visual feedback
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            
+            emailInput.style.background = 'rgba(220, 20, 60, 0.1)';
+            passwordInput.style.background = 'rgba(220, 20, 60, 0.1)';
+            
+            setTimeout(() => {
+                emailInput.style.background = '';
+                passwordInput.style.background = '';
+            }, 1000);
+            
+            console.log('Auto-filled credentials:', { email, password });
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            // Check if user is already logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const currentUser = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn === 'true' && currentUser) {
+                const user = JSON.parse(currentUser);
+                console.log('User already logged in:', user);
+                
+                // Redirect based on role
+                let redirectPath = '../admin/dashboard.html'; // default
+                
+                switch(user.role) {
+                    case 'admin':
+                        redirectPath = '../admin/dashboard.html';
+                        break;
+                    case 'professor':
+                        redirectPath = '../admin/dashboard_professor.html';
+                        break;
+                    case 'aluno':
+                        redirectPath = '../admin/dashboard_aluno.html';
+                        break;
+                }
+                
+                window.location.href = redirectPath;
+            }
+        });
+
+        // Input validation and formatting
+        document.getElementById('email').addEventListener('input', function() {
+            const value = this.value.trim();
+            const isEmail = value.includes('@');
+            const cleanValue = value.replace(/\D/g, '');
+            
+            // CPF formatting
+            if (!isEmail && cleanValue.length > 0) {
+                let formatted = cleanValue;
+                if (cleanValue.length > 3) {
+                    formatted = cleanValue.replace(/(\d{3})(\d)/, '$1.$2');
+                }
+                if (cleanValue.length > 6) {
+                    formatted = formatted.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+                }
+                if (cleanValue.length > 9) {
+                    formatted = formatted.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+                }
+                this.value = formatted;
+            }
+            
+            // Custom validation
+            if (!isEmail && cleanValue.length > 0 && cleanValue.length !== 11) {
+                this.setCustomValidity('CPF deve ter 11 dígitos');
+            } else if (isEmail && !value.includes('@') && value.length > 0) {
+                this.setCustomValidity('Digite um email válido');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Prevent form submission on Enter in inputs (optional)
+        document.getElementById('email').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Console log for debugging
+        console.log('Login page loaded successfully');
+        console.log('Available demo credentials:');
+        console.log('1. Admin: admin@graciebarra.com / admin123');
+        console.log('2. Professor: professor@graciebarra.com / prof123');
+        console.log('3. Aluno: aluno@graciebarra.com / aluno123');
+        console.log('4. CPF: 111.111.111-11 / 123456');
+        console.log('');
+        console.log('Redirection paths:');
+        console.log('- Admin: ../admin/dashboard.html');
+        console.log('- Professor: ../admin/dashboard_professor.html');
+        console.log('- Aluno: ../admin/dashboard_aluno.html');
+    </script>
+</body>
+</html>

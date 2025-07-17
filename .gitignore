@@ -1,0 +1,16 @@
+# Ignorar dependências
+node_modules/
+**/node_modules/
+
+# Ignorar builds e arquivos temporários
+dist/
+build/
+.env
+*.log
+*.lock
+.DS_Store
+*.tmp
+
+# Ignorar binários gerados por npm
+*.exe
+*.out

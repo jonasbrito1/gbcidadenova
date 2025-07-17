@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/backend/src/server.ts",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "runtimeArgs": ["--loader", "tsx/esm"],
+      "envFile": "${workspaceFolder}/apps/backend/.env",
+      "console": "integratedTerminal",
+      "restart": true,
+      "protocol": "inspector",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/apps/backend/dist/**/*.js"]
+    },
+    {
+      "name": "Debug Frontend",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/frontend/node_modules/.bin/vite",
+      "args": ["--mode", "development"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/frontend"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Full Stack",
+      "configurations": ["Debug Backend", "Debug Frontend"],
+      "stopAll": true
+    }
+  ]
+}

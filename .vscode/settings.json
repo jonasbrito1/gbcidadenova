@@ -1,3 +1,33 @@
 {
-    "liveServer.settings.port": 5504
+  "typescript.preferences.quoteStyle": "single",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "files.associations": {
+    "docker-compose*.yml": "dockercompose",
+    "*.prisma": "prisma"
+  },
+  "docker.containers.groupBy": "None",
+  "docker.containers.sortBy": "CreatedTime",
+  "sqltools.connections": [
+    {
+      "name": "GB PostgreSQL Local",
+      "driver": "PostgreSQL",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "database": "gb_sistema",
+      "username": "gb_user",
+      "password": "gb_dev_password"
+    }
+  ],
+  "sqltools.useNodeRuntime": true,
+  "prisma.showPrismaDataPlatformNotification": false,
+  "typescript.suggest.autoImports": true,
+  "emmet.includeLanguages": {
+    "typescript": "typescriptreact",
+    "javascript": "javascriptreact"
+  }
 }

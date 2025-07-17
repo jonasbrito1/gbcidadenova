@@ -1,0 +1,385 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// Enums
+enum UserRole {
+    admin
+    manager
+    instructor
+    front_desk
+    student
+}
+
+enum UserStatus {
+    active
+    inactive
+    suspended
+    pending
+}
+
+enum PaymentStatus {
+    pending
+    paid
+    overdue
+    cancelled
+    refunded
+}
+
+enum PaymentMethod {
+    money
+    pix
+    card
+    transfer
+    check
+}
+
+enum BeltColor {
+    white
+    grey
+    yellow
+    orange
+    green
+    blue
+    purple
+    brown
+    black
+    red
+}
+
+enum ClassStatus {
+    scheduled
+    ongoing
+    completed
+    cancelled
+}
+
+enum NotificationType {
+    payment
+    class
+    graduation
+    general
+    system
+}
+
+// Models
+model User {
+    id                   String     @id @default(uuid())
+    email                String     @unique
+    passwordHash         String     @map("password_hash")
+    role                 UserRole   @default(student)
+    status               UserStatus @default(active)
+    firstName            String     @map("first_name")
+    lastName             String     @map("last_name")
+    phone                String?
+    avatarUrl            String?    @map("avatar_url")
+    emailVerified        Boolean    @default(false) @map("email_verified")
+    twoFactorEnabled     Boolean    @default(false) @map("two_factor_enabled")
+    lastLogin            DateTime?  @map("last_login")
+    passwordResetToken   String?    @map("password_reset_token")
+    passwordResetExpires DateTime?  @map("password_reset_expires")
+    createdAt            DateTime   @default(now()) @map("created_at")
+    updatedAt            DateTime   @updatedAt @map("updated_at")
+    createdBy            String?    @map("created_by")
+
+    // Relations
+    studentProfile        StudentProfile?
+    instructorProfile     InstructorProfile?
+    classes               Class[]            @relation("ClassInstructor")
+    substituteClasses     Class[]            @relation("ClassSubstitute")
+    graduationsInstructor Graduation[]
+    paymentsProcessed     Payment[]
+    attendancesCreated    Attendance[]
+    notifications         Notification[]
+    creator               User?              @relation("UserCreator", fields: [createdBy], references: [id])
+    createdUsers          User[]             @relation("UserCreator")
+    ClassSchedule         ClassSchedule[]
+
+    @@map("users")
+}
+
+model StudentProfile {
+    id                    String    @id @default(uuid())
+    userId                String    @unique @map("user_id")
+    registrationNumber    String    @unique @map("registration_number")
+    birthDate             DateTime? @map("birth_date")
+    cpf                   String?   @unique
+    rg                    String?
+    emergencyContactName  String?   @map("emergency_contact_name")
+    emergencyContactPhone String?   @map("emergency_contact_phone")
+    medicalConditions     String?   @map("medical_conditions")
+    bloodType             String?   @map("blood_type")
+    addressStreet         String?   @map("address_street")
+    addressNumber         String?   @map("address_number")
+    addressComplement     String?   @map("address_complement")
+    addressNeighborhood   String?   @map("address_neighborhood")
+    addressCity           String?   @default("Manaus") @map("address_city")
+    addressState          String?   @default("AM") @map("address_state")
+    addressZipCode        String?   @map("address_zip_code")
+    enrollmentDate        DateTime  @default(now()) @map("enrollment_date")
+    currentBelt           BeltColor @default(white) @map("current_belt")
+    stripeCount           Int       @default(0) @map("stripe_count")
+    monthlyFee            Decimal   @default(0.00) @map("monthly_fee")
+    paymentDueDay         Int       @default(5) @map("payment_due_day")
+    notes                 String?
+    active                Boolean   @default(true)
+    createdAt             DateTime  @default(now()) @map("created_at")
+    updatedAt             DateTime  @updatedAt @map("updated_at")
+
+    // Relations
+    user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    enrollments Enrollment[]
+    graduations Graduation[]
+    monthlyFees MonthlyFee[]
+    payments    Payment[]
+    attendances Attendance[]
+
+    @@map("student_profiles")
+}
+
+model InstructorProfile {
+    id                 String    @id @default(uuid())
+    userId             String    @unique @map("user_id")
+    employeeId         String?   @unique @map("employee_id")
+    beltLevel          BeltColor @map("belt_level")
+    certificationLevel String?   @map("certification_level")
+    hireDate           DateTime  @map("hire_date")
+    salary             Decimal?
+    commissionRate     Decimal   @default(0.00) @map("commission_rate")
+    bio                String?
+    specializations    String[]
+    active             Boolean   @default(true)
+    createdAt          DateTime  @default(now()) @map("created_at")
+    updatedAt          DateTime  @updatedAt @map("updated_at")
+
+    // Relations
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("instructor_profiles")
+}
+
+model Program {
+    id               String      @id @default(uuid())
+    name             String
+    description      String?
+    minAge           Int?        @map("min_age")
+    maxAge           Int?        @map("max_age")
+    beltRequirements BeltColor[] @map("belt_requirements")
+    monthlyPrice     Decimal     @map("monthly_price")
+    classDuration    Int         @map("class_duration")
+    maxStudents      Int?        @map("max_students")
+    active           Boolean     @default(true)
+    createdAt        DateTime    @default(now()) @map("created_at")
+    updatedAt        DateTime    @updatedAt @map("updated_at")
+
+    // Relations
+    schedules   ClassSchedule[]
+    enrollments Enrollment[]
+
+    @@map("programs")
+}
+
+model ClassSchedule {
+    id           String   @id @default(uuid())
+    programId    String   @map("program_id")
+    instructorId String   @map("instructor_id")
+    dayOfWeek    Int      @map("day_of_week")
+    startTime    DateTime @map("start_time") @db.Time
+    endTime      DateTime @map("end_time") @db.Time
+    maxCapacity  Int      @default(20) @map("max_capacity")
+    active       Boolean  @default(true)
+    createdAt    DateTime @default(now()) @map("created_at")
+    updatedAt    DateTime @updatedAt @map("updated_at")
+
+    // Relations
+    program    Program @relation(fields: [programId], references: [id])
+    instructor User    @relation("ClassInstructor", fields: [instructorId], references: [id])
+    classes    Class[]
+
+    @@map("class_schedules")
+}
+
+model Enrollment {
+    id              String   @id @default(uuid())
+    studentId       String   @map("student_id")
+    programId       String   @map("program_id")
+    enrollmentDate  DateTime @default(now()) @map("enrollment_date")
+    status          String   @default("active")
+    monthlyDiscount Decimal  @default(0.00) @map("monthly_discount")
+    notes           String?
+    createdAt       DateTime @default(now()) @map("created_at")
+    updatedAt       DateTime @updatedAt @map("updated_at")
+
+    // Relations
+    student StudentProfile @relation(fields: [studentId], references: [id])
+    program Program        @relation(fields: [programId], references: [id])
+
+    @@unique([studentId, programId])
+    @@map("enrollments")
+}
+
+model Class {
+    id                     String      @id @default(uuid())
+    scheduleId             String      @map("schedule_id")
+    date                   DateTime
+    instructorId           String      @map("instructor_id")
+    substituteInstructorId String?     @map("substitute_instructor_id")
+    status                 ClassStatus @default(scheduled)
+    actualStartTime        DateTime?   @map("actual_start_time")
+    actualEndTime          DateTime?   @map("actual_end_time")
+    notes                  String?
+    attendanceCount        Int         @default(0) @map("attendance_count")
+    createdAt              DateTime    @default(now()) @map("created_at")
+    updatedAt              DateTime    @updatedAt @map("updated_at")
+
+    // Relations
+    schedule             ClassSchedule @relation(fields: [scheduleId], references: [id])
+    instructor           User          @relation("ClassInstructor", fields: [instructorId], references: [id])
+    substituteInstructor User?         @relation("ClassSubstitute", fields: [substituteInstructorId], references: [id])
+    attendances          Attendance[]
+
+    @@unique([scheduleId, date])
+    @@map("classes")
+}
+
+model Attendance {
+    id             String    @id @default(uuid())
+    classId        String    @map("class_id")
+    studentId      String    @map("student_id")
+    checkInTime    DateTime  @default(now()) @map("check_in_time")
+    checkOutTime   DateTime? @map("check_out_time")
+    lateArrival    Boolean   @default(false) @map("late_arrival")
+    earlyDeparture Boolean   @default(false) @map("early_departure")
+    notes          String?
+    createdBy      String?   @map("created_by")
+    createdAt      DateTime  @default(now()) @map("created_at")
+
+    // Relations
+    class   Class          @relation(fields: [classId], references: [id])
+    student StudentProfile @relation(fields: [studentId], references: [id])
+    creator User?          @relation(fields: [createdBy], references: [id])
+
+    @@unique([classId, studentId])
+    @@map("attendances")
+}
+
+model Graduation {
+    id                String    @id @default(uuid())
+    studentId         String    @map("student_id")
+    instructorId      String    @map("instructor_id")
+    previousBelt      BeltColor @map("previous_belt")
+    previousStripes   Int       @default(0) @map("previous_stripes")
+    newBelt           BeltColor @map("new_belt")
+    newStripes        Int       @default(0) @map("new_stripes")
+    graduationDate    DateTime  @default(now()) @map("graduation_date")
+    requirementsMet   String[]  @map("requirements_met")
+    ceremonyDate      DateTime? @map("ceremony_date")
+    certificateIssued Boolean   @default(false) @map("certificate_issued")
+    certificateUrl    String?   @map("certificate_url")
+    notes             String?
+    createdAt         DateTime  @default(now()) @map("created_at")
+    updatedAt         DateTime  @updatedAt @map("updated_at")
+
+    // Relations
+    student    StudentProfile @relation(fields: [studentId], references: [id])
+    instructor User           @relation(fields: [instructorId], references: [id])
+
+    @@map("graduations")
+}
+
+model MonthlyFee {
+    id             String        @id @default(uuid())
+    studentId      String        @map("student_id")
+    referenceMonth DateTime      @map("reference_month")
+    amount         Decimal
+    discount       Decimal       @default(0.00)
+    finalAmount    Decimal       @map("final_amount")
+    dueDate        DateTime      @map("due_date")
+    status         PaymentStatus @default(pending)
+    generatedAt    DateTime      @default(now()) @map("generated_at")
+    createdAt      DateTime      @default(now()) @map("created_at")
+    updatedAt      DateTime      @updatedAt @map("updated_at")
+
+    // Relations
+    student  StudentProfile @relation(fields: [studentId], references: [id])
+    payments Payment[]
+
+    @@unique([studentId, referenceMonth])
+    @@map("monthly_fees")
+}
+
+model Payment {
+    id            String        @id @default(uuid())
+    studentId     String        @map("student_id")
+    monthlyFeeId  String?       @map("monthly_fee_id")
+    amount        Decimal
+    paymentMethod PaymentMethod @map("payment_method")
+    paymentDate   DateTime      @default(now()) @map("payment_date")
+    referenceId   String?       @map("reference_id")
+    description   String?
+    receiptUrl    String?       @map("receipt_url")
+    processedBy   String?       @map("processed_by")
+    createdAt     DateTime      @default(now()) @map("created_at")
+    updatedAt     DateTime      @updatedAt @map("updated_at")
+
+    // Relations
+    student         StudentProfile @relation(fields: [studentId], references: [id])
+    monthlyFee      MonthlyFee?    @relation(fields: [monthlyFeeId], references: [id])
+    processedByUser User?          @relation(fields: [processedBy], references: [id])
+
+    @@map("payments")
+}
+
+model Notification {
+    id        String           @id @default(uuid())
+    userId    String           @map("user_id")
+    type      NotificationType
+    title     String
+    message   String
+    read      Boolean          @default(false)
+    actionUrl String?          @map("action_url")
+    metadata  Json?
+    createdAt DateTime         @default(now()) @map("created_at")
+    readAt    DateTime?        @map("read_at")
+
+    // Relations
+    user User @relation(fields: [userId], references: [id])
+
+    @@map("notifications")
+}
+
+model SystemSetting {
+    id          String   @id @default(uuid())
+    key         String   @unique
+    value       String
+    description String?
+    category    String   @default("general")
+    isPublic    Boolean  @default(false) @map("is_public")
+    createdAt   DateTime @default(now()) @map("created_at")
+    updatedAt   DateTime @updatedAt @map("updated_at")
+
+    @@map("system_settings")
+}
+
+model AuditLog {
+    id        String   @id @default(uuid())
+    userId    String?  @map("user_id")
+    action    String
+    tableName String   @map("table_name")
+    recordId  String?  @map("record_id")
+    oldValues Json?    @map("old_values")
+    newValues Json?    @map("new_values")
+    ipAddress String?  @map("ip_address")
+    userAgent String?  @map("user_agent")
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@map("audit_logs")
+}

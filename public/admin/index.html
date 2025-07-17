@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Admin - Gracie Barra Cidade Nova</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/gb_logo.png">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- CSS do Admin -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <!-- ===== LOGIN SECTION ===== -->
+    <div id="loginSection" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="../assets/images/gb_logo.png" alt="Gracie Barra Logo" onerror="this.style.display='none'">
+            </div>
+            <h2 class="login-title">CMS Admin - Gracie Barra</h2>
+            
+            <div id="errorMessage" class="error-message">
+                Usuário ou senha incorretos
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" class="form-control" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" class="form-control" required autocomplete="current-password">
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe"> Lembrar-me
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span class="btn-text">Entrar</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="bi bi-arrow-clockwise spinning"></i> Entrando...
+                    </span>
+                </button>
+            </form>
+            
+            <div class="login-help">
+                <p><strong>Usuários de teste:</strong></p>
+                <small>Admin: admin / password123<br>
+                Editor: jonasgb / password123</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CMS ADMIN SECTION ===== -->
+    <div id="cmsSection" class="cms-container">
+        <!-- Header -->
+        <header class="cms-header">
+            <div class="cms-logo">
+                <img src="../assets/images/gb_logo.png" alt="GB Logo" class="cms-logo-img">
+                <div class="cms-title">
+                    <h1>CMS Admin</h1>
+                    <span>Gracie Barra Cidade Nova</span>
+                </div>
+            </div>
+            
+            <div class="cms-nav">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Admin</div>
+                        <div class="user-role" id="userRole">Administrador</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" id="previewBtn">
+                    <i class="bi bi-eye"></i> Visualizar Site
+                </button>
+                
+                <button class="btn btn-primary" id="saveAllBtn">
+                    <i class="bi bi-cloud-arrow-up"></i> Salvar Tudo
+                </button>
+                
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" id="userMenuBtn">
+                        <i class="bi bi-person-circle"></i>
+                    </button>
+                    <div class="dropdown-menu" id="userMenu">
+                        <a href="#" id="profileBtn"><i class="bi bi-person"></i> Perfil</a>
+                        <a href="#" id="settingsBtn"><i class="bi bi-gear"></i> Configurações</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="cms-main">
+            <!-- Sidebar -->
+            <aside class="cms-sidebar">
+                <nav class="sidebar-nav">
+                    <!-- Dashboard -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </div>
+                        <div class="sidebar-item active" data-section="dashboard">
+                            <i class="bi bi-graph-up"></i>
+                            <span>Visão Geral</span>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo do Site -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">
+                            <i class="bi bi-file-text"></i> Conteúdo do Site
+                        </div>
+                        <div class="sidebar-item" data-section="header">
+                            <i class="bi bi-layout-text-window"></i>
+                            <span>Header & Logo</span>
+                        </div>
+                        <div class="sidebar-item" data-section="hero">
+                            <i class="bi bi-star-fill"></i>
+                            <span>Seção Principal</span>
+                        </div>
+                        <div class="sidebar-item" data-section="about">
+                            <i class="bi bi-info-circle"></i>
+                            <span>Sobre Nós</span>
+                        </div>
+                        <div class="sidebar-item" data-section="programs">
+                            <i class="bi bi-grid-3x3"></i>
+                            <span>Programas</span>
+                        </div>
+                        <div class="sidebar-item" data-section="benefits">
+                            <i class="bi bi-heart-fill"></i>
+                            <span>Benefícios</span>
+                        </div>
+                        <div class="sidebar-item" data-section="instructors">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Professores</span>
+                        </div>
+                        <div class="sidebar-item" data-section="schedule">
+                            <i class="bi bi-calendar3"></i>
+                            <span>Horários</span>
+                        </div>
+                        <div class="sidebar-item" data-section="contact">
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>Contato</span>
+                        </div>
+                        <div class="sidebar-item" data-section="footer">
+                            <i class="bi bi-layout-text-window-reverse"></i>
+                            <span>Rodapé</span>
+                        </div>
+                    </div>
+
+                    <!-- Mídia -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">
+                            <i class="bi bi-images"></i> Mídia
+                        </div>
+                        <div class="sidebar-item" data-section="media">
+                            <i class="bi bi-folder2-open"></i>
+                            <span>Gerenciar Arquivos</span>
+                        </div>
+                        <div class="sidebar-item" data-section="gallery">
+                            <i class="bi bi-collection"></i>
+                            <span>Galeria de Fotos</span>
+                        </div>
+                    </div>
+
+                    <!-- Sistema -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">
+                            <i class="bi bi-gear-fill"></i> Sistema
+                        </div>
+                        <div class="sidebar-item" data-section="settings">
+                            <i class="bi bi-sliders"></i>
+                            <span>Configurações</span>
+                        </div>
+                        <div class="sidebar-item" data-section="users" data-permission="admin">
+                            <i class="bi bi-person-gear"></i>
+                            <span>Usuários</span>
+                        </div>
+                        <div class="sidebar-item" data-section="backup" data-permission="admin">
+                            <i class="bi bi-archive"></i>
+                            <span>Backup</span>
+                        </div>
+                        <div class="sidebar-item" data-section="logs" data-permission="admin">
+                            <i class="bi bi-journal-text"></i>
+                            <span>Logs</span>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="cms-content">
+                <!-- Status Messages -->
+                <div id="alertContainer" class="alert-container"></div>
+
+                <!-- Dynamic Content -->
+                <div id="dynamicContent" class="content-area">
+                    <!-- Conteúdo será carregado dinamicamente aqui -->
+                    <div class="welcome-screen">
+                        <div class="welcome-icon">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <h2>Bem-vindo ao CMS</h2>
+                        <p>Selecione uma opção na barra lateral para começar a editar o conteúdo do site.</p>
+                        
+                        <div class="quick-actions">
+                            <button class="btn btn-primary" onclick="loadSection('hero')">
+                                <i class="bi bi-star"></i> Editar Página Principal
+                            </button>
+                            <button class="btn btn-secondary" onclick="loadSection('media')">
+                                <i class="bi bi-images"></i> Gerenciar Imagens
+                            </button>
+                            <button class="btn btn-secondary" onclick="window.open('../', '_blank')">
+                                <i class="bi bi-eye"></i> Ver Site
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+    
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content modal-fullscreen">
+            <div class="modal-header">
+                <h3><i class="bi bi-eye"></i> Preview do Site</h3>
+                <button class="btn-close" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="previewFrame" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="bi bi-cloud-upload"></i> Upload de Arquivo</h3>
+                <button class="btn-close" onclick="closeUploadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="bi bi-cloud-upload"></i>
+                    </div>
+                    <h4>Arraste arquivos aqui ou clique para selecionar</h4>
+                    <p>Tipos permitidos: JPG, PNG, GIF, WebP (máx. 5MB)</p>
+                    <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Selecionar Arquivos
+                    </button>
+                </div>
+                <div id="uploadProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Enviando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="bi bi-arrow-clockwise spinning"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/content.js"></script>
+    <script src="js/files.js"></script>
+    <script src="js/admin.js"></script>
+    
+    <script>
+        // Inicialização do sistema
+        document.addEventListener('DOMContentLoaded', function() {
+            AdminSystem.init();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Área - Gracie Barra Cidade Nova</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="../assets/images/gb_logo.png">
+    
+    <style>
+        :root {
+            --primary-red: #dc143c;
+            --primary-blue: #2c5aa0;
+            --dark-red: #b91c3c;
+            --success-green: #28a745;
+            --warning-yellow: #ffc107;
+            --danger-red: #dc3545;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #666;
+            --background-primary: #ffffff;
+            --background-secondary: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-light: #888;
+            --background-primary: #1a1a1a;
+            --background-secondary: #2d2d2d;
+            --card-background: #2d2d2d;
+            --border-color: rgba(255,255,255,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.3);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-strong: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background-secondary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .student-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .student-header {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-blue));
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .student-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .student-details h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .student-belt {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .belt-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+
+        .belt-branca { background: #ffffff; }
+        .belt-azul { background: #1565c0; }
+        .belt-roxa { background: #7b1fa2; }
+        .belt-marrom { background: #5d4037; }
+        .belt-preta { background: #000000; }
+
+        .student-meta {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--background-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .theme-toggle {
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--background-secondary);
+        }
+
+        /* Progress Cards */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .progress-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .progress-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .progress-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Schedule Card */
+        .schedule-item {
+            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .schedule-time {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 0.3rem;
+        }
+
+        .schedule-class {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .schedule-instructor {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Payment Card */
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .payment-info {
+            flex: 1;
+        }
+
+        .payment-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .payment-amount {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .payment-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-paid {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success-green);
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--warning-yellow);
+        }
+
+        .status-overdue {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-red);
+        }
+
+        /* Achievement Card */
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--background-secondary);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .achievement-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Full Width Cards */
+        .full-width-card {
+            grid-column: 1 / -1;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            background: var(--background-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .table tbody tr:hover {
+            background: var(--background-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .student-container {
+                padding: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .student-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Logout */
+        .logout-btn {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-red);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .logout-btn:hover {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: var(--primary-red);
+            border-bottom-color: var(--primary-red);
+        }
+
+        .nav-tab:hover {
+            color: var(--primary-red);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Print styles */
+        @media print {
+            .header-actions,
+            .logout-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="student-container">
+        <!-- Header -->
+        <div class="student-header">
+            <div class="header-content">
+                <div class="student-info">
+                    <div class="student-avatar" id="studentAvatar">JS</div>
+                    <div class="student-details">
+                        <h1 id="studentName">João Silva</h1>
+                        <div class="student-belt">
+                            <div class="belt-indicator belt-azul"></div>
+                            <span>Faixa Azul • 2º Grau</span>
+                        </div>
+                        <div class="student-meta">
+                            Aluno desde: Janeiro 2023 • ID: #12345
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="bi bi-moon" id="themeIcon"></i>
+                    </button>
+                    <a href="/public/index.html" class="btn btn-secondary">
+                        <i class="bi bi-house"></i>
+                        Site Principal
+                    </a>
+                    <button class="btn logout-btn" onclick="logout()">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Cards -->
+        <div class="progress-grid">
+            <div class="progress-card">
+                <div class="progress-header">
+                    <div class="progress-title">Frequência Mensal</div>
+                    <div class="progress-icon" style="background: linear-gradient(135deg, #28a745, #20c997);">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                </div>
+                <div class="progress-value">18</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+                <div class="progress-text">85% do mês • Meta: 20 treinos</div>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-header">
+                    <div class="progress-title">Progresso na Faixa</div>
+                    <div class="progress-icon" style="background: linear-gradient(135deg, #1565c0, #0d47a1);">
+                        <i class="bi bi-award"></i>
+                    </div>
+                </div>
+                <div class="progress-value">68%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 68%;"></div>
+                </div>
+                <div class="progress-text">2 anos na faixa azul • Próxima graduação estimada: 8 meses</div>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-header">
+                    <div class="progress-title">Situação Financeira</div>
+                    <div class="progress-icon" style="background: linear-gradient(135deg, #28a745, #20c997);">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                </div>
+                <div class="progress-value">Em dia</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+                <div class="progress-text">Última mensalidade: 15/07/2025</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">Visão Geral</button>
+            <button class="nav-tab" onclick="showTab('schedule')">Meus Horários</button>
+            <button class="nav-tab" onclick="showTab('payments')">Financeiro</button>
+            <button class="nav-tab" onclick="showTab('progress')">Meu Progresso</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="overview">
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Próximas Aulas</h3>
+                        <button class="btn btn-secondary">
+                            <i class="bi bi-calendar-plus"></i>
+                            Agendar
+                        </button>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">Hoje - 19:00</div>
+                        <div class="schedule-class">GB1 + GB2 - Adultos</div>
+                        <div class="schedule-instructor">Professor Victor César</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">Amanhã - 19:00</div>
+                        <div class="schedule-class">GB1 + GB2 - Adultos</div>
+                        <div class="schedule-instructor">Professor Ricardo Pires</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">Sábado - 09:00</div>
+                        <div class="schedule-class">Open Mat - Treino Livre</div>
+                        <div class="schedule-instructor">Treino Livre</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Conquistas Recentes</h3>
+                        <button class="btn btn-secondary">Ver Todas</button>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-title">Frequência Exemplar</div>
+                            <div class="achievement-date">15 de Julho, 2025</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-title">2º Grau Faixa Azul</div>
+                            <div class="achievement-date">01 de Junho, 2025</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <div class="achievement-title">1 Ano de Treino</div>
+                            <div class="achievement-date">15 de Janeiro, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Histórico de Treinos</h3>
+                    <button class="btn btn-secondary">
+                        <i class="bi bi-download"></i>
+                        Exportar
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Aula</th>
+                                <th>Professor</th>
+                                <th>Duração</th>
+                                <th>Técnicas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>16/07/2025</td>
+                                <td>GB1 + GB2</td>
+                                <td>Prof. Victor César</td>
+                                <td>1h 30min</td>
+                                <td>Guarda fechada, Passagem de guarda</td>
+                            </tr>
+                            <tr>
+                                <td>15/07/2025</td>
+                                <td>GB1 + GB2</td>
+                                <td>Prof. Ricardo Pires</td>
+                                <td>1h 30min</td>
+                                <td>Montada, Defesas de montada</td>
+                            </tr>
+                            <tr>
+                                <td>13/07/2025</td>
+                                <td>Open Mat</td>
+                                <td>Treino Livre</td>
+                                <td>2h</td>
+                                <td>Sparring, Treino livre</td>
+                            </tr>
+                            <tr>
+                                <td>12/07/2025</td>
+                                <td>GB1 + GB2</td>
+                                <td>Prof. Victor César</td>
+                                <td>1h 30min</td>
+                                <td>Raspagem da guarda, Transições</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div class="tab-content" id="schedule">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Meus Horários de Treino</h3>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-calendar-plus"></i>
+                        Agendar Aula
+                    </button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Segunda</th>
+                                <th>Terça</th>
+                                <th>Quarta</th>
+                                <th>Quinta</th>
+                                <th>Sexta</th>
+                                <th>Sábado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: 600;">19:00</td>
+                                <td style="background: rgba(220, 20, 60, 0.1); color: var(--primary-red); font-weight: 600;">GB1 + GB2</td>
+                                <td style="background: rgba(220, 20, 60, 0.1); color: var(--primary-red); font-weight: 600;">GB1 + GB2</td>
+                                <td style="background: rgba(220, 20, 60, 0.1); color: var(--primary-red); font-weight: 600;">GB1 + GB2</td>
+                                <td style="background: rgba(220, 20, 60, 0.1); color: var(--primary-red); font-weight: 600;">GB1 + GB2</td>
+                                <td style="background: rgba(220, 20, 60, 0.1); color: var(--primary-red); font-weight: 600;">GB1 + GB2</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">09:00</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                                <td style="background: rgba(108, 117, 125, 0.1); color: #6c757d;">-</td>
+                                <td style="background: rgba(44, 90, 160, 0.1); color: var(--primary-blue); font-weight: 600;">Open Mat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--background-secondary); border-radius: 8px;">
+                    <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">Legenda:</h4>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span style="color: var(--primary-red);">■ Minhas aulas agendadas</span>
+                        <span style="color: var(--primary-blue);">■ Aulas disponíveis</span>
+                        <span style="color: #6c757d;">■ Não disponível</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Tab -->
+        <div class="tab-content" id="payments">
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Histórico de Pagamentos</h3>
+                        <button class="btn btn-secondary">
+                            <i class="bi bi-download"></i>
+                            Comprovantes
+                        </button>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-info">
+                            <div class="payment-date">Vencimento: 15/07/2025</div>
+                            <div class="payment-amount">R$ 195,00</div>
+                        </div>
+                        <div class="payment-status status-paid">Pago</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-info">
+                            <div class="payment-date">Vencimento: 15/06/2025</div>
+                            <div class="payment-amount">R$ 195,00</div>
+                        </div>
+                        <div class="payment-status status-paid">Pago</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-info">
+                            <div class="payment-date">Vencimento: 15/05/2025</div>
+                            <div class="payment-amount">R$ 195,00</div>
+                        </div>
+                        <div class="payment-status status-paid">Pago</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-info">
+                            <div class="payment-date">Vencimento: 15/04/2025</div>
+                            <div class="payment-amount">R$ 195,00</div>
+                        </div>
+                        <div class="payment-status status-paid">Pago</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Próximos Vencimentos</h3>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-info">
+                            <div class="payment-date">Vencimento: 15/08/2025</div>
+                            <div class="payment-amount">R$ 195,00</div>
+                        </div>
+                        <div class="payment-status status-pending">Pendente</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-primary" style="width: 100%;">
+                            <i class="bi bi-credit-card"></i>
+                            Pagar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div class="tab-content" id="progress">
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Jornada de Graduação</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; align-items: center; padding: 1rem; background: var(--background-secondary); border-radius: 8px;">
+                            <div class="belt-indicator belt-branca" style="width: 30px; height: 30px; margin-right: 1rem;"></div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600;">Faixa Branca</div>
+                                <div style="color: var(--text-light); font-size: 0.9rem;">Janeiro 2023 - Junho 2023</div>
+                            </div>
+                            <i class="bi bi-check-circle" style="color: var(--success-green); font-size: 1.2rem;"></i>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 1rem; background: rgba(21, 101, 192, 0.1); border-radius: 8px; border-left: 4px solid #1565c0;">
+                            <div class="belt-indicator belt-azul" style="width: 30px; height: 30px; margin-right: 1rem;"></div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600;">Faixa Azul</div>
+                                <div style="color: var(--text-light); font-size: 0.9rem;">Junho 2023 - Atual</div>
+                            </div>
+                            <div style="color: var(--primary-blue); font-weight: 600;">68%</div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 1rem; background: rgba(123, 31, 162, 0.1); border-radius: 8px; opacity: 0.6;">
+                            <div class="belt-indicator belt-roxa" style="width: 30px; height: 30px; margin-right: 1rem;"></div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600;">Faixa Roxa</div>
+                                <div style="color: var(--text-light); font-size: 0.9rem;">Estimativa: Março 2026</div>
+                            </div>
+                            <i class="bi bi-lock" style="color: var(--text-light); font-size: 1.2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Estatísticas</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                            <span>Total de treinos:</span>
+                            <span style="font-weight: 600;">387</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                            <span>Média mensal:</span>
+                            <span style="font-weight: 600;">16 treinos</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                            <span>Frequência geral:</span>
+                            <span style="font-weight: 600; color: var(--success-green);">82%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                            <span>Tempo na academia:</span>
+                            <span style="font-weight: 600;">2 anos e 6 meses</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme functionality
+        let isDark = false;
+        
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeIcon').className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                isDark = savedTheme === 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.getElementById('themeIcon').className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+            }
+        }
+
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Update active tab button
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Check authentication
+        function checkAuth() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const user = JSON.parse(currentUser);
+            if (user.role !== 'aluno') {
+                alert('Acesso negado. Esta página é apenas para alunos.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update user info
+            const name = user.email.split('@')[0];
+            document.getElementById('studentName').textContent = name.charAt(0).toUpperCase() + name.slice(1);
+            document.getElementById('studentAvatar').textContent = name.charAt(0).toUpperCase();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            initTheme();
+            
+            // Add some interactive effects
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Print functionality
+        function printReport() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

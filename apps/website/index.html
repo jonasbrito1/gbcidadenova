@@ -153,12 +153,11 @@
             margin-top: -2px;
         }
 
-        /* Container para navegação e controles */
+        /* Container para navegação e tema */
         .nav-wrapper {
             display: flex;
             align-items: center;
             gap: clamp(1rem, 2vw, 2rem);
-            flex-wrap: wrap;
         }
 
         .nav-menu {
@@ -198,70 +197,6 @@
         .nav-menu a:hover,
         .nav-menu a.active {
             color: var(--primary-red);
-        }
-
-        /* Auth Buttons Container */
-        .auth-buttons {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-            margin-left: 1rem;
-        }
-
-        .auth-btn {
-            padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem);
-            border: 2px solid var(--primary-red);
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .auth-btn.login {
-            background: transparent;
-            color: var(--primary-red);
-        }
-
-        .auth-btn.login:hover {
-            background: var(--primary-red);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
-        }
-
-        .auth-btn.register {
-            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-            color: white;
-            border-color: var(--primary-red);
-        }
-
-        .auth-btn.register:hover {
-            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
-        }
-
-        .auth-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .auth-btn:hover::before {
-            left: 100%;
         }
 
         /* Theme Toggle Button */
@@ -357,22 +292,6 @@
             color: var(--primary-blue);
         }
 
-        .mobile-nav .auth-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .mobile-nav .auth-btn {
-            width: 100%;
-            justify-content: center;
-            padding: 1rem;
-            font-size: 1.1rem;
-        }
-
         .mobile-nav .theme-toggle {
             display: flex !important;
             width: 100%;
@@ -389,23 +308,23 @@
 
         /* Hero Section com imagem de fundo */
         .hero {
-            background: 
-                linear-gradient(135deg, rgba(220, 20, 60, 0.8), rgba(44, 90, 160, 0.6)), 
-                url('assets/images/gb1.jpg'),
-                linear-gradient(45deg, #1a1a1a, #333);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            padding-top: 21vh;
-        }
+    background: 
+        linear-gradient(135deg, rgba(220, 20, 60, 0.8), rgba(44, 90, 160, 0.6)), 
+        url('assets/images/gb1.jpg'),
+        linear-gradient(45deg, #1a1a1a, #333);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding-top: 21vh;
+}
 
         .hero::before {
             content: '';
@@ -481,63 +400,6 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5);
-        }
-
-        /* Hero Auth Section */
-        .hero-auth {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-auth-text {
-            color: #ffffff;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-auth-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .hero-auth-btn {
-            padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1.2rem, 3vw, 1.8rem);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            background: rgba(255,255,255,0.1);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: clamp(0.85rem, 1.8vw, 1rem);
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .hero-auth-btn:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(255,255,255,0.2);
-        }
-
-        .hero-auth-btn.primary {
-            background: rgba(220, 20, 60, 0.8);
-            border-color: var(--primary-red);
-        }
-
-        .hero-auth-btn.primary:hover {
-            background: var(--primary-red);
-            border-color: var(--primary-red);
         }
 
         /* Content Sections */
@@ -1310,23 +1172,6 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 1200px) {
-            .nav-wrapper {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .auth-buttons {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            
-            .auth-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-        }
-
         @media (max-width: 1024px) {
             .nav-container {
                 flex-wrap: wrap;
@@ -1341,18 +1186,10 @@
             .nav-menu {
                 gap: 1rem;
             }
-            
-            .auth-buttons {
-                margin-left: 0;
-            }
         }
 
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
-            }
-            
-            .auth-buttons {
                 display: none;
             }
             
@@ -1372,22 +1209,6 @@
             .hero {
                 min-height: 80vh;
             }
-            
-            .hero-auth {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .hero-auth-buttons {
-                flex-direction: column;
-                width: 100%;
-                align-items: center;
-            }
-            
-            .hero-auth-btn {
-                width: 100%;
-                max-width: 300px;
-            }
 
             .two-column {
                 grid-template-columns: 1fr;
@@ -1400,6 +1221,20 @@
             .contact-grid,
             .values-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .mobile-nav .theme-toggle {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+                padding: 1rem;
+                background: var(--background-secondary);
+                border: 2px solid var(--border-color);
+                border-radius: 12px;
+                color: var(--text-primary);
+                font-size: 1rem;
+                cursor: pointer;
             }
 
             .contact-section {
@@ -1586,17 +1421,6 @@
                     </ul>
                 </nav>
                 
-                <div class="auth-buttons">
-                    <a href="../public/admin/login.html" class="auth-btn login">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        <span>Entrar</span>
-                    </a>
-                    <a href="../public/admin/cadastro.html" class="auth-btn register">
-                        <i class="bi bi-person-plus"></i>
-                        <span>Cadastrar</span>
-                    </a>
-                </div>
-                
                 <button class="theme-toggle" id="themeToggle">
                     <span id="themeIcon">🌙</span>
                     <span id="themeText">Escuro</span>
@@ -1617,18 +1441,6 @@
                 <li><a href="#horarios">Horários</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
-            
-            <div class="auth-buttons">
-                <a href="../public/admin/login.html" class="auth-btn login">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Entrar</span>
-                </a>
-                <a href="public/admin/cadastro.html" class="auth-btn register">
-                    <i class="bi bi-person-plus"></i>
-                    <span>Cadastrar</span>
-                </a>
-            </div>
-            
             <button class="theme-toggle" id="mobileThemeToggle">
                 <span id="mobileThemeIcon">🌙</span>
                 <span id="mobileThemeText">Escuro</span>
@@ -1641,20 +1453,6 @@
             <h1>Gracie Barra Cidade Nova</h1>
             <div class="subtitle">Jiu-Jitsu para Todos</div>
             <a href="https://wa.me/559281136742?text=Olá!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20na%20Gracie%20Barra%20Cidade%20Nova.%20Poderia%20me%20ajudar%20com%20mais%20informações?" target="_blank" class="cta-button">Começar a Treinar</a>
-            
-            <div class="hero-auth">
-                <div class="hero-auth-text">Já faz parte da nossa família GB?</div>
-                <div class="hero-auth-buttons">
-                    <a href="public/admin/login.html" class="hero-auth-btn">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        Área do Aluno
-                    </a>
-                    <a href="public/admin/cadastro.html" class="hero-auth-btn primary">
-                        <i class="bi bi-person-plus"></i>
-                        Criar Conta
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -2642,55 +2440,6 @@
                         }
                     });
                 }
-            });
-        });
-
-        // Auth button hover effects
-        document.querySelectorAll('.auth-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Hero auth buttons interaction
-        document.querySelectorAll('.hero-auth-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Additional accessibility for auth buttons
-        document.querySelectorAll('.auth-btn, .hero-auth-btn').forEach(btn => {
-            btn.addEventListener('focus', function() {
-                this.style.outline = '2px solid var(--primary-red)';
-                this.style.outlineOffset = '2px';
-            });
-            
-            btn.addEventListener('blur', function() {
-                this.style.outline = 'none';
-            });
-        });
-
-        // Loading states for auth buttons
-        document.querySelectorAll('.auth-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Carregando...';
-                this.style.pointerEvents = 'none';
-                
-                // Reset after a short delay (this would be handled by the actual page load)
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.style.pointerEvents = 'auto';
-                }, 2000);
             });
         });
     </script>

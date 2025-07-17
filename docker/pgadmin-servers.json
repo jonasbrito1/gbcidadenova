@@ -1,0 +1,20 @@
+# Criar docker/pgadmin-servers.json
+mkdir -p docker
+
+cat > docker/pgadmin-servers.json << 'EOF'
+{
+  "Servers": {
+    "1": {
+      "Name": "GB Sistema Local",
+      "Group": "Development",
+      "Host": "gb-postgres",
+      "Port": 5432,
+      "MaintenanceDB": "gb_sistema",
+      "Username": "gb_user",
+      "Password": "gb_dev_password",
+      "SSLMode": "prefer",
+      "Favorite": true
+    }
+  }
+}
+EOF
