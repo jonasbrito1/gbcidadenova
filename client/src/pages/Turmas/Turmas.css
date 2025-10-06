@@ -1,0 +1,38 @@
+.turmas-page {
+  padding: 2rem 0;
+}
+
+.turmas-page h2 {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.turma-card {
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.turma-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  border-color: #dc2626;
+}
+
+.grade-horarios h5 {
+  border-bottom: 2px solid #dc2626;
+  padding-bottom: 0.5rem;
+}
+
+.nav-tabs .nav-link {
+  color: #6c757d;
+}
+
+.nav-tabs .nav-link.active {
+  color: #dc2626;
+  border-bottom: 2px solid #dc2626;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #dc2626;
+}

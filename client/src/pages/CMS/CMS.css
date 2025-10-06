@@ -1,0 +1,166 @@
+/* CMS Styles */
+.cms-manager {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.cms-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cms-header h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.cms-field-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e9ecef;
+}
+
+.cms-field-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.cms-field-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem;
+}
+
+.cms-field-card .card-body {
+  padding: 1.25rem;
+}
+
+.hover-shadow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Loading states */
+.cms-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+/* Image preview */
+.cms-image-preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+}
+
+.cms-image-preview img {
+  transition: transform 0.3s ease;
+}
+
+.cms-image-preview:hover img {
+  transform: scale(1.05);
+}
+
+/* Form elements */
+.cms-field-card .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.cms-field-card .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.cms-field-card .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Status indicators */
+.cms-status-success {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.cms-status-error {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.cms-status-warning {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cms-header {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cms-field-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Animation for success states */
+@keyframes cms-success-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cms-success-animation {
+  animation: cms-success-pulse 0.6s ease-in-out;
+}
+
+/* Badge styles */
+.cms-field-card .badge {
+  font-size: 0.7em;
+  padding: 0.35em 0.65em;
+}
+
+/* File input styling */
+.cms-field-card input[type="file"] {
+  border: 2px dashed #007bff;
+  border-radius: 6px;
+  padding: 1rem;
+  background-color: #f8f9ff;
+  transition: all 0.3s ease;
+}
+
+.cms-field-card input[type="file"]:hover {
+  border-color: #0056b3;
+  background-color: #e6f3ff;
+}
+
+.cms-field-card input[type="file"]:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+/* Progress indicators */
+.cms-upload-progress {
+  background: linear-gradient(90deg, #007bff 50%, transparent 50%);
+  background-size: 200% 100%;
+  animation: cms-progress 2s infinite;
+}
+
+@keyframes cms-progress {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

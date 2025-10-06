@@ -1,0 +1,114 @@
+services:
+  # Banco de dados MySQL (mantido)
+  mysql:
+    image: mysql:8.0
+    container_name: gb_mysql_modern
+    ports:
+      - "3309:3306"  # Porta diferente para não conflitar
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_2024
+      MYSQL_DATABASE: gracie_barra_db
+      MYSQL_USER: gb_user
+      MYSQL_PASSWORD: gb_password_2024
+    volumes:
+      - mysql_data_modern:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - gb_modern_network
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --skip-host-cache
+      --skip-name-resolve
+    restart: unless-stopped
+
+  # Backend Node.js/Express
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: gb_backend_modern
+    ports:
+      - "3011:3000"  # Porta do backend
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mysql
+      - DB_NAME=gracie_barra_db
+      - DB_USER=gb_user
+      - DB_PASSWORD=gb_password_2024
+      - DB_PORT=3306
+      - JWT_SECRET=your_jwt_secret_here_change_in_production
+      - PORT=3000
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+      - uploads_data_modern:/app/uploads
+    depends_on:
+      - mysql
+    networks:
+      - gb_modern_network
+    restart: unless-stopped
+    command: npm run dev
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: gb_frontend_modern
+    ports:
+      - "3010:3000"  # Porta do frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:3011
+      - GENERATE_SOURCEMAP=false
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - gb_modern_network
+    restart: unless-stopped
+    command: npm start
+
+  # Nginx (Proxy reverso)
+  nginx:
+    image: nginx:alpine
+    container_name: gb_nginx_modern
+    ports:
+      - "8084:80"  # Porta principal da aplicação
+    volumes:
+      - ./nginx-simple.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - gb_modern_network
+    restart: unless-stopped
+
+  # phpMyAdmin (para gerenciar banco)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: gb_phpmyadmin_modern
+    ports:
+      - "8085:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: gb_user
+      PMA_PASSWORD: gb_password_2024
+    depends_on:
+      - mysql
+    networks:
+      - gb_modern_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data_modern:
+  uploads_data_modern:
+
+networks:
+  gb_modern_network:
+    driver: bridge

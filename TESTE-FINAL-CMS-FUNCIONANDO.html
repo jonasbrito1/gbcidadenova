@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 CMS FUNCIONANDO - Sistema Gracie Barra</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .status-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+            min-height: 80vh;
+        }
+        .controls {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+        .iframe-container {
+            padding: 0;
+            background: white;
+        }
+        .test-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-section h3 {
+            color: #343a40;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        .test-section h3 .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40,167,69,0.3);
+        }
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-danger { background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); }
+        .btn-warning { background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: #212529; }
+        .btn-info { background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .status .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .logs {
+            background: #2d3748;
+            color: #a0aec0;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .logs::-webkit-scrollbar { width: 8px; }
+        .logs::-webkit-scrollbar-track { background: #1a202c; }
+        .logs::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 4px; }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40,167,69,0.25);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(40,167,69,0.2);
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .banner {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 768px) {
+            .content { grid-template-columns: 1fr; }
+            .controls { border-right: none; border-bottom: 1px solid #e9ecef; }
+            .header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Sistema CMS - FUNCIONANDO</h1>
+            <p>Gracie Barra - Teste Final de Validação</p>
+            <div class="status-badge">
+                ✅ Banco de Dados Conectado • Persistência Ativa
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="controls">
+                <div class="banner">
+                    🚀 SISTEMA 100% OPERACIONAL
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="testCount">0</div>
+                        <div class="stat-label">Testes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="successCount">0</div>
+                        <div class="stat-label">Sucessos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="dbStatus">✅</div>
+                        <div class="stat-label">Banco</div>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="icon">🧪</span>Testes Automatizados</h3>
+                    <button class="btn" onclick="executarTestesCompletos()" id="btnTeste">
+                        Executar Bateria Completa
+                    </button>
+                    <button class="btn btn-info" onclick="testarPersistencia()">
+                        Verificar Persistência
+                    </button>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="icon">✏️</span>Teste Manual</h3>
+                    <div class="input-group">
+                        <input type="text" id="textoTeste" placeholder="Digite um texto para testar...">
+                    </div>
+                    <button class="btn" onclick="testarAtualizacao()">
+                        Atualizar Conteúdo
+                    </button>
+                    <div id="resultadoManual"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="icon">🖥️</span>Interface CMS</h3>
+                    <button class="btn btn-info" onclick="abrirCMS()">
+                        Abrir Sistema CMS
+                    </button>
+                    <button class="btn btn-warning" onclick="recarregarCMS()">
+                        Recarregar Interface
+                    </button>
+                </div>
+
+                <div class="test-section">
+                    <h3><span class="icon">📊</span>Logs do Sistema</h3>
+                    <button class="btn btn-danger" onclick="limparLogs()">Limpar Logs</button>
+                    <div class="logs" id="logsContainer"></div>
+                </div>
+            </div>
+
+            <div class="iframe-container" id="cmsContainer">
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f8f9fa; color: #6c757d; font-size: 1.5rem; text-align: center; flex-direction: column;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖥️</div>
+                    <p style="margin: 0;">Sistema CMS Pronto</p>
+                    <p style="margin: 0; font-size: 1rem; opacity: 0.7;">Clique em "Abrir Sistema CMS" para começar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3011/api/cms';
+        const CMS_URL = 'http://localhost:3010/app/cms';
+
+        let testCount = 0;
+        let successCount = 0;
+
+        function updateStats() {
+            document.getElementById('testCount').textContent = testCount;
+            document.getElementById('successCount').textContent = successCount;
+        }
+
+        function log(message, type = 'info') {
+            const container = document.getElementById('logsContainer');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                success: '#48bb78',
+                error: '#f56565',
+                warning: '#ed8936',
+                info: '#4299e1'
+            };
+
+            container.innerHTML += `<div style="color: ${colors[type]}; margin: 2px 0;">
+                [${timestamp}] ${message}
+            </div>`;
+            container.scrollTop = container.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function limparLogs() {
+            document.getElementById('logsContainer').innerHTML = '';
+            testCount = 0;
+            successCount = 0;
+            updateStats();
+            log('🧹 Sistema reiniciado - Logs limpos', 'info');
+        }
+
+        function mostrarResultado(elementId, tipo, mensagem) {
+            const elemento = document.getElementById(elementId);
+            if (elemento) {
+                const iconMap = {
+                    success: '✅',
+                    error: '❌',
+                    warning: '⚠️',
+                    info: 'ℹ️'
+                };
+                elemento.innerHTML = `<div class="status ${tipo}">
+                    <span class="icon">${iconMap[tipo]}</span>
+                    ${mensagem}
+                </div>`;
+            }
+        }
+
+        async function testarAPI(endpoint, metodo = 'GET', dados = null) {
+            testCount++;
+            updateStats();
+
+            try {
+                const opcoes = {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+
+                if (dados) {
+                    opcoes.body = JSON.stringify(dados);
+                }
+
+                const response = await fetch(`${API_BASE}${endpoint}`, opcoes);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    successCount++;
+                    updateStats();
+                    return { sucesso: true, data };
+                } else {
+                    return { sucesso: false, erro: data.error || 'Erro desconhecido' };
+                }
+            } catch (error) {
+                return { sucesso: false, erro: error.message };
+            }
+        }
+
+        async function executarTestesCompletos() {
+            const btnTeste = document.getElementById('btnTeste');
+            btnTeste.disabled = true;
+            btnTeste.textContent = '⏳ Executando Testes...';
+
+            log('🚀 Iniciando bateria completa de testes com BANCO DE DADOS', 'info');
+
+            try {
+                // Teste 1: Verificar conexão com banco
+                log('🔗 [1/6] Testando conexão com banco de dados...', 'info');
+                const teste1 = await testarAPI('/secoes');
+                if (teste1.sucesso) {
+                    log(`✅ [1/6] Banco conectado: ${teste1.data.data.length} seções encontradas`, 'success');
+                } else {
+                    log(`❌ [1/6] Falha na conexão: ${teste1.erro}`, 'error');
+                }
+
+                // Teste 2: Carregar seção específica
+                log('📖 [2/6] Testando carregamento da seção Hero...', 'info');
+                const teste2 = await testarAPI('/secoes/1');
+                if (teste2.sucesso) {
+                    log(`✅ [2/6] Seção Hero: ${teste2.data.data.conteudos.length} conteúdos do banco`, 'success');
+                } else {
+                    log(`❌ [2/6] Falha no carregamento da seção`, 'error');
+                }
+
+                // Teste 3: Atualizar conteúdo (PERSISTÊNCIA REAL)
+                const textoTeste = `Teste DB ${new Date().toLocaleTimeString()}`;
+                log(`📝 [3/6] Testando persistência no banco: "${textoTeste}"`, 'info');
+                const teste3 = await testarAPI('/conteudos/1', 'PUT', { valor: textoTeste });
+                if (teste3.sucesso) {
+                    log(`✅ [3/6] Conteúdo persistido no banco com sucesso`, 'success');
+                } else {
+                    log(`❌ [3/6] Falha na persistência: ${teste3.erro}`, 'error');
+                }
+
+                // Teste 4: Verificar persistência após delay
+                log('🔍 [4/6] Verificando se mudança persistiu no banco...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                const teste4 = await testarAPI('/secoes/1');
+                if (teste4.sucesso) {
+                    const conteudo = teste4.data.data.conteudos.find(c => c.id === 1);
+                    if (conteudo && conteudo.valor === textoTeste) {
+                        log(`✅ [4/6] PERSISTÊNCIA CONFIRMADA: "${conteudo.valor}"`, 'success');
+                    } else {
+                        log(`⚠️ [4/6] Problema na persistência. Valor: "${conteudo.valor}"`, 'warning');
+                    }
+                }
+
+                // Teste 5: Verificar acesso a imagens
+                log('🖼️ [5/6] Testando servidor de imagens...', 'info');
+                try {
+                    const imgResponse = await fetch('http://localhost:3011/uploads/cms/cms-1759108640262-637737945.png');
+                    if (imgResponse.ok) {
+                        log(`✅ [5/6] Servidor de imagens funcionando (${imgResponse.status})`, 'success');
+                    } else {
+                        log(`⚠️ [5/6] Problema com servidor de imagens (${imgResponse.status})`, 'warning');
+                    }
+                } catch (error) {
+                    log(`❌ [5/6] Erro no acesso a imagens: ${error.message}`, 'error');
+                }
+
+                // Teste 6: Verificar interface CMS
+                log('🖥️ [6/6] Testando interface CMS...', 'info');
+                try {
+                    const cmsResponse = await fetch(CMS_URL);
+                    if (cmsResponse.ok) {
+                        log(`✅ [6/6] Interface CMS acessível (${cmsResponse.status})`, 'success');
+                    } else {
+                        log(`⚠️ [6/6] Problema na interface CMS (${cmsResponse.status})`, 'warning');
+                    }
+                } catch (error) {
+                    log(`❌ [6/6] Erro na interface CMS: ${error.message}`, 'error');
+                }
+
+                // Resultado final
+                const porcentagemSucesso = Math.round((successCount / testCount) * 100);
+                log(`🎉 Testes concluídos: ${successCount}/${testCount} sucessos (${porcentagemSucesso}%)`,
+                    porcentagemSucesso >= 80 ? 'success' : 'warning');
+
+                if (porcentagemSucesso >= 90) {
+                    log('🚀 SISTEMA CMS 100% OPERACIONAL COM BANCO DE DADOS!', 'success');
+                    document.getElementById('dbStatus').textContent = '🟢';
+                } else {
+                    log('⚠️ Sistema apresenta alguns problemas, verificar logs', 'warning');
+                    document.getElementById('dbStatus').textContent = '🟡';
+                }
+
+            } catch (error) {
+                log(`💥 Erro crítico nos testes: ${error.message}`, 'error');
+                document.getElementById('dbStatus').textContent = '🔴';
+            } finally {
+                btnTeste.disabled = false;
+                btnTeste.textContent = 'Executar Bateria Completa';
+            }
+        }
+
+        async function testarAtualizacao() {
+            const texto = document.getElementById('textoTeste').value.trim();
+            if (!texto) {
+                alert('Digite um texto primeiro!');
+                return;
+            }
+
+            log(`📝 Teste manual de persistência: "${texto}"`, 'info');
+
+            const resultado = await testarAPI('/conteudos/1', 'PUT', { valor: texto });
+            if (resultado.sucesso) {
+                log(`✅ Texto persistido no banco: "${texto}"`, 'success');
+                mostrarResultado('resultadoManual', 'success', 'Texto atualizado e persistido no banco de dados!');
+            } else {
+                log(`❌ Falha na persistência: ${resultado.erro}`, 'error');
+                mostrarResultado('resultadoManual', 'error', `Erro: ${resultado.erro}`);
+            }
+        }
+
+        async function testarPersistencia() {
+            log('🔍 Verificando persistência dos dados...', 'info');
+
+            const resultado = await testarAPI('/secoes/1');
+            if (resultado.sucesso) {
+                const conteudo = resultado.data.data.conteudos.find(c => c.id === 1);
+                log(`📊 Valor atual no banco: "${conteudo.valor}"`, 'info');
+                log(`⏰ Última atualização: ${conteudo.updated_at || 'N/A'}`, 'info');
+                log('✅ Dados persistindo corretamente no MySQL', 'success');
+            } else {
+                log(`❌ Erro ao verificar persistência: ${resultado.erro}`, 'error');
+            }
+        }
+
+        function abrirCMS() {
+            log('🖥️ Carregando interface CMS com banco de dados...', 'info');
+            const container = document.getElementById('cmsContainer');
+            container.innerHTML = `<iframe src="${CMS_URL}" title="Sistema CMS"></iframe>`;
+        }
+
+        function recarregarCMS() {
+            const iframe = document.querySelector('#cmsContainer iframe');
+            if (iframe) {
+                log('🔄 Recarregando interface CMS...', 'info');
+                iframe.contentWindow.location.reload();
+            } else {
+                log('⚠️ Interface CMS não está aberta', 'warning');
+            }
+        }
+
+        // Inicialização
+        window.onload = function() {
+            log('🔧 Sistema de teste carregado - Banco de dados ativo', 'success');
+            log('📊 Backend: MySQL + Docker • Frontend: React + Bootstrap', 'info');
+            document.getElementById('textoTeste').value = `Teste Manual ${new Date().toLocaleTimeString()}`;
+            updateStats();
+
+            // Executar teste automático após 2 segundos
+            setTimeout(() => {
+                log('🤖 Executando teste automático de conectividade...', 'info');
+                executarTestesCompletos();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Integração CMS</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .success { color: green; }
+        .error { color: red; }
+        .loading { color: blue; }
+        button { padding: 10px 20px; margin: 10px 5px; cursor: pointer; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Teste de Integração CMS - Gracie Barra</h1>
+
+    <div class="test-section">
+        <h2>1. Teste: Listar Seções</h2>
+        <button onclick="testListarSecoes()">Testar Listar Seções</button>
+        <div id="result-secoes"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Teste: Carregar Seção Hero</h2>
+        <button onclick="testCarregarSecao()">Testar Carregar Seção Hero</button>
+        <div id="result-secao"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Teste: Atualizar Conteúdo</h2>
+        <button onclick="testAtualizarConteudo()">Testar Atualizar Título Principal</button>
+        <div id="result-update"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Teste: Upload de Imagem (simulado)</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <button onclick="testUploadImagem()">Testar Upload (Simulado)</button>
+        <div id="result-upload"></div>
+    </div>
+
+    <script>
+        const apiBase = 'http://localhost:3011/api/cms';
+
+        async function testListarSecoes() {
+            const resultDiv = document.getElementById('result-secoes');
+            resultDiv.innerHTML = '<span class="loading">Carregando...</span>';
+
+            try {
+                const response = await fetch(`${apiBase}/secoes`);
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="success">✅ Sucesso! ${data.data.length} seções encontradas</div>
+                        <pre>${JSON.stringify(data.data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro de rede: ${error.message}</div>`;
+            }
+        }
+
+        async function testCarregarSecao() {
+            const resultDiv = document.getElementById('result-secao');
+            resultDiv.innerHTML = '<span class="loading">Carregando seção Hero...</span>';
+
+            try {
+                const response = await fetch(`${apiBase}/secoes/1`);
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="success">✅ Seção carregada: ${data.data.secao.nome}</div>
+                        <div>📝 ${data.data.conteudos.length} conteúdos encontrados</div>
+                        <pre>${JSON.stringify(data.data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro de rede: ${error.message}</div>`;
+            }
+        }
+
+        async function testAtualizarConteudo() {
+            const resultDiv = document.getElementById('result-update');
+            resultDiv.innerHTML = '<span class="loading">Atualizando conteúdo...</span>';
+
+            const novoValor = `Gracie Barra - Teste ${new Date().toLocaleTimeString()}`;
+
+            try {
+                const response = await fetch(`${apiBase}/conteudos/1`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ valor: novoValor })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="success">✅ Conteúdo atualizado com sucesso!</div>
+                        <div>📝 Novo valor: ${data.data.valor}</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro de rede: ${error.message}</div>`;
+            }
+        }
+
+        function testUploadImagem() {
+            const resultDiv = document.getElementById('result-upload');
+            const fileInput = document.getElementById('imageInput');
+
+            if (!fileInput.files[0]) {
+                resultDiv.innerHTML = '<div class="error">❌ Selecione uma imagem primeiro</div>';
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            // Validações
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                resultDiv.innerHTML = '<div class="error">❌ Tipo de arquivo não permitido</div>';
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                resultDiv.innerHTML = '<div class="error">❌ Arquivo muito grande (máx. 5MB)</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = `
+                <div class="success">✅ Arquivo válido selecionado:</div>
+                <div>📁 Nome: ${file.name}</div>
+                <div>📏 Tamanho: ${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                <div>🎯 Tipo: ${file.type}</div>
+                <div class="loading">⚠️ Upload real seria feito via FormData para /api/cms/upload/3</div>
+            `;
+        }
+
+        // Teste automático ao carregar a página
+        window.onload = function() {
+            console.log('🚀 Iniciando testes automáticos...');
+            setTimeout(testListarSecoes, 1000);
+        };
+    </script>
+</body>
+</html>

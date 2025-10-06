@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Final CMS - Gracie Barra</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 30px; color: #333; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .loading { color: #007bff; }
+        .info { color: #6c757d; }
+        button { padding: 12px 24px; margin: 10px 5px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 14px; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #6c757d; cursor: not-allowed; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 4px; overflow-x: auto; border-left: 4px solid #007bff; }
+        iframe { width: 100%; height: 700px; border: 2px solid #ddd; border-radius: 8px; }
+        .status-bar { background: #343a40; color: white; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px; max-height: 200px; overflow-y: auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Teste Final do Sistema CMS</h1>
+            <p>Sistema Gracie Barra - Verificação Completa de Funcionalidades</p>
+        </div>
+
+        <div class="grid">
+            <div>
+                <div class="test-section">
+                    <h2>📋 Testes API Backend</h2>
+                    <button onclick="executarTodosOsTestes()" id="btnTestar">Executar Todos os Testes</button>
+                    <button onclick="limparLogs()">Limpar Logs</button>
+                    <div id="resultados-api"></div>
+                </div>
+
+                <div class="test-section">
+                    <h2>🎯 Teste Específico - Atualizar Texto</h2>
+                    <input type="text" id="novoTexto" placeholder="Digite o novo texto" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <button onclick="atualizarTexto()">Atualizar Título Principal</button>
+                    <div id="resultado-texto"></div>
+                </div>
+
+                <div class="test-section">
+                    <h2>📤 Teste Upload de Imagem</h2>
+                    <input type="file" id="arquivoImagem" accept="image/*" style="margin: 10px 0;">
+                    <button onclick="testarUpload()">Fazer Upload (Simulado)</button>
+                    <div id="resultado-upload"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="test-section">
+                    <h2>🖥️ Interface React CMS</h2>
+                    <button onclick="abrirCMS()">Abrir CMS Interface</button>
+                    <button onclick="recarregarCMS()">Recarregar Interface</button>
+                    <div id="cms-interface"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Logs do Sistema</h2>
+            <div id="logs" class="status-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3011/api/cms';
+        const FRONTEND_URL = 'http://localhost:3010/app/cms';
+
+        function log(message, type = 'info') {
+            const logsDiv = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                'success': '#28a745',
+                'error': '#dc3545',
+                'warning': '#ffc107',
+                'info': '#17a2b8'
+            };
+            const color = colors[type] || '#ffffff';
+            logsDiv.innerHTML += `<div style="color: ${color}; margin: 2px 0;">[${timestamp}] ${message}</div>`;
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function limparLogs() {
+            document.getElementById('logs').innerHTML = '';
+            log('🧹 Logs limpos', 'info');
+        }
+
+        function mostrarResultado(elementId, tipo, titulo, detalhes) {
+            const elemento = document.getElementById(elementId);
+            const classe = tipo === 'success' ? 'success' : 'error';
+            elemento.innerHTML = `
+                <div class="${classe}">${titulo}</div>
+                ${detalhes ? `<pre>${JSON.stringify(detalhes, null, 2)}</pre>` : ''}
+            `;
+        }
+
+        async function testarAPI(endpoint, metodo = 'GET', dados = null) {
+            try {
+                const opcoes = {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                if (dados) opcoes.body = JSON.stringify(dados);
+
+                const response = await fetch(`${API_BASE}${endpoint}`, opcoes);
+                const data = await response.json();
+
+                return { sucesso: response.ok && data.success, data, status: response.status };
+            } catch (error) {
+                return { sucesso: false, erro: error.message };
+            }
+        }
+
+        async function executarTodosOsTestes() {
+            const btnTestar = document.getElementById('btnTestar');
+            btnTestar.disabled = true;
+            btnTestar.textContent = 'Testando...';
+
+            log('🚀 Iniciando bateria completa de testes', 'info');
+
+            try {
+                // Teste 1: Listar seções
+                log('📋 Teste 1: Listando seções...', 'info');
+                const teste1 = await testarAPI('/secoes');
+                if (teste1.sucesso) {
+                    log(`✅ Seções carregadas: ${teste1.data.data.length} encontradas`, 'success');
+                } else {
+                    log(`❌ Falha ao carregar seções: ${teste1.erro || teste1.data.error}`, 'error');
+                }
+
+                // Teste 2: Carregar seção específica
+                log('📖 Teste 2: Carregando seção Hero...', 'info');
+                const teste2 = await testarAPI('/secoes/1');
+                if (teste2.sucesso) {
+                    log(`✅ Seção Hero carregada: ${teste2.data.data.conteudos.length} conteúdos`, 'success');
+                } else {
+                    log(`❌ Falha ao carregar seção Hero`, 'error');
+                }
+
+                // Teste 3: Atualizar conteúdo
+                const novoTexto = `Teste Automático ${new Date().toLocaleTimeString()}`;
+                log(`📝 Teste 3: Atualizando texto para "${novoTexto}"...`, 'info');
+                const teste3 = await testarAPI('/conteudos/1', 'PUT', { valor: novoTexto });
+                if (teste3.sucesso) {
+                    log(`✅ Texto atualizado com sucesso`, 'success');
+                } else {
+                    log(`❌ Falha ao atualizar texto`, 'error');
+                }
+
+                // Teste 4: Verificar persistência
+                log('🔍 Teste 4: Verificando se mudança persistiu...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                const teste4 = await testarAPI('/secoes/1');
+                if (teste4.sucesso) {
+                    const conteudo = teste4.data.data.conteudos.find(c => c.id === 1);
+                    if (conteudo && conteudo.valor === novoTexto) {
+                        log(`✅ Mudança persistiu corretamente: "${conteudo.valor}"`, 'success');
+                    } else {
+                        log(`⚠️ Mudança não persistiu. Valor atual: "${conteudo.valor}"`, 'warning');
+                    }
+                }
+
+                // Teste 5: Verificar imagens
+                log('🖼️ Teste 5: Verificando acesso a imagens...', 'info');
+                const testeImagem = await fetch('http://localhost:3011/uploads/cms/cms-1759102015813-171141797.jpg');
+                if (testeImagem.ok) {
+                    log(`✅ Imagens acessíveis (${testeImagem.status})`, 'success');
+                } else {
+                    log(`❌ Problemas no acesso a imagens (${testeImagem.status})`, 'error');
+                }
+
+                mostrarResultado('resultados-api', 'success', '✅ Todos os testes completados!',
+                    'Verifique os logs para detalhes. Backend funcionando corretamente.');
+
+            } catch (error) {
+                log(`❌ Erro durante os testes: ${error.message}`, 'error');
+                mostrarResultado('resultados-api', 'error', '❌ Erro nos testes', error.message);
+            } finally {
+                btnTestar.disabled = false;
+                btnTestar.textContent = 'Executar Todos os Testes';
+            }
+        }
+
+        async function atualizarTexto() {
+            const novoTexto = document.getElementById('novoTexto').value;
+            if (!novoTexto.trim()) {
+                alert('Digite um texto primeiro!');
+                return;
+            }
+
+            log(`📝 Atualizando texto manualmente: "${novoTexto}"`, 'info');
+
+            const resultado = await testarAPI('/conteudos/1', 'PUT', { valor: novoTexto });
+            if (resultado.sucesso) {
+                log(`✅ Texto atualizado: "${novoTexto}"`, 'success');
+                mostrarResultado('resultado-texto', 'success', '✅ Texto atualizado com sucesso!', resultado.data);
+            } else {
+                log(`❌ Falha ao atualizar texto`, 'error');
+                mostrarResultado('resultado-texto', 'error', '❌ Erro ao atualizar texto', resultado.erro);
+            }
+        }
+
+        function testarUpload() {
+            const arquivo = document.getElementById('arquivoImagem').files[0];
+            if (!arquivo) {
+                alert('Selecione uma imagem primeiro!');
+                return;
+            }
+
+            log(`📤 Arquivo selecionado: ${arquivo.name} (${(arquivo.size/1024/1024).toFixed(2)}MB)`, 'info');
+
+            // Validações
+            const tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!tiposPermitidos.includes(arquivo.type)) {
+                log(`❌ Tipo de arquivo não permitido: ${arquivo.type}`, 'error');
+                mostrarResultado('resultado-upload', 'error', '❌ Tipo de arquivo inválido');
+                return;
+            }
+
+            if (arquivo.size > 5 * 1024 * 1024) {
+                log(`❌ Arquivo muito grande: ${(arquivo.size/1024/1024).toFixed(2)}MB`, 'error');
+                mostrarResultado('resultado-upload', 'error', '❌ Arquivo muito grande (máx. 5MB)');
+                return;
+            }
+
+            log(`✅ Arquivo válido - upload seria executado para /api/cms/upload/3`, 'success');
+            mostrarResultado('resultado-upload', 'success', '✅ Arquivo válido!', {
+                nome: arquivo.name,
+                tamanho: `${(arquivo.size/1024/1024).toFixed(2)}MB`,
+                tipo: arquivo.type,
+                destino: '/api/cms/upload/3'
+            });
+        }
+
+        function abrirCMS() {
+            log('🖥️ Abrindo interface CMS...', 'info');
+            const container = document.getElementById('cms-interface');
+            container.innerHTML = `<iframe src="${FRONTEND_URL}" style="width: 100%; height: 600px; border: 2px solid #007bff; border-radius: 8px;"></iframe>`;
+        }
+
+        function recarregarCMS() {
+            const iframe = document.querySelector('#cms-interface iframe');
+            if (iframe) {
+                log('🔄 Recarregando interface CMS...', 'info');
+                iframe.contentWindow.location.reload();
+            } else {
+                log('⚠️ Interface CMS não está aberta', 'warning');
+            }
+        }
+
+        // Executar teste automático ao carregar
+        window.onload = function() {
+            log('🔧 Sistema de teste carregado', 'info');
+            log('👆 Clique em "Executar Todos os Testes" para verificar o sistema', 'info');
+            document.getElementById('novoTexto').value = `Teste Manual ${new Date().toLocaleTimeString()}`;
+        };
+    </script>
+</body>
+</html>

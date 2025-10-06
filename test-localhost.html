@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste localhost:3010</title>
+</head>
+<body>
+    <h1>Testando localhost:3010</h1>
+    <p>Clique no link abaixo para testar:</p>
+    <a href="http://localhost:3010" target="_blank">Abrir localhost:3010</a>
+
+    <script>
+        // Limpar localStorage antes do teste
+        function clearStorage() {
+            localStorage.clear();
+            sessionStorage.clear();
+            alert('Storage limpo! Agora teste o link.');
+        }
+    </script>
+
+    <br><br>
+    <button onclick="clearStorage()">Limpar Storage e Testar</button>
+
+    <h2>Debug: Current Storage</h2>
+    <div id="storage-info"></div>
+
+    <script>
+        // Mostrar conteúdo atual do localStorage
+        function showStorage() {
+            const info = document.getElementById('storage-info');
+            const keys = Object.keys(localStorage);
+
+            if (keys.length === 0) {
+                info.innerHTML = '<p>localStorage está vazio</p>';
+            } else {
+                let html = '<ul>';
+                keys.forEach(key => {
+                    html += `<li><strong>${key}:</strong> ${localStorage.getItem(key)}</li>`;
+                });
+                html += '</ul>';
+                info.innerHTML = html;
+            }
+        }
+
+        showStorage();
+        setInterval(showStorage, 2000); // Atualizar a cada 2 segundos
+    </script>
+</body>
+</html>

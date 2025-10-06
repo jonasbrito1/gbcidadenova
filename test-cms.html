@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste CMS</title>
+</head>
+<body>
+    <h1>Teste de Conexão CMS</h1>
+    <button onclick="testCMS()">Testar Seções</button>
+    <div id="result"></div>
+
+    <script>
+        async function testCMS() {
+            try {
+                const response = await fetch('http://localhost:3011/api/cms/secoes');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = 'Erro: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
