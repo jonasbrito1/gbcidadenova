@@ -51,3 +51,4 @@ uploads/*
 # Docker volumes (se houver)
 mysql-data/
 nul
+.claude/settings.local.json
