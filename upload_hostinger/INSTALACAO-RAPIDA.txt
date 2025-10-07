@@ -1,0 +1,72 @@
+═══════════════════════════════════════════════════════════════════════
+  INSTALAÇÃO RÁPIDA - GRACIE BARRA HOSTINGER
+═══════════════════════════════════════════════════════════════════════
+
+📌 RESUMO EM 7 PASSOS:
+
+1️⃣  BANCO DE DADOS (phpMyAdmin)
+   → Executar SQL: database/hostinger_migration.sql
+
+2️⃣  FRONTEND (public_html/)
+   → Upload: frontend/* para public_html/
+
+3️⃣  BACKEND (api/)
+   → Upload: backend/* para api/
+
+4️⃣  CONFIGURAR .ENV (api/.env)
+   → Renomear .env.example para .env
+   → Preencher DB_PASSWORD e secrets
+
+5️⃣  INSTALAR (SSH)
+   cd api/
+   npm install --production
+   pm2 start index.js --name gracie-barra-api
+   pm2 startup && pm2 save
+
+6️⃣  TESTAR
+   → https://seudominio.com.br/api/health
+   → https://seudominio.com.br
+   → Login: admin@graciebarra.com / admin123
+
+7️⃣  ALTERAR SENHA DO ADMIN!
+
+═══════════════════════════════════════════════════════════════════════
+
+📂 ESTRUTURA DE PASTAS NO HOSTINGER:
+
+domains/seudominio.com.br/
+├── public_html/     ← Copiar: frontend/*
+│   ├── index.html
+│   ├── .htaccess
+│   └── static/
+└── api/             ← Copiar: backend/*
+    ├── index.js
+    ├── package.json
+    ├── .env
+    ├── src/
+    ├── uploads/
+    └── logs/
+
+═══════════════════════════════════════════════════════════════════════
+
+🔐 VARIÁVEIS OBRIGATÓRIAS (.env):
+
+DB_PASSWORD=sua_senha_banco
+JWT_SECRET=gerar_secret_64_caracteres
+ENCRYPTION_KEY=gerar_key_32_caracteres
+SESSION_SECRET=gerar_secret_32_caracteres
+ALLOWED_ORIGINS=https://seudominio.com.br
+
+Gerar secrets em: https://www.grc.com/passwords.htm
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ VERIFICAÇÃO:
+
+pm2 status                           ← Backend rodando?
+curl seudominio.com.br/api/health   ← API responde?
+Abrir seudominio.com.br             ← Frontend carrega?
+
+═══════════════════════════════════════════════════════════════════════
+
+Leia o arquivo LEIA-ME.txt para instruções completas!

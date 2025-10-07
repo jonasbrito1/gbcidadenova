@@ -1,0 +1,209 @@
+═══════════════════════════════════════════════════════════════════════
+  ÍNDICE DA PASTA upload_hostinger
+═══════════════════════════════════════════════════════════════════════
+
+📦 CONTEÚDO TOTAL: ~16.2 MB
+
+upload_hostinger/
+│
+├── 📄 LEIA-ME.txt                    ← LEIA PRIMEIRO! Guia completo
+├── 📄 INSTALACAO-RAPIDA.txt          ← Resumo dos 7 passos
+├── 📄 INDEX.txt                      ← Este arquivo
+│
+├── 📁 frontend/                      (16 MB)
+│   │   ⬆️  DESTINO: public_html/
+│   │
+│   ├── index.html                    ← Página principal
+│   ├── .htaccess                     ← Configuração Apache (IMPORTANTE!)
+│   ├── manifest.json
+│   ├── favicon.ico
+│   ├── robots.txt
+│   └── static/                       ← CSS, JS, Imagens
+│       ├── css/
+│       ├── js/
+│       └── media/
+│
+├── 📁 backend/                       (216 KB)
+│   │   ⬆️  DESTINO: api/
+│   │
+│   ├── index.js                      ← Servidor principal
+│   ├── package.json                  ← Dependências Node.js
+│   ├── .env.example                  ← ⚠️  RENOMEAR para .env e CONFIGURAR!
+│   │
+│   ├── src/                          ← Código fonte
+│   │   ├── config/
+│   │   │   ├── database.js           ← Conexão MySQL
+│   │   │   └── passport.js           ← Autenticação
+│   │   │
+│   │   ├── middleware/
+│   │   │   └── auth.js               ← Segurança JWT
+│   │   │
+│   │   ├── routes/                   ← Rotas da API
+│   │   │   ├── auth.js               ← Login/Logout
+│   │   │   ├── plans.js              ← Planos
+│   │   │   ├── formularios.js        ← Formulários
+│   │   │   ├── students.js           ← Alunos
+│   │   │   ├── professores.js        ← Professores
+│   │   │   ├── turmas.js             ← Turmas
+│   │   │   ├── users.js              ← Usuários
+│   │   │   ├── dashboard.js          ← Dashboard
+│   │   │   ├── frequencia.js         ← Frequência
+│   │   │   ├── financeiro.js         ← Financeiro
+│   │   │   ├── attendance.js         ← Presença
+│   │   │   ├── payments.js           ← Pagamentos
+│   │   │   ├── reports.js            ← Relatórios
+│   │   │   ├── gateway.js            ← Gateway pagamento
+│   │   │   └── teachers.js           ← Professores (alt)
+│   │   │
+│   │   └── utils/
+│   │       └── logger.js             ← Sistema de logs
+│   │
+│   ├── uploads/                      ← Pasta para arquivos (VAZIA)
+│   └── logs/                         ← Pasta para logs (VAZIA)
+│
+└── 📁 database/                      (20 KB)
+    │   ⬆️  EXECUTAR NO phpMyAdmin
+    │
+    └── hostinger_migration.sql       ← Script com 37 tabelas
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 MAPEAMENTO DE DESTINOS:
+
+NO HOSTINGER                          COPIAR DESTA PASTA
+─────────────────────────────────────────────────────────────────────
+public_html/                    ←     frontend/*
+api/                            ←     backend/*
+phpMyAdmin (SQL)                ←     database/hostinger_migration.sql
+
+═══════════════════════════════════════════════════════════════════════
+
+⚙️  ARQUIVOS QUE PRECISAM CONFIGURAÇÃO:
+
+1. backend/.env.example
+   → Renomear para: .env
+   → Editar variáveis:
+     - DB_PASSWORD (senha do banco)
+     - JWT_SECRET (gerar novo)
+     - ENCRYPTION_KEY (gerar novo)
+     - SESSION_SECRET (gerar novo)
+     - ALLOWED_ORIGINS (seu domínio)
+
+2. frontend/.htaccess
+   → Já está configurado
+   → Copiar junto com outros arquivos
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 ESTATÍSTICAS:
+
+Frontend:
+  - Arquivos: ~50
+  - Tamanho: 16 MB
+  - Tecnologia: React (compilado)
+  - Arquivos principais: index.html, static/
+
+Backend:
+  - Arquivos: ~20
+  - Tamanho: 216 KB
+  - Tecnologia: Node.js + Express
+  - Dependências: Instalar via npm
+
+Banco de Dados:
+  - Tabelas: 37
+  - Tamanho script: 20 KB
+  - Registros iniciais: Planos e Graduações
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ CHECKLIST DE UPLOAD:
+
+BANCO DE DADOS:
+□ Executar database/hostinger_migration.sql no phpMyAdmin
+□ Verificar 37 tabelas criadas
+□ Verificar planos importados (4 ativos)
+
+FRONTEND (public_html/):
+□ Upload de frontend/index.html
+□ Upload de frontend/.htaccess
+□ Upload de frontend/static/ (completo)
+□ Upload de frontend/manifest.json
+□ Upload de frontend/favicon.ico
+
+BACKEND (api/):
+□ Upload de backend/index.js
+□ Upload de backend/package.json
+□ Upload de backend/src/ (completo)
+□ Renomear .env.example para .env
+□ Editar .env com senhas e secrets
+□ Criar pasta uploads/ (vazia)
+□ Criar pasta logs/ (vazia)
+□ Executar: npm install --production
+□ Executar: pm2 start index.js
+
+TESTES:
+□ API: https://seudominio.com.br/api/health
+□ Frontend: https://seudominio.com.br
+□ Login: admin@graciebarra.com / admin123
+□ Formulário: https://seudominio.com.br/formulario
+
+SEGURANÇA:
+□ Alterar senha do admin
+□ Ativar SSL/HTTPS
+□ Configurar backups
+
+═══════════════════════════════════════════════════════════════════════
+
+🔗 CONECTIVIDADE:
+
+Frontend ──┐
+           ├─► Backend (API) ──► Banco de Dados MySQL
+Usuários ──┘                     (u674882802_gb)
+
+Fluxo de dados:
+1. Usuário acessa frontend (public_html/)
+2. Frontend faz requisições para /api/*
+3. .htaccess redireciona para backend (porta 3000)
+4. Backend conecta ao MySQL via .env
+5. Retorna dados para frontend
+
+═══════════════════════════════════════════════════════════════════════
+
+📞 INFORMAÇÕES DE CONEXÃO (configurar em .env):
+
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=u674882802_jonasgb
+DB_PASSWORD=PREENCHER_AQUI
+DB_NAME=u674882802_gb
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 APÓS O UPLOAD, EXECUTAR VIA SSH:
+
+cd /home/u674882802/domains/seudominio.com.br/api
+npm install --production
+npm install -g pm2
+pm2 start index.js --name "gracie-barra-api"
+pm2 startup
+pm2 save
+pm2 status
+
+═══════════════════════════════════════════════════════════════════════
+
+💡 DICAS:
+
+1. Use WinSCP ou FileZilla para upload mais rápido
+2. Compacte as pastas em .zip antes de fazer upload
+3. Descompacte no servidor usando File Manager
+4. Sempre faça backup antes de substituir arquivos
+5. Mantenha uma cópia local desta pasta
+
+═══════════════════════════════════════════════════════════════════════
+
+Desenvolvido com Claude Code 🤖
+https://claude.com/claude-code
+
+GitHub: https://github.com/jonasbrito1/gbcidadenova
+
+═══════════════════════════════════════════════════════════════════════

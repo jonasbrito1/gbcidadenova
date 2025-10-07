@@ -1,0 +1,291 @@
+╔════════════════════════════════════════════════════════════════════════╗
+║                                                                        ║
+║         GRACIE BARRA - SISTEMA DE GESTÃO - VERSÃO 2.0                 ║
+║                    GUIA DE INSTALAÇÃO HOSTINGER                        ║
+║                                                                        ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+📦 CONTEÚDO DESTA PASTA:
+
+upload_hostinger/
+├── frontend/          → Arquivos do site (React compilado)
+├── backend/           → API do sistema (Node.js)
+├── database/          → Script SQL do banco de dados
+└── LEIA-ME.txt        → Este arquivo
+
+═══════════════════════════════════════════════════════════════════════
+
+⚠️  IMPORTANTE: Siga TODOS os passos na ordem indicada!
+
+═══════════════════════════════════════════════════════════════════════
+
+🗄️  PASSO 1: CONFIGURAR BANCO DE DADOS (PRIMEIRO!)
+
+1.1 - Acesse o painel da Hostinger
+1.2 - Vá em: Websites > Manage > Banco de Dados
+1.3 - Clique em "phpMyAdmin"
+1.4 - Selecione o banco: u674882802_gb
+1.5 - Clique na aba "SQL" (barra superior)
+1.6 - Abra o arquivo: database/hostinger_migration.sql
+1.7 - Copie TODO o conteúdo
+1.8 - Cole na área de texto do phpMyAdmin
+1.9 - Clique em "Executar" (botão no canto inferior direito)
+1.10 - Aguarde a mensagem: "Query executada com sucesso"
+
+✅ VERIFICAR: Execute no SQL:
+   SHOW TABLES;
+
+   Deve mostrar 37 tabelas
+
+═══════════════════════════════════════════════════════════════════════
+
+📱 PASSO 2: FAZER UPLOAD DO FRONTEND
+
+2.1 - Acesse: File Manager no painel da Hostinger
+2.2 - Navegue até: domains/seudominio.com.br/public_html
+2.3 - DELETE todos os arquivos que existem lá (ou renomeie a pasta)
+2.4 - Faça upload de TODOS os arquivos da pasta: frontend/
+2.5 - Certifique-se que o arquivo .htaccess foi enviado
+
+✅ VERIFICAR: Em public_html/ deve ter:
+   - index.html
+   - .htaccess
+   - static/ (pasta com CSS e JS)
+   - manifest.json
+
+═══════════════════════════════════════════════════════════════════════
+
+🔧 PASSO 3: FAZER UPLOAD DO BACKEND
+
+3.1 - No File Manager, navegue até: domains/seudominio.com.br/
+3.2 - Crie uma NOVA pasta chamada: api
+3.3 - Entre na pasta api/
+3.4 - Faça upload de TODOS os arquivos da pasta: backend/
+     (index.js, package.json, pasta src/, etc.)
+
+✅ VERIFICAR: Em api/ deve ter:
+   - index.js
+   - package.json
+   - .env.example
+   - src/ (pasta completa)
+   - uploads/ (pasta vazia)
+   - logs/ (pasta vazia)
+
+═══════════════════════════════════════════════════════════════════════
+
+⚙️  PASSO 4: CONFIGURAR VARIÁVEIS DE AMBIENTE
+
+4.1 - No File Manager, entre em: api/
+4.2 - Renomeie o arquivo: .env.example para .env
+4.3 - Clique com botão direito em .env > Edit
+4.4 - Preencha as seguintes variáveis:
+
+     DB_PASSWORD=SUA_SENHA_DO_BANCO_DE_DADOS
+
+     Para gerar os secrets, use https://www.grc.com/passwords.htm
+     ou execute localmente:
+     node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
+     JWT_SECRET=COLE_O_SECRET_GERADO_AQUI
+     ENCRYPTION_KEY=COLE_OUTRO_SECRET_AQUI
+     SESSION_SECRET=COLE_OUTRO_SECRET_AQUI
+
+     ALLOWED_ORIGINS=https://seudominio.com.br
+
+4.5 - Salve o arquivo
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 PASSO 5: INSTALAR E INICIAR O BACKEND
+
+5.1 - Ative o SSH no painel Hostinger:
+      Advanced > SSH Access > Ativar
+
+5.2 - Conecte via SSH (use PuTTY no Windows ou Terminal no Mac/Linux):
+      ssh u674882802@seu-servidor.hostinger.com
+
+5.3 - Execute os comandos abaixo, UM POR VEZ:
+
+      cd domains/seudominio.com.br/api
+
+      npm install --production
+
+      npm install -g pm2
+
+      pm2 start index.js --name "gracie-barra-api"
+
+      pm2 startup
+
+      pm2 save
+
+5.4 - Verifique se está rodando:
+      pm2 status
+
+✅ VERIFICAR: Deve mostrar:
+   gracie-barra-api | online
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ PASSO 6: TESTAR O SISTEMA
+
+6.1 - Teste a API:
+      Abra no navegador: https://seudominio.com.br/api/health
+
+      Deve retornar:
+      {"status":"OK","timestamp":"...","version":"2.0.0"}
+
+6.2 - Teste o Frontend:
+      Abra: https://seudominio.com.br
+
+      Deve carregar a landing page
+
+6.3 - Teste o Login:
+      Abra: https://seudominio.com.br/login
+
+      Email: admin@graciebarra.com
+      Senha: admin123
+
+      ⚠️  IMPORTANTE: Altere a senha após o primeiro login!
+
+6.4 - Teste o Formulário Público:
+      Abra: https://seudominio.com.br/formulario
+
+      Deve carregar o formulário de cadastro
+
+═══════════════════════════════════════════════════════════════════════
+
+🔒 PASSO 7: SEGURANÇA PÓS-INSTALAÇÃO
+
+7.1 - Altere a senha do admin:
+      - Login como admin
+      - Vá em Perfil > Alterar Senha
+      - Use uma senha forte (mínimo 8 caracteres)
+
+7.2 - Ative SSL/HTTPS:
+      - Painel Hostinger > Websites > Manage > SSL
+      - Ativar certificado SSL gratuito
+
+7.3 - Configure backups automáticos:
+      - Painel Hostinger > Backups
+      - Ativar backup diário
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 COMANDOS ÚTEIS (via SSH)
+
+Ver status do backend:
+  pm2 status
+
+Ver logs em tempo real:
+  pm2 logs gracie-barra-api
+
+Reiniciar backend:
+  pm2 restart gracie-barra-api
+
+Parar backend:
+  pm2 stop gracie-barra-api
+
+Monitorar performance:
+  pm2 monit
+
+═══════════════════════════════════════════════════════════════════════
+
+🆘 PROBLEMAS COMUNS
+
+PROBLEMA: API não responde
+SOLUÇÃO:
+  pm2 logs gracie-barra-api --lines 50
+  pm2 restart gracie-barra-api
+
+PROBLEMA: Erro de conexão com banco
+SOLUÇÃO:
+  1. Verifique senha em api/.env
+  2. Teste conexão:
+     mysql -h 127.0.0.1 -u u674882802_jonasgb -p u674882802_gb
+
+PROBLEMA: Frontend mostra página em branco
+SOLUÇÃO:
+  1. Abra Console do navegador (F12)
+  2. Verifique se .htaccess está em public_html/
+  3. Limpe cache do navegador (Ctrl+Shift+Del)
+
+PROBLEMA: "Cannot find module"
+SOLUÇÃO:
+  cd domains/seudominio.com.br/api
+  npm install --production
+  pm2 restart gracie-barra-api
+
+═══════════════════════════════════════════════════════════════════════
+
+📞 INFORMAÇÕES DO SISTEMA
+
+Banco de Dados:
+  Host: 127.0.0.1
+  Porta: 3306
+  Usuário: u674882802_jonasgb
+  Banco: u674882802_gb
+  Tabelas: 37
+
+Backend (API):
+  Localização: /domains/seudominio.com.br/api
+  Porta: 3000
+  Tecnologia: Node.js + Express
+  Gerenciador: PM2
+
+Frontend:
+  Localização: /domains/seudominio.com.br/public_html
+  Tecnologia: React
+  Build: Produção otimizado
+
+Planos Ativos:
+  - Plano Mensal (R$ 140/mês)
+  - Plano 3 Meses (R$ 420 - R$ 357 à vista)
+  - Plano 6 Meses (R$ 780 - R$ 663 à vista) ⭐
+  - Plano 1 Ano (R$ 1.440 - R$ 1.224 à vista)
+
+═══════════════════════════════════════════════════════════════════════
+
+📚 FUNCIONALIDADES DO SISTEMA
+
+✓ Autenticação JWT
+✓ Gestão de Alunos
+✓ Gestão de Professores
+✓ Gestão de Turmas
+✓ Sistema de Planos
+✓ Formulário Público de Cadastro
+✓ Aprovação de Formulários
+✓ Sistema Financeiro
+✓ Controle de Frequência
+✓ Dashboard Administrativo
+✓ Relatórios
+✓ CMS (Gestão de Conteúdo)
+✓ Google OAuth (opcional)
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ CHECKLIST FINAL
+
+□ Banco de dados configurado (37 tabelas)
+□ Frontend enviado para public_html/
+□ .htaccess criado em public_html/
+□ Backend enviado para api/
+□ .env configurado com senhas
+□ npm install executado
+□ PM2 instalado e rodando
+□ API respondendo em /api/health
+□ Frontend carregando
+□ Login funcionando
+□ Senha do admin alterada
+□ SSL/HTTPS ativado
+
+═══════════════════════════════════════════════════════════════════════
+
+🎉 SISTEMA INSTALADO COM SUCESSO!
+
+Para suporte técnico, consulte a documentação completa em:
+https://github.com/jonasbrito1/gbcidadenova
+
+Desenvolvido com Claude Code 🤖
+https://claude.com/claude-code
+
+═══════════════════════════════════════════════════════════════════════
