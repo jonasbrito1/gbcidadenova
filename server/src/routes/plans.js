@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
             SELECT id, nome, descricao, valor_mensal, valor_total, valor_avista,
                    duracao_meses, tipo, destaque, beneficios, status
             FROM planos
+            WHERE status = 'ativo'
             ORDER BY duracao_meses, valor_mensal
         `);
 
@@ -23,6 +24,23 @@ router.get('/', async (req, res) => {
 
 // Rotas protegidas
 router.use(authenticateToken);
+
+// Listar TODOS os planos (apenas admin)
+router.get('/all', adminOnly, async (req, res) => {
+    try {
+        const plans = await query(`
+            SELECT id, nome, descricao, valor_mensal, valor_total, valor_avista,
+                   duracao_meses, tipo, destaque, beneficios, status
+            FROM planos
+            ORDER BY duracao_meses, valor_mensal
+        `);
+
+        res.json(plans);
+    } catch (error) {
+        console.error('Erro ao buscar planos:', error);
+        res.status(500).json({ error: 'Erro ao buscar planos' });
+    }
+});
 
 // Criar plano (apenas admin)
 router.post('/', adminOnly, async (req, res) => {

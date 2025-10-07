@@ -17,3 +17,5 @@ Remover informações expostas no sistema e site que não são relevantes para u
 Implementar logica correta e aplicações funcionando corretamente  e perfeitamente
 
 Manter acesso e ajustes em portas especificas sem precisar criar varias portas de acesso local ou mudar sempre 
+
+Não alterar o que ja esta funcionando
