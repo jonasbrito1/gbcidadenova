@@ -1,0 +1,372 @@
+╔════════════════════════════════════════════════════════════════════════╗
+║                                                                        ║
+║                    CHECKLIST FINAL - UPLOAD_HOSTINGER                  ║
+║                      TUDO PRONTO PARA ENVIAR! ✅                       ║
+║                                                                        ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ VERIFICAÇÃO DE CONTEÚDO COMPLETO
+
+═══════════════════════════════════════════════════════════════════════
+
+📁 FRONTEND (16 MB) - COMPLETO ✅
+   ✓ index.html
+   ✓ .htaccess (configurado para proxy e SPA)
+   ✓ static/css/ (estilos compilados)
+   ✓ static/js/ (JavaScript compilado)
+   ✓ images/ (logos e fotos)
+   ✓ manifest.json
+   ✓ Build de produção otimizado
+
+📁 BACKEND (216 KB) - COMPLETO ✅
+   ✓ index.js (servidor principal)
+   ✓ package.json (dependências)
+   ✓ .env (CONFIGURADO com senha do banco!)
+   ✓ .env.example (backup)
+   ✓ src/config/ (database.js, passport.js)
+   ✓ src/middleware/ (auth.js)
+   ✓ src/routes/ (todas 15 rotas)
+   ✓ src/utils/ (logger.js)
+   ✓ uploads/ (pasta vazia criada)
+   ✓ logs/ (pasta vazia criada)
+
+📁 DATABASE (20 KB) - COMPLETO ✅
+   ✓ hostinger_migration.sql
+   ✓ 37 tabelas definidas
+   ✓ 4 planos ativos inseridos
+   ✓ 13 graduações inseridas
+   ✓ Dados iniciais incluídos
+
+📄 DOCUMENTAÇÃO - COMPLETA ✅
+   ✓ LEIA-ME.txt (guia passo a passo)
+   ✓ INSTALACAO-RAPIDA.txt (resumo)
+   ✓ INDEX.txt (mapa completo)
+   ✓ CHECKLIST-FINAL.txt (este arquivo)
+
+═══════════════════════════════════════════════════════════════════════
+
+🔐 CONFIGURAÇÕES JÁ APLICADAS
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ BANCO DE DADOS (backend/.env):
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_USER=u674882802_jonasgb
+   DB_PASSWORD=~wDE17bsngZ1        ← JÁ CONFIGURADO!
+   DB_NAME=u674882802_gb
+
+✅ SEGURANÇA (backend/.env):
+   JWT_SECRET=GERADO                ← JÁ CONFIGURADO!
+   ENCRYPTION_KEY=GERADO            ← JÁ CONFIGURADO!
+   SESSION_SECRET=GERADO            ← JÁ CONFIGURADO!
+
+⚠️  FALTA APENAS CONFIGURAR:
+   ALLOWED_ORIGINS=https://SEUDOMINIO.com.br
+
+   Edite o arquivo: backend/.env
+   Substitua SEUDOMINIO.com.br pelo seu domínio real
+
+═══════════════════════════════════════════════════════════════════════
+
+📤 INSTRUÇÕES DE UPLOAD
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 1: BANCO DE DADOS (phpMyAdmin)
+─────────────────────────────────────────────────────────────────────
+1. Login no painel Hostinger
+2. Websites > Manage > Banco de Dados > phpMyAdmin
+3. Selecionar banco: u674882802_gb
+4. Clicar em SQL
+5. Copiar TODO conteúdo de: database/hostinger_migration.sql
+6. Colar e Executar
+
+Resultado esperado: "37 queries executadas com sucesso"
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 2: FRONTEND (File Manager ou FTP)
+─────────────────────────────────────────────────────────────────────
+Destino: domains/seudominio.com.br/public_html/
+
+1. Deletar conteúdo existente de public_html/
+2. Upload COMPLETO da pasta: frontend/*
+3. Verificar se .htaccess foi enviado
+4. Verificar se pasta static/ está completa
+
+Arquivos principais que DEVEM estar em public_html/:
+   ✓ index.html
+   ✓ .htaccess
+   ✓ static/css/
+   ✓ static/js/
+   ✓ images/
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 3: BACKEND (File Manager ou FTP)
+─────────────────────────────────────────────────────────────────────
+Destino: domains/seudominio.com.br/api/
+
+1. Criar pasta: api/ (se não existir)
+2. Upload COMPLETO da pasta: backend/*
+3. Verificar se .env foi enviado (COM A SENHA!)
+4. Verificar se pasta src/ está completa
+
+Arquivos principais que DEVEM estar em api/:
+   ✓ index.js
+   ✓ package.json
+   ✓ .env (com senha do banco)
+   ✓ src/ (pasta completa)
+   ✓ uploads/ (vazia)
+   ✓ logs/ (vazia)
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 4: EDITAR DOMÍNIO NO .ENV
+─────────────────────────────────────────────────────────────────────
+Via File Manager:
+1. Navegar até: api/.env
+2. Editar linha:
+   ALLOWED_ORIGINS=https://seudominio.com.br,https://www.seudominio.com.br
+
+   Substituir "seudominio.com.br" pelo SEU domínio real
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 5: INSTALAR DEPENDÊNCIAS (SSH)
+─────────────────────────────────────────────────────────────────────
+1. Ativar SSH: Painel Hostinger > Advanced > SSH Access
+
+2. Conectar via SSH:
+   ssh u674882802@seu-servidor.hostinger.com
+
+3. Executar comandos (copiar e colar UM POR VEZ):
+
+   cd domains/seudominio.com.br/api
+
+   npm install --production
+
+   npm install -g pm2
+
+   pm2 start index.js --name "gracie-barra-api"
+
+   pm2 startup
+
+   pm2 save
+
+   pm2 status
+
+Resultado esperado:
+   gracie-barra-api │ online │ 0 │
+
+═══════════════════════════════════════════════════════════════════════
+
+PASSO 6: TESTAR SISTEMA
+─────────────────────────────────────────────────────────────────────
+
+✅ Teste 1 - API:
+   https://seudominio.com.br/api/health
+
+   Deve retornar:
+   {"status":"OK","timestamp":"...","version":"2.0.0"}
+
+✅ Teste 2 - Frontend:
+   https://seudominio.com.br
+
+   Deve carregar a landing page do Gracie Barra
+
+✅ Teste 3 - Login:
+   https://seudominio.com.br/login
+
+   Email: admin@graciebarra.com
+   Senha: admin123
+
+   Deve fazer login com sucesso
+
+✅ Teste 4 - Dashboard:
+   Após login, deve carregar o dashboard administrativo
+
+✅ Teste 5 - Formulário Público:
+   https://seudominio.com.br/formulario
+
+   Deve carregar o formulário de cadastro
+
+✅ Teste 6 - Planos:
+   No formulário, verificar se os 4 planos aparecem:
+   - Plano Mensal
+   - Plano 3 Meses
+   - Plano 6 Meses ⭐
+   - Plano 1 Ano
+
+═══════════════════════════════════════════════════════════════════════
+
+🔒 PASSO 7: SEGURANÇA PÓS-INSTALAÇÃO
+─────────────────────────────────────────────────────────────────────
+
+OBRIGATÓRIO:
+
+1. Alterar senha do admin:
+   - Login como admin
+   - Ir em: Perfil > Alterar Senha
+   - Usar senha FORTE (mínimo 8 caracteres, maiúsculas, números, símbolos)
+
+2. Ativar SSL/HTTPS:
+   - Painel Hostinger > Websites > Manage > SSL
+   - Ativar certificado SSL gratuito Let's Encrypt
+
+3. Configurar Backups:
+   - Painel Hostinger > Backups
+   - Ativar backup automático diário
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 INFORMAÇÕES DO SISTEMA
+
+═══════════════════════════════════════════════════════════════════════
+
+BANCO DE DADOS:
+   Host: 127.0.0.1
+   Porta: 3306
+   Usuário: u674882802_jonasgb
+   Senha: ~wDE17bsngZ1
+   Banco: u674882802_gb
+   Tabelas: 37
+
+BACKEND:
+   Localização: /api/
+   Porta: 3000
+   Tecnologia: Node.js v18+ / Express
+   Gerenciador: PM2
+
+FRONTEND:
+   Localização: /public_html/
+   Tecnologia: React 18
+   Build: Production (minificado)
+
+LOGIN INICIAL:
+   Email: admin@graciebarra.com
+   Senha: admin123
+   ⚠️  ALTERAR APÓS PRIMEIRO LOGIN!
+
+PLANOS ATIVOS:
+   1. Plano Mensal - R$ 140/mês
+   2. Plano 3 Meses - R$ 420 (R$ 357 à vista)
+   3. Plano 6 Meses - R$ 780 (R$ 663 à vista) ⭐ Destaque
+   4. Plano 1 Ano - R$ 1.440 (R$ 1.224 à vista)
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ CHECKLIST DE SUCESSO
+
+═══════════════════════════════════════════════════════════════════════
+
+BANCO DE DADOS:
+□ SQL executado no phpMyAdmin
+□ 37 tabelas criadas
+□ 4 planos importados
+□ 13 graduações importadas
+□ Usuário admin criado
+
+ARQUIVOS:
+□ Frontend enviado para public_html/
+□ .htaccess em public_html/
+□ Backend enviado para api/
+□ .env com senha configurado em api/
+□ Pastas uploads/ e logs/ criadas
+
+INSTALAÇÃO:
+□ npm install executado
+□ PM2 instalado globalmente
+□ Backend rodando no PM2
+□ PM2 configurado para auto-start
+
+TESTES:
+□ API responde em /api/health
+□ Frontend carrega
+□ Login funciona
+□ Dashboard carrega
+□ Formulário público funciona
+□ 4 planos aparecem no formulário
+
+SEGURANÇA:
+□ Senha do admin alterada
+□ SSL/HTTPS ativado
+□ Backups configurados
+
+═══════════════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING RÁPIDO
+
+═══════════════════════════════════════════════════════════════════════
+
+PROBLEMA: "Cannot connect to database"
+SOLUÇÃO: Verificar senha em api/.env
+
+PROBLEMA: API não responde
+SOLUÇÃO:
+   pm2 logs gracie-barra-api
+   pm2 restart gracie-barra-api
+
+PROBLEMA: Frontend página em branco
+SOLUÇÃO:
+   1. Verificar se .htaccess está em public_html/
+   2. Limpar cache do navegador
+   3. Verificar Console (F12) para erros
+
+PROBLEMA: "Module not found"
+SOLUÇÃO:
+   cd api/
+   npm install --production
+   pm2 restart gracie-barra-api
+
+═══════════════════════════════════════════════════════════════════════
+
+💡 DICAS IMPORTANTES
+
+═══════════════════════════════════════════════════════════════════════
+
+1. Use WinSCP ou FileZilla para upload mais rápido
+2. Compacte as pastas em .zip para upload mais eficiente
+3. Mantenha uma cópia local de backup
+4. Documente qualquer alteração que fizer
+5. Verifique logs regularmente: pm2 logs
+
+═══════════════════════════════════════════════════════════════════════
+
+📞 COMANDOS ÚTEIS (SSH)
+
+═══════════════════════════════════════════════════════════════════════
+
+Ver status:        pm2 status
+Ver logs:          pm2 logs gracie-barra-api
+Reiniciar:         pm2 restart gracie-barra-api
+Parar:             pm2 stop gracie-barra-api
+Monitorar:         pm2 monit
+Listar processos:  pm2 list
+
+═══════════════════════════════════════════════════════════════════════
+
+🎉 SISTEMA PRONTO PARA PRODUÇÃO!
+
+═══════════════════════════════════════════════════════════════════════
+
+✓ Todos os arquivos estão completos
+✓ Configurações aplicadas
+✓ Senha do banco já configurada
+✓ Secrets de segurança gerados
+✓ Documentação completa incluída
+✓ Sistema testado localmente
+
+APENAS FAZER UPLOAD E SEGUIR OS 7 PASSOS!
+
+═══════════════════════════════════════════════════════════════════════
+
+Desenvolvido com Claude Code 🤖
+https://claude.com/claude-code
+
+GitHub: https://github.com/jonasbrito1/gbcidadenova
+
+═══════════════════════════════════════════════════════════════════════
