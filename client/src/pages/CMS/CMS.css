@@ -1,0 +1,1466 @@
+/* ============================================
+   CMS MANAGER - PROFESSIONAL STYLES
+   Enhanced visibility, UX, and consistency
+   ============================================ */
+
+/* ===== GLOBAL STYLES ===== */
+.cms-manager {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Global Typography - High Contrast */
+.cms-manager h1:not(.cms-header *),
+.cms-manager h2:not(.cms-header *),
+.cms-manager h3:not(.cms-header *),
+.cms-manager h4:not(.cms-header *),
+.cms-manager h5:not(.cms-header *),
+.cms-manager h6:not(.cms-header *) {
+  color: #1a202c !important;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+}
+
+.cms-manager h1 { font-size: 2.25rem; }
+.cms-manager h2 { font-size: 1.875rem; }
+.cms-manager h3 { font-size: 1.5rem; }
+.cms-manager h4 { font-size: 1.25rem; }
+.cms-manager h5 { font-size: 1.125rem; }
+.cms-manager h6 { font-size: 1rem; }
+
+.cms-manager p {
+  color: #2d3748 !important;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.cms-manager label {
+  color: #1a202c !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* ===== HEADER SECTION ===== */
+.cms-header {
+  background: #dc3545;
+  color: white !important;
+  padding: 2rem 2.5rem;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0;
+}
+
+.cms-header h2 {
+  margin: 0;
+  font-weight: 700;
+  color: white !important;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cms-header h2 i {
+  font-size: 1.5rem;
+  color: white !important;
+}
+
+.cms-header p {
+  margin: 0.5rem 0 0 0;
+  color: rgba(255,255,255,0.9) !important;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+/* Force white color for all header text */
+.cms-header,
+.cms-header * {
+  color: white !important;
+}
+
+/* Content wrapper after header */
+.cms-manager .container-fluid {
+  padding: 2rem 1.5rem;
+}
+
+/* ===== FIELD CARDS ===== */
+.cms-field-card {
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 1.5rem;
+}
+
+.cms-field-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border-color: #2563eb;
+}
+
+.cms-field-card.field-changed {
+  border-color: #ffc107;
+  border-left-width: 4px;
+}
+
+.cms-field-header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem 1.25rem;
+}
+
+.cms-field-header h6 {
+  color: #1a202c !important;
+  font-weight: 600 !important;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cms-field-card .card-body {
+  padding: 1.25rem;
+  background: white;
+}
+
+/* ===== FORM ELEMENTS - CLEAN STYLE ===== */
+.cms-field-card .form-control,
+.field-content input[type="text"],
+.field-content input[type="url"],
+.field-content input[type="email"],
+.field-content textarea,
+.field-content select {
+  color: #1a202c !important;
+  font-weight: 500;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  background: #ffffff;
+  padding: 0.65rem 0.9rem;
+}
+
+.cms-field-card .form-control::placeholder,
+.field-content input::placeholder,
+.field-content textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.cms-field-card .form-control:focus,
+.field-content input:focus,
+.field-content textarea:focus,
+.field-content select:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+  outline: none !important;
+  background: #ffffff !important;
+  color: #1a202c !important;
+}
+
+.cms-field-card .form-control:disabled,
+.field-content input:disabled,
+.field-content textarea:disabled {
+  background-color: #f5f5f5 !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.cms-field-card .form-label {
+  color: #1a202c !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.cms-field-card .form-text {
+  color: #6c757d !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.cms-field-card .form-text i {
+  color: #6c757d !important;
+}
+
+.field-content textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+/* ===== FILE INPUT STYLING ===== */
+.cms-field-card input[type="file"] {
+  border: 2px dashed #cbd5e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  color: #1a202c !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cms-field-card input[type="file"]:hover {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.cms-field-card input[type="file"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ===== BUTTONS - ENHANCED UX ===== */
+.cms-manager .btn {
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.cms-manager .btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.cms-manager .btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.cms-manager .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.cms-manager .btn-primary {
+  background: #2563eb;
+  color: white !important;
+}
+
+.cms-manager .btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.cms-manager .btn-success {
+  background: #10b981;
+  color: white !important;
+}
+
+.cms-manager .btn-success:hover:not(:disabled) {
+  background: #059669;
+}
+
+.save-button {
+  background: #10b981;
+  border: none;
+  transition: all 0.2s ease;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+}
+
+.save-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+  background: #059669;
+}
+
+.save-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.cms-manager .btn-danger {
+  background: #dc3545;
+  color: white !important;
+}
+
+.cms-manager .btn-danger:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.cms-manager .btn-info {
+  background: #17a2b8;
+  color: white !important;
+}
+
+.cms-manager .btn-info:hover:not(:disabled) {
+  background: #138496;
+}
+
+.cms-manager .btn-warning {
+  background: #ffc107;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.cms-manager .btn-warning:hover:not(:disabled) {
+  background: #e0a800;
+}
+
+.cms-manager .btn-secondary {
+  background: #6c757d;
+  color: white !important;
+}
+
+.cms-manager .btn-secondary:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+/* ===== STATUS BADGES - HIGH VISIBILITY ===== */
+.badge {
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.badge-primary {
+  background: #2563eb;
+  color: white !important;
+}
+
+.badge-success {
+  background: #10b981;
+  color: white !important;
+}
+
+.badge-info {
+  background: #17a2b8;
+  color: white !important;
+}
+
+.badge-warning {
+  background: #ffc107;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.badge-danger {
+  background: #dc3545;
+  color: white !important;
+}
+
+.badge-secondary {
+  background: #6c757d;
+  color: white !important;
+}
+
+.badge-dark {
+  background: #343a40;
+  color: white !important;
+}
+
+/* ===== ALERTS - CLEAN STYLE ===== */
+.alert {
+  border-radius: 6px;
+  border-width: 1px;
+  border-left-width: 4px;
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.alert strong {
+  font-weight: 700;
+}
+
+.alert-info {
+  background-color: #e0f2fe;
+  border-color: #0284c7;
+  color: #0c4a6e !important;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  border-color: #dc2626;
+  color: #7f1d1d !important;
+}
+
+.alert-warning {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+  color: #78350f !important;
+}
+
+.alert-success {
+  background-color: #d1fae5;
+  border-color: #10b981;
+  color: #064e3b !important;
+}
+
+/* ===== STATUS INDICATORS ===== */
+.cms-status-success {
+  color: #047857 !important;
+  font-weight: 700;
+}
+
+.cms-status-error {
+  color: #b91c1c !important;
+  font-weight: 700;
+}
+
+.cms-status-warning {
+  color: #b45309 !important;
+  font-weight: 700;
+}
+
+/* ===== LOADING STATES ===== */
+.cms-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #1a202c !important;
+  font-weight: 600;
+}
+
+.loading-shimmer {
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.cms-manager .spinner-border {
+  color: #2563eb;
+  border-width: 3px;
+}
+
+/* ===== IMAGE PREVIEW ===== */
+.cms-image-preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.cms-image-preview:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.cms-image-preview img {
+  transition: transform 0.2s ease;
+  display: block;
+  width: 100%;
+}
+
+.cms-image-preview:hover img {
+  transform: scale(1.02);
+}
+
+.image-preview-container {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.image-preview-container:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.image-preview-container img {
+  transition: transform 0.2s ease;
+}
+
+.image-preview-container:hover img {
+  transform: scale(1.02);
+}
+
+.cms-image-preview + small,
+.text-muted {
+  color: #64748b !important;
+  font-weight: 500;
+}
+
+small.text-muted {
+  color: #64748b !important;
+}
+
+/* ===== STATS CARDS - CLEAN DESIGN ===== */
+.stats-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+  border-left-width: 3px;
+  margin-bottom: 1rem;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.stats-card h3 {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: 2rem !important;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+}
+
+.stats-card small {
+  color: #6c757d !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem;
+}
+
+.stats-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.stats-card:hover .stats-icon {
+  transform: scale(1.05);
+}
+
+/* Stats card específicos por tipo */
+.stats-card.stats-sections {
+  border-left-color: #2563eb;
+}
+
+.stats-card.stats-sections .stats-icon {
+  background: #2563eb;
+}
+
+.stats-card.stats-contents {
+  border-left-color: #10b981;
+}
+
+.stats-card.stats-contents .stats-icon {
+  background: #10b981;
+}
+
+.stats-card.stats-images {
+  border-left-color: #0ea5e9;
+}
+
+.stats-card.stats-images .stats-icon {
+  background: #0ea5e9;
+}
+
+.stats-card.stats-texts {
+  border-left-color: #f59e0b;
+}
+
+.stats-card.stats-texts .stats-icon {
+  background: #f59e0b;
+}
+
+/* ===== SEARCH AND FILTER ===== */
+.search-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 1.5rem;
+  border: 1px solid #e0e0e0;
+}
+
+.search-input {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #1a202c !important;
+  font-weight: 400;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+  background: #ffffff;
+  color: #1a202c !important;
+}
+
+.search-input::placeholder {
+  color: #9ca3af !important;
+  font-weight: 400;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/* Section List Header */
+.sections-header {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  padding: 1rem 1.25rem;
+}
+
+.sections-header h5 {
+  color: white !important;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.sections-header p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin: 0;
+}
+
+/* Section Card Icon */
+.section-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2563eb;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Section Cards */
+.cms-manager .card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.cms-manager .card-body {
+  padding: 1.25rem;
+}
+
+.cms-manager .card-title {
+  color: #0f172a !important;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.cms-manager .card-text {
+  color: #6c757d !important;
+  font-size: 0.875rem;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.hover-shadow {
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border-color: #2563eb;
+}
+
+.hover-shadow:active {
+  transform: translateY(0);
+}
+
+/* Content counter badge */
+.cms-manager .text-success {
+  color: #10b981 !important;
+}
+
+/* Arrow icon on cards */
+.cms-manager .text-primary {
+  color: #2563eb !important;
+}
+
+/* Small text consistency */
+.cms-manager small {
+  font-size: 0.875rem;
+}
+
+/* Filter buttons */
+.cms-manager .btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.cms-manager .btn-outline-primary {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.cms-manager .btn-outline-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+.cms-manager .btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.cms-manager .btn-outline-secondary:hover {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+/* Button light variant in headers */
+.cms-manager .sections-header .btn-light {
+  background: white;
+  border: none;
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.cms-manager .sections-header .btn-light:hover {
+  background: #f8f9fa;
+  color: #dc3545;
+}
+
+/* ===== PROFESSOR SECTION - CLEAN STYLING ===== */
+.professor-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  border-left: 4px solid #dc3545 !important;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #dc3545 !important;
+  margin-bottom: 1.5rem;
+}
+
+.professor-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  border-color: #dc3545;
+}
+
+.professor-card-header {
+  background: #dc3545;
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.professor-card-header h5 {
+  color: white !important;
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.professor-card-header small,
+.professor-card-header .text-muted {
+  color: rgba(255,255,255,0.9) !important;
+  font-weight: 500;
+}
+
+.professor-photo-preview {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+
+.professor-photo-preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.professor-field-group {
+  background-color: #f8fafc;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e0e0e0;
+}
+
+.professor-field-group .form-label {
+  color: #1a202c !important;
+  font-weight: 700 !important;
+}
+
+.professor-bio-field {
+  background-color: #f8fafc;
+  border-radius: 6px;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.professor-bio-field:hover {
+  border-color: #cbd5e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.professor-bio-field label {
+  color: #1a202c !important;
+  font-weight: 700 !important;
+}
+
+.professor-badge {
+  background: #dc3545;
+  color: white !important;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.professor-badge:hover {
+  background: #c82333;
+}
+
+/* Professor Card Form Controls - Maximum Visibility */
+.professor-card .form-control,
+.professor-card input[type="text"],
+.professor-card textarea {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+  border: 2px solid #334155 !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.professor-card .form-control::placeholder,
+.professor-card input::placeholder,
+.professor-card textarea::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.professor-card .form-control:focus,
+.professor-card input:focus,
+.professor-card textarea:focus {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2) !important;
+}
+
+.professor-card .form-label {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.professor-card .form-text {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+.professor-card .text-warning {
+  color: #d97706 !important;
+  font-weight: 700 !important;
+}
+
+/* ===== SECTION TITLES - MAXIMUM VISIBILITY ===== */
+.cms-manager h4,
+.cms-manager h5.mb-3,
+.professor-section-title {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  letter-spacing: -0.025em;
+}
+
+/* ===== ANIMATIONS - SIMPLIFIED ===== */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.2s ease-out;
+}
+
+.cms-success-animation {
+  background-color: #d1fae5;
+  transition: background-color 0.3s ease;
+}
+
+.cms-upload-progress {
+  background: #2563eb;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .cms-header {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cms-field-card {
+    margin-bottom: 1rem;
+  }
+
+  .cms-field-card .card-body {
+    padding: 1rem;
+  }
+
+  .professor-card-header {
+    padding: 1.25rem;
+  }
+
+  .stats-card {
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+  }
+
+  .stats-card h3 {
+    font-size: 2rem !important;
+  }
+
+  .cms-manager h1 { font-size: 1.75rem; }
+  .cms-manager h2 { font-size: 1.5rem; }
+  .cms-manager h3 { font-size: 1.25rem; }
+}
+
+@media (max-width: 576px) {
+  .cms-header {
+    padding: 1.25rem;
+  }
+
+  .cms-manager .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .stats-card h3 {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* ===== DARK MODE REMOVED ===== */
+/* Mantemos apenas o tema claro para consistência com o sistema */
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+.cms-manager *:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.cms-manager button:focus-visible,
+.cms-manager input:focus-visible,
+.cms-manager textarea:focus-visible,
+.cms-manager select:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ===== VISIBILITY FIXES - PREVENT WHITE ON WHITE ===== */
+/* Ultra-specific rules to override Bootstrap and inline styles */
+
+/* Force dark text on white/light backgrounds */
+.cms-manager .cms-field-card,
+.cms-manager .cms-field-card .card-body,
+.cms-manager .cms-field-card .form-control,
+.cms-manager .stats-card,
+.cms-manager .search-container,
+.cms-manager .hover-shadow,
+.cms-manager .professor-field-group,
+.cms-manager .professor-bio-field {
+  color: #1a202c !important;
+}
+
+/* Override Bootstrap's text-muted in stats cards */
+.cms-manager .stats-card .text-muted,
+.cms-manager .stats-card small.text-muted,
+.cms-manager .stats-card .text-muted small {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* All small elements in stats cards */
+.cms-manager .stats-card small {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Numbers in stats cards - ultra specific */
+.cms-manager .stats-card h3.mb-0,
+.cms-manager .stats-card .mb-0 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Ensure all text elements in white cards are dark */
+.cms-field-card *:not(.badge):not(.btn):not(.alert),
+.stats-card *:not(.badge):not(.btn),
+.search-container *:not(.badge):not(.btn),
+.hover-shadow *:not(.badge):not(.btn) {
+  color: inherit;
+}
+
+/* Stats card numbers - always dark on white background - ULTRA SPECIFIC */
+.cms-manager .stats-card h3,
+.cms-manager .stats-card h2,
+.cms-manager .stats-card h1,
+.cms-manager .stats-card div h3,
+.cms-manager .stats-card div h2,
+.cms-manager .stats-card div h1 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.cms-manager .stats-card small,
+.cms-manager .stats-card span,
+.cms-manager .stats-card p,
+.cms-manager .stats-card div small,
+.cms-manager .stats-card div span,
+.cms-manager .stats-card div p {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Divs inside stats cards - ensure they inherit dark text */
+.cms-manager .stats-card div,
+.cms-manager .stats-card > div,
+.cms-manager .stats-card .d-flex,
+.cms-manager .stats-card .d-flex > div {
+  color: #1a202c !important;
+}
+
+/* Card headers - ensure dark text - ULTRA SPECIFIC */
+.cms-manager .cms-field-card .card-header,
+.cms-manager .cms-field-card .card-header *,
+.cms-manager .card .card-header,
+.cms-manager .card .card-header * {
+  color: #1a202c !important;
+}
+
+/* Card titles and text */
+.cms-manager .card-title,
+.cms-manager .card-text,
+.cms-manager .card-body,
+.cms-manager .card-body *:not(.badge):not(.btn):not(.alert) {
+  color: #1a202c !important;
+}
+
+/* Specific Bootstrap card components */
+.cms-manager .card .mb-1,
+.cms-manager .card .mb-0,
+.cms-manager .card h1,
+.cms-manager .card h2,
+.cms-manager .card h3,
+.cms-manager .card h4,
+.cms-manager .card h5,
+.cms-manager .card h6 {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Override any white text in light background cards */
+.card-body .text-white,
+.cms-field-card .text-white:not(.badge):not(.btn),
+.stats-card .text-white:not(.badge):not(.btn) {
+  color: #1a202c !important;
+}
+
+/* Numbers and counters - maximum visibility */
+.cms-manager h1,
+.cms-manager h2,
+.cms-manager h3,
+.cms-manager h4 {
+  color: #0f172a !important;
+}
+
+/* Form labels in light cards */
+.cms-field-card label,
+.cms-field-card .form-label,
+.stats-card label,
+.search-container label {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Small text and descriptions - ULTRA SPECIFIC */
+.cms-manager .cms-field-card small,
+.cms-manager .stats-card small,
+.cms-manager .search-container small,
+.cms-manager .hover-shadow small,
+.cms-manager .card small,
+.cms-manager small {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Override ALL .text-muted instances in CMS */
+.cms-manager .text-muted,
+.cms-manager small.text-muted,
+.cms-manager span.text-muted,
+.cms-manager div.text-muted,
+.cms-manager p.text-muted {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Bootstrap utilities override */
+.cms-manager .text-secondary,
+.cms-manager .text-dark {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Character counters and form text */
+.cms-field-card .form-text,
+.cms-field-card small.text-muted {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* Prevent any accidental white text */
+.cms-manager .card:not(.professor-card-header):not(.cms-header) {
+  color: #1a202c !important;
+}
+
+.cms-manager .card:not(.professor-card-header):not(.cms-header) * {
+  color: inherit;
+}
+
+/* Table cells and data */
+.cms-manager td,
+.cms-manager th,
+.cms-manager .table {
+  color: #1a202c !important;
+}
+
+/* List items */
+.cms-manager li,
+.cms-manager ul,
+.cms-manager ol {
+  color: #1a202c !important;
+}
+
+/* Divs and spans in white backgrounds */
+.cms-field-card div,
+.cms-field-card span:not(.badge),
+.stats-card div,
+.stats-card span:not(.badge) {
+  color: inherit;
+}
+
+/* Ensure badges remain visible with their own colors */
+.badge {
+  color: white !important;
+}
+
+.badge-warning {
+  color: #1a202c !important;
+}
+
+/* Buttons keep their colors */
+.btn {
+  color: white !important;
+}
+
+.btn-warning,
+.btn-light {
+  color: #1a202c !important;
+}
+
+/* Headers in gradient backgrounds keep white */
+.cms-header,
+.cms-header *,
+.professor-card-header,
+.professor-card-header * {
+  color: white !important;
+}
+
+/* Text inside colored backgrounds */
+.alert * {
+  color: inherit !important;
+}
+
+.alert-info,
+.alert-info * {
+  color: #0c4a6e !important;
+}
+
+.alert-danger,
+.alert-danger * {
+  color: #7f1d1d !important;
+}
+
+.alert-warning,
+.alert-warning * {
+  color: #78350f !important;
+}
+
+.alert-success,
+.alert-success * {
+  color: #064e3b !important;
+}
+
+/* Input values and placeholders - SMART DETECTION */
+/* Light background inputs (white/light cards) */
+.cms-field-card input:not([type="file"]):not([style*="background"]),
+.cms-field-card textarea:not([style*="background"]),
+.cms-field-card select:not([style*="background"]) {
+  color: #1a202c !important;
+  background-color: #ffffff !important;
+}
+
+/* Dark background inputs - override to white text */
+.cms-field-card input[style*="background: rgb(45, 55, 72)"],
+.cms-field-card input[style*="background-color: rgb(45, 55, 72)"],
+.cms-field-card textarea[style*="background: rgb(45, 55, 72)"],
+.cms-field-card textarea[style*="background-color: rgb(45, 55, 72)"],
+.cms-field-card .form-control[style*="background"] {
+  color: #ffffff !important;
+  background-color: #2d3748 !important;
+}
+
+/* Card with dark background - all inputs white text */
+.cms-field-card[style*="background: rgb(45, 55, 72)"] input,
+.cms-field-card[style*="background: rgb(45, 55, 72)"] textarea,
+.cms-field-card[style*="background-color: rgb(45, 55, 72)"] input,
+.cms-field-card[style*="background-color: rgb(45, 55, 72)"] textarea {
+  color: #ffffff !important;
+}
+
+/* Placeholders for light backgrounds */
+.cms-field-card input:not([style*="background"])::placeholder,
+.cms-field-card textarea:not([style*="background"])::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Placeholders for dark backgrounds */
+.cms-field-card input[style*="background"]::placeholder,
+.cms-field-card textarea[style*="background"]::placeholder {
+  color: #cbd5e0 !important;
+}
+
+/* Cards with images - captions */
+.cms-image-preview + small,
+.image-preview-container + small {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* Section titles */
+.cms-manager h5.mb-3,
+.cms-manager .section-title {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Strong and bold text */
+.cms-field-card strong,
+.cms-field-card b,
+.stats-card strong,
+.stats-card b {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+/* Links in cards */
+.cms-manager .cms-field-card a:not(.btn),
+.cms-manager .stats-card a:not(.btn),
+.cms-manager .card a:not(.btn) {
+  color: #2563eb !important;
+  font-weight: 600 !important;
+}
+
+.cms-manager .cms-field-card a:not(.btn):hover,
+.cms-manager .stats-card a:not(.btn):hover,
+.cms-manager .card a:not(.btn):hover {
+  color: #1d4ed8 !important;
+}
+
+/* ===== DARK BACKGROUND DETECTION ===== */
+/* Detect and fix dark background inputs/textareas */
+.cms-manager input[style*="2d3748"],
+.cms-manager input[style*="1e293b"],
+.cms-manager input[style*="334155"],
+.cms-manager textarea[style*="2d3748"],
+.cms-manager textarea[style*="1e293b"],
+.cms-manager textarea[style*="334155"],
+.cms-manager input[style*="rgb(45"],
+.cms-manager input[style*="rgb(30"],
+.cms-manager textarea[style*="rgb(45"],
+.cms-manager textarea[style*="rgb(30"] {
+  color: #ffffff !important;
+  background-color: #2d3748 !important;
+}
+
+/* Dark input placeholders */
+.cms-manager input[style*="2d3748"]::placeholder,
+.cms-manager input[style*="1e293b"]::placeholder,
+.cms-manager textarea[style*="2d3748"]::placeholder,
+.cms-manager textarea[style*="1e293b"]::placeholder {
+  color: #cbd5e0 !important;
+  opacity: 0.8 !important;
+}
+
+/* Fields inside cards with dark body */
+.cms-manager .card-body[style*="2d3748"] input,
+.cms-manager .card-body[style*="2d3748"] textarea,
+.cms-manager .card-body[style*="1e293b"] input,
+.cms-manager .card-body[style*="1e293b"] textarea {
+  color: #ffffff !important;
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+}
+
+/* ===== ULTIMATE CATCH-ALL RULE ===== */
+/* This ensures EVERYTHING in CMS manager has appropriate text color */
+.cms-manager > div,
+.cms-manager .container-fluid,
+.cms-manager .row,
+.cms-manager .col,
+.cms-manager [class*="col-"] {
+  color: #1a202c !important;
+}
+
+/* Force all text nodes to inherit appropriately */
+.cms-manager * {
+  color: inherit;
+}
+
+/* Light backgrounds - dark text */
+.cms-manager div:not(.cms-header):not(.professor-card-header):not(.stats-icon):not(.badge):not(.btn):not(.alert):not([style*="2d3748"]):not([style*="1e293b"]),
+.cms-manager span:not(.badge):not(.btn),
+.cms-manager p:not(.cms-header p):not(.professor-card-header p) {
+  color: #1a202c !important;
+}
+
+/* Dark backgrounds - white text */
+.cms-manager div[style*="2d3748"],
+.cms-manager div[style*="1e293b"],
+.cms-manager div[style*="rgb(45"],
+.cms-manager div[style*="rgb(30"] {
+  color: #ffffff !important;
+}
+
+.cms-manager div[style*="2d3748"] *:not(.badge):not(.btn),
+.cms-manager div[style*="1e293b"] *:not(.badge):not(.btn),
+.cms-manager div[style*="rgb(45"] *:not(.badge):not(.btn),
+.cms-manager div[style*="rgb(30"] *:not(.badge):not(.btn) {
+  color: #ffffff !important;
+}
+
+/* Labels inside dark backgrounds */
+.cms-manager div[style*="2d3748"] label,
+.cms-manager div[style*="1e293b"] label,
+.cms-manager div[style*="2d3748"] h6,
+.cms-manager div[style*="1e293b"] h6,
+.cms-manager div[style*="2d3748"] .form-label,
+.cms-manager div[style*="1e293b"] .form-label {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Character counter in dark backgrounds */
+.cms-manager div[style*="2d3748"] small,
+.cms-manager div[style*="1e293b"] small,
+.cms-manager div[style*="2d3748"] .form-text,
+.cms-manager div[style*="1e293b"] .form-text {
+  color: #cbd5e0 !important;
+  font-weight: 500 !important;
+}
+
+/* Badges in dark backgrounds - ensure visibility */
+.cms-manager div[style*="2d3748"] .badge,
+.cms-manager div[style*="1e293b"] .badge {
+  background-color: #64748b !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: 1px solid #94a3b8;
+}
+
+/* Card headers in dark cards */
+.cms-manager .card[style*="2d3748"] .card-header h6,
+.cms-manager .card[style*="1e293b"] .card-header h6 {
+  color: #ffffff !important;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .cms-header,
+  .cms-manager .btn,
+  .save-button {
+    display: none;
+  }
+
+  .cms-field-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

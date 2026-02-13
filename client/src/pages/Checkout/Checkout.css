@@ -1,0 +1,134 @@
+.checkout-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding-top: 2rem;
+}
+
+.checkout-card {
+  border: none;
+  border-radius: 15px;
+}
+
+.checkout-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s;
+}
+
+.step.active .step-number {
+  background: var(--gb-red, #dc2626);
+  color: white;
+}
+
+.step-label {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.step-line {
+  width: 100px;
+  height: 2px;
+  background: #e0e0e0;
+  margin: 0 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-type-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.payment-type-selector .btn {
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.qr-code-placeholder {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Form styling */
+.checkout-card .form-control,
+.checkout-card .form-select {
+  border-radius: 8px;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s;
+}
+
+.checkout-card .form-control:focus,
+.checkout-card .form-select:focus {
+  border-color: var(--gb-red, #dc2626);
+  box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.25);
+}
+
+.checkout-card .btn-danger {
+  background: var(--gb-red, #dc2626);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.checkout-card .btn-danger:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.checkout-card .alert {
+  border-radius: 8px;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-steps {
+    scale: 0.9;
+  }
+
+  .step-line {
+    width: 50px;
+  }
+
+  .payment-type-selector {
+    flex-direction: column;
+  }
+
+  .payment-type-selector .btn {
+    width: 100%;
+  }
+}

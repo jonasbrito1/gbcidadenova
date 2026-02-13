@@ -1,0 +1,81 @@
+.professor-detalhes-page {
+  padding: 2rem 0;
+}
+
+.professor-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #dc2626;
+  margin: 0 auto;
+}
+
+.professor-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-large {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.stats-card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.aluno-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #dc2626;
+}
+
+.aluno-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-small-placeholder {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link {
+  color: #6c757d;
+}
+
+.nav-tabs .nav-link.active {
+  color: #dc2626;
+  border-bottom: 2px solid #dc2626;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #dc2626;
+}

@@ -1,0 +1,345 @@
+/* ========================================
+   SISTEMA DE CORES GRACIE BARRA
+   ======================================== */
+
+/* Backgrounds Sólidos */
+.bg-gb-red { background-color: var(--gb-red) !important; }
+.bg-gb-red-dark { background-color: var(--gb-red-dark) !important; }
+.bg-gb-red-light { background-color: var(--gb-red-light) !important; }
+.bg-gb-blue { background-color: var(--gb-blue) !important; }
+.bg-gb-blue-dark { background-color: var(--gb-blue-dark) !important; }
+.bg-gb-blue-light { background-color: var(--gb-blue-light) !important; }
+.bg-gb-black { background-color: var(--gb-black) !important; }
+.bg-gb-black-soft { background-color: var(--gb-black-soft) !important; }
+.bg-gb-white { background-color: var(--gb-white) !important; }
+.bg-gb-white-soft { background-color: var(--gb-white-soft) !important; }
+.bg-gb-gray { background-color: var(--gb-gray) !important; }
+
+/* Backgrounds com Gradiente */
+.bg-gradient-gb-red {
+  background: var(--gb-red-gradient) !important;
+}
+
+.bg-gradient-gb-red-dark {
+  background: var(--gb-red-gradient-dark) !important;
+}
+
+.bg-gradient-gb-blue {
+  background: var(--gb-blue-gradient) !important;
+}
+
+/* Gradiente Escuro com Vermelho */
+.bg-gradient-gb-dark-red {
+  background: linear-gradient(180deg, var(--gb-black) 0%, var(--gb-red-darker) 100%) !important;
+}
+
+/* Gradiente Sidebar GB */
+.bg-gradient-sidebar-gb {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
+}
+
+/* Gradiente Header GB */
+.bg-gradient-header-gb {
+  background: linear-gradient(135deg, var(--gb-black) 0%, #333 100%) !important;
+}
+
+/* Bordas */
+.border-gb-red { border-color: var(--gb-red) !important; }
+.border-gb-red-dark { border-color: var(--gb-red-dark) !important; }
+.border-gb-blue { border-color: var(--gb-blue) !important; }
+.border-gb-black { border-color: var(--gb-black) !important; }
+.border-gb-white { border-color: var(--gb-white) !important; }
+.border-gb-gray { border-color: var(--gb-gray) !important; }
+
+.border-l-gb-red { border-left: 4px solid var(--gb-red) !important; }
+.border-l-gb-blue { border-left: 4px solid var(--gb-blue) !important; }
+
+.border-t-gb-red { border-top: 4px solid var(--gb-red) !important; }
+.border-t-gb-blue { border-top: 4px solid var(--gb-blue) !important; }
+
+/* Sombras com Cores GB */
+.shadow-gb-red {
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
+}
+
+.shadow-gb-red-lg {
+  box-shadow: 0 8px 24px rgba(220, 53, 69, 0.4) !important;
+}
+
+.shadow-gb-blue {
+  box-shadow: 0 4px 12px rgba(0, 82, 163, 0.3) !important;
+}
+
+.shadow-gb-blue-lg {
+  box-shadow: 0 8px 24px rgba(0, 82, 163, 0.4) !important;
+}
+
+.shadow-gb-dark {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Overlays Semi-Transparentes */
+.overlay-gb-red {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.overlay-gb-red-dark {
+  background: rgba(220, 53, 69, 0.2);
+}
+
+.overlay-gb-blue {
+  background: rgba(0, 82, 163, 0.1);
+}
+
+.overlay-gb-black {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay-gb-white {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Efeitos de Hover */
+.hover-gb-red:hover {
+  background-color: var(--gb-red) !important;
+  color: var(--gb-white) !important;
+  transition: all 0.3s ease;
+}
+
+.hover-gb-blue:hover {
+  background-color: var(--gb-blue) !important;
+  color: var(--gb-white) !important;
+  transition: all 0.3s ease;
+}
+
+.hover-shadow-gb-red:hover {
+  box-shadow: 0 8px 24px rgba(220, 53, 69, 0.4) !important;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.hover-shadow-gb-blue:hover {
+  box-shadow: 0 8px 24px rgba(0, 82, 163, 0.4) !important;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Cards com Cores GB */
+.card-gb-red {
+  background: var(--gb-red);
+  color: var(--gb-white);
+  border: none;
+}
+
+.card-gb-blue {
+  background: var(--gb-blue);
+  color: var(--gb-white);
+  border: none;
+}
+
+.card-gb-white {
+  background: var(--gb-white);
+  border: 1px solid var(--gb-gray-light);
+}
+
+.card-gb-gradient-red {
+  background: var(--gb-red-gradient);
+  color: var(--gb-white);
+  border: none;
+}
+
+.card-gb-gradient-blue {
+  background: var(--gb-blue-gradient);
+  color: var(--gb-white);
+  border: none;
+}
+
+/* Badges GB */
+.badge-gb-red {
+  background: var(--gb-red-gradient);
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-gb-blue {
+  background: var(--gb-blue-gradient);
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-gb-admin {
+  background: var(--gb-red-gradient);
+  color: var(--gb-white);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.badge-gb-professor {
+  background: var(--gb-blue-gradient);
+  color: var(--gb-white);
+  box-shadow: 0 2px 8px rgba(0, 82, 163, 0.3);
+}
+
+.badge-gb-aluno {
+  background: linear-gradient(135deg, var(--gb-gray) 0%, var(--gb-gray-dark) 100%);
+  color: var(--gb-white);
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Botões GB */
+.btn-gb-red {
+  background: var(--gb-red-gradient);
+  border: none;
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-gb-red:hover {
+  background: var(--gb-red-gradient-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 53, 69, 0.4);
+}
+
+.btn-gb-blue {
+  background: var(--gb-blue-gradient);
+  border: none;
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-gb-blue:hover {
+  background: linear-gradient(135deg, var(--gb-blue-dark) 0%, var(--gb-blue) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 82, 163, 0.4);
+}
+
+.btn-gb-outline-red {
+  background: transparent;
+  border: 2px solid var(--gb-red);
+  color: var(--gb-red);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-gb-outline-red:hover {
+  background: var(--gb-red);
+  color: var(--gb-white);
+}
+
+.btn-gb-outline-blue {
+  background: transparent;
+  border: 2px solid var(--gb-blue);
+  color: var(--gb-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-gb-outline-blue:hover {
+  background: var(--gb-blue);
+  color: var(--gb-white);
+}
+
+/* Links GB */
+.link-gb-red {
+  color: var(--gb-red);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.link-gb-red:hover {
+  color: var(--gb-red-dark);
+  text-decoration: underline;
+}
+
+.link-gb-blue {
+  color: var(--gb-blue);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.link-gb-blue:hover {
+  color: var(--gb-blue-dark);
+  text-decoration: underline;
+}
+
+/* Dividers GB */
+.divider-gb-red {
+  height: 2px;
+  background: var(--gb-red-gradient);
+  border: none;
+  margin: 1.5rem 0;
+}
+
+.divider-gb-blue {
+  height: 2px;
+  background: var(--gb-blue-gradient);
+  border: none;
+  margin: 1.5rem 0;
+}
+
+/* Alert GB */
+.alert-gb-red {
+  background: rgba(220, 53, 69, 0.1);
+  border-left: 4px solid var(--gb-red);
+  color: var(--gb-red-dark);
+  font-family: var(--font-body);
+}
+
+.alert-gb-blue {
+  background: rgba(0, 82, 163, 0.1);
+  border-left: 4px solid var(--gb-blue);
+  color: var(--gb-blue-dark);
+  font-family: var(--font-body);
+}
+
+/* Progress Bar GB */
+.progress-gb-red .progress-bar {
+  background: var(--gb-red-gradient);
+}
+
+.progress-gb-blue .progress-bar {
+  background: var(--gb-blue-gradient);
+}
+
+/* Status Indicators */
+.status-ativo-gb {
+  color: var(--gb-success);
+  font-weight: 600;
+}
+
+.status-inativo-gb {
+  color: var(--gb-gray);
+  font-weight: 600;
+}
+
+.status-suspenso-gb {
+  color: var(--gb-warning);
+  font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .shadow-gb-red-lg,
+  .shadow-gb-blue-lg {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+}

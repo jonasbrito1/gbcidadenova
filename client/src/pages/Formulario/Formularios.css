@@ -1,0 +1,21 @@
+.formularios-container {
+  min-height: 100vh;
+}
+
+.formularios-container .card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formularios-container .table td {
+  vertical-align: middle;
+}
+
+.formularios-container .modal-body p {
+  margin-bottom: 0.5rem;
+}
+
+.formularios-container .modal-body h6 {
+  margin-top: 1rem;
+  color: #495057;
+  font-weight: 600;
+}

@@ -1,0 +1,532 @@
+.student-attendance-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  color: var(--gb-black);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: var(--gb-gray);
+  font-size: 1rem;
+}
+
+/* Cards */
+.check-in-card,
+.stats-card,
+.history-card {
+  background: var(--bg-primary-light);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.check-in-card .card-header,
+.stats-card .card-header,
+.history-card .card-header {
+  background: var(--gb-red-gradient);
+  color: white;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1.25rem 1.5rem;
+}
+
+.check-in-card .card-header h5,
+.stats-card .card-header h5,
+.history-card .card-header h5 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.check-in-card .card-body,
+.stats-card .card-body,
+.history-card .card-body {
+  padding: 1.5rem;
+}
+
+/* Turma Card */
+.turma-card {
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  height: 100%;
+  background: white;
+}
+
+.turma-card:hover:not(.already-checked) {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.2);
+  border-color: var(--gb-red);
+}
+
+.turma-card.already-checked {
+  background-color: var(--bg-secondary-light);
+  opacity: 0.85;
+  border-color: var(--border-secondary-light);
+}
+
+.turma-card .card-body {
+  padding: 1.25rem;
+}
+
+.turma-card h6 {
+  color: var(--gb-black);
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0;
+}
+
+.turma-info {
+  margin-top: 1rem;
+}
+
+.turma-info .info-item {
+  font-size: 0.925rem;
+  margin-bottom: 0.625rem;
+  color: var(--gb-gray-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.turma-info .info-item svg {
+  color: var(--gb-red);
+}
+
+.turma-info .badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+}
+
+/* Status Badges */
+.badge.bg-success {
+  background: var(--gb-success) !important;
+}
+
+.badge.bg-primary {
+  background: var(--gb-blue) !important;
+}
+
+.badge.bg-info {
+  background: var(--gb-info) !important;
+}
+
+.badge.bg-secondary {
+  background: var(--gb-gray) !important;
+}
+
+/* Statistics */
+.stat-box {
+  text-align: center;
+  padding: 1.75rem 1.25rem;
+  background: var(--gb-red-gradient);
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.25);
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.35);
+}
+
+.stat-box.success {
+  background: linear-gradient(135deg, var(--gb-success) 0%, #20c997 100%);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+}
+
+.stat-box.success:hover {
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.35);
+}
+
+.stat-box.danger {
+  background: var(--gb-red-gradient-dark);
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25);
+}
+
+.stat-box.danger:hover {
+  box-shadow: 0 6px 16px rgba(185, 28, 28, 0.35);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* Table */
+.history-card .table {
+  margin-bottom: 0;
+}
+
+.history-card thead {
+  background-color: var(--bg-secondary-light);
+}
+
+.history-card thead th {
+  border-bottom: 2px solid var(--gb-red);
+  font-weight: 600;
+  color: var(--gb-black);
+  padding: 1rem;
+  font-size: 0.925rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.history-card tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.history-card tbody tr:hover {
+  background-color: var(--bg-secondary-light);
+  transform: scale(1.01);
+}
+
+.history-card tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* Modal */
+.confirm-details {
+  background-color: var(--bg-secondary-light);
+  padding: 1.25rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  border: 1px solid var(--border-light);
+}
+
+.confirm-details p {
+  margin-bottom: 0.75rem;
+  color: var(--gb-gray-dark);
+  font-size: 0.975rem;
+}
+
+.confirm-details p:last-child {
+  margin-bottom: 0;
+}
+
+.confirm-details strong {
+  color: var(--gb-black);
+}
+
+/* Buttons */
+.btn-success {
+  background: var(--gb-success);
+  border: none;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.btn-secondary {
+  background: var(--gb-gray);
+  border: none;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover {
+  background: var(--gb-gray-dark);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+  border: none;
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+}
+
+.alert-info {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert-danger {
+  background: #ffe5e8;
+  color: var(--gb-red-dark);
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Loading */
+.spinner-border {
+  color: var(--gb-red);
+}
+
+/* Belt Visualization - Estilo Gracie Barra Realista */
+.belt-visualization {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.belt-display {
+  position: relative;
+  height: 50px;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--belt-color, #0066CC);
+}
+
+/* Ponta da faixa (mesma cor da faixa - padrão GB) */
+.belt-display::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: inherit;
+  border-left: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.belt-display:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.belt-name {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Container dos graus - posicionado no centro da faixa */
+.belt-degrees {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 8px 0;
+}
+
+/* Cada grau/listra branca */
+.degree-stripe {
+  width: 8px;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 991px) {
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+  }
+
+  .stat-box {
+    padding: 1.5rem 1rem;
+  }
+
+  .belt-visualization {
+    max-width: 240px;
+  }
+
+  .belt-display {
+    height: 45px;
+  }
+
+  .belt-display::after {
+    width: 35px;
+  }
+
+  .degree-stripe {
+    width: 7px;
+  }
+
+  .belt-degrees {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .check-in-card .card-body,
+  .stats-card .card-body,
+  .history-card .card-body {
+    padding: 1.25rem;
+  }
+
+  .turma-card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .turma-card .card-body {
+    padding: 1rem;
+  }
+
+  .stat-box {
+    padding: 1.25rem 0.875rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .history-card thead th,
+  .history-card tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .btn-success,
+  .btn-secondary {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .belt-visualization {
+    max-width: 200px;
+  }
+
+  .belt-display {
+    height: 40px;
+  }
+
+  .belt-display::after {
+    width: 30px;
+  }
+
+  .degree-stripe {
+    width: 6px;
+  }
+
+  .belt-degrees {
+    gap: 4px;
+  }
+
+  .belt-name {
+    font-size: 0.75rem;
+  }
+
+  .degree-stripe {
+    width: 3px;
+    height: 16px;
+  }
+
+  .belt-degrees {
+    gap: 3px;
+  }
+
+  .belt-visualization {
+    max-width: 160px;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.check-in-card,
+.stats-card,
+.history-card {
+  animation: fadeIn 0.5s ease;
+}
+
+.turma-card {
+  animation: fadeIn 0.5s ease;
+  animation-fill-mode: both;
+}
+
+.turma-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.turma-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.turma-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.turma-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.turma-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.turma-card:nth-child(6) {
+  animation-delay: 0.6s;
+}

@@ -1,0 +1,285 @@
+.professores-page {
+  padding: 2rem 0;
+}
+
+.professores-page h2 {
+  color: #dc2626;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.professores-table thead {
+  background-color: #f8f9fa;
+}
+
+.professores-table thead th {
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dc2626;
+}
+
+.professores-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.professores-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.professor-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #dc2626;
+}
+
+.professor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.professor-card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.professor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+/* ========================================
+   RESPONSIVIDADE PROFISSIONAL MOBILE-FIRST
+   ======================================== */
+
+/* Tablets e iPads (≤991px) */
+@media (max-width: 991px) {
+  .professores-page {
+    padding: 1rem 0;
+  }
+
+  .professores-page h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Tablets Pequenos (≤768px) */
+@media (max-width: 768px) {
+  .professores-page {
+    padding: 0.75rem 0;
+  }
+
+  .professores-page h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Tabela Responsiva */
+  .professores-table {
+    font-size: 0.875rem;
+  }
+
+  .professores-table thead th {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .professores-table tbody td {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  /* Avatar */
+  .professor-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .avatar-placeholder {
+    font-size: 1.2rem;
+  }
+
+  /* Botões de Ação */
+  .d-flex.gap-2 {
+    gap: 0.25rem !important;
+  }
+
+  .btn-sm {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Smartphones (≤576px) - Foco Principal Mobile */
+@media (max-width: 576px) {
+  .professores-page {
+    padding: 0.5rem 0;
+  }
+
+  .professores-page h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Header com Botão */
+  .professores-page .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .professores-page .d-flex.justify-content-between .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Filtros */
+  .professores-page .input-group,
+  .professores-page .form-select {
+    min-height: 44px;
+  }
+
+  .professores-page .form-control,
+  .professores-page .form-select {
+    font-size: 0.95rem;
+    padding: 0.625rem 0.875rem;
+  }
+
+  /* Tabela Compacta Mobile */
+  .professores-table {
+    font-size: 0.8rem;
+  }
+
+  .professores-table thead {
+    display: none;
+  }
+
+  .professores-table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.875rem;
+    background: white;
+  }
+
+  .professores-table tbody tr:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+  }
+
+  .professores-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .professores-table tbody td:last-child {
+    border-bottom: none;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .professores-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #495057;
+    flex: 0 0 45%;
+  }
+
+  /* Avatar Mobile */
+  .professor-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .avatar-placeholder {
+    font-size: 1rem;
+  }
+
+  /* Informações do Professor */
+  .professores-table .d-flex.align-items-center {
+    flex-direction: row;
+    gap: 0.625rem;
+  }
+
+  .professores-table .d-flex.align-items-center .fw-bold {
+    font-size: 0.9rem;
+  }
+
+  .professores-table .d-flex.align-items-center small {
+    font-size: 0.75rem;
+  }
+
+  /* Badges Compactos */
+  .badge {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  /* Botões de Ação - Touch Friendly */
+  .professores-table .d-flex.justify-content-center {
+    justify-content: flex-end !important;
+    gap: 0.5rem !important;
+  }
+
+  .professores-table .btn-sm {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card */
+  .professor-card {
+    margin-bottom: 0.875rem;
+  }
+}
+
+/* Smartphones Muito Pequenos (≤380px) */
+@media (max-width: 380px) {
+  .professores-page h2 {
+    font-size: 1.25rem;
+  }
+
+  .professores-page .d-flex.justify-content-between .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .professores-table tbody tr {
+    padding: 0.75rem;
+  }
+
+  .professores-table tbody td::before {
+    font-size: 0.75rem;
+    flex: 0 0 50%;
+  }
+
+  .professor-avatar {
+    width: 32px;
+    height: 32px;
+  }
+}

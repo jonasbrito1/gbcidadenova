@@ -1,0 +1,143 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+build/
+dist/
+*.tar.gz
+*.log
+
+# Environment variables (CREDENCIAIS)
+.env
+.env.*
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production
+.env.production.local
+
+# Credenciais e tokens
+CREDENCIAIS*
+*token*.txt
+VER-CREDENCIAIS*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Uploads (dados pessoais de usuarios)
+uploads/
+server/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+
+# Database backups
+*.sql.backup
+*.sql.gz
+*.db
+server/backups/
+backups/
+
+# Diretorios desnecessarios
+backup_producao*/
+upload_hostinger/
+gb.old/
+
+# Documentacao temporaria e scripts na raiz do projeto
+/*.md
+/*.txt
+/*.bat
+/*.sql
+/*.sh
+/*.html
+/*.php
+/*.json
+/*.js
+
+# Manter apenas arquivos essenciais na raiz
+!.gitignore
+!package.json
+!docker-compose.local.yml
+!backup-mysql.sh
+!backup-files.sh
+!monitor-backups.sh
+!monitor-security.sh
+!nginx.conf
+!nginx-landing.conf
+!nginx-simple.conf
+
+# Scripts utilitarios/teste no server (podem conter credenciais)
+server/test-*
+server/testar-*
+server/check-*
+server/criar-*
+server/create-*
+server/reset-*
+server/delete-*
+server/corrigir-*
+server/verificar-*
+server/analisar-*
+server/executar-*
+server/validar-*
+server/populate-*
+server/matricular-*
+server/run-migration*
+server/gerar-*
+server/verify-*
+server/auto-reload-monitor.js
+server/criar-backup-local.js
+server/comparar-com-producao.txt
+server/database_cms_setup.sql
+server/create_justificativas_table.sql
+server/srcroutesdashboard.js
+server/dashboard-*.js
+server/students-*.js
+server/students_enhanced.js
+
+# Backup files dentro do codigo
+*.backup
+*.BACKUP.*
+*.OLD.*
+
+# SQL com dados sensiveis
+sql/atualizar-senhas.sql
+sql/criar-usuarios-teste.sql
+sql/corrigir_vencimentos_beatriz_sofia.sql
+
+# Migration runners (podem conter credenciais hardcoded)
+server/migrations/create-superadmin*.js
+server/migrations/set-superadmin.js
+server/migrations/run_migration*.js
+server/migrations/run_superadmin*.js
+
+# Configs temporarias
+ecosystem.config.js.CORRIGIDO
+sftp-batch-commands.txt
+sftp-upload-students.txt
+upload-sftp-commands.txt
+students.json
+sql;C

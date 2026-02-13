@@ -1,0 +1,613 @@
+/* ========================================
+   MELHORIAS DE RESPONSIVIDADE MOBILE
+   Otimizações profissionais para telas pequenas
+   ======================================== */
+
+/* Extra Small Devices (Phones, 320px - 575px) */
+@media (max-width: 575.98px) {
+  /* Hero Section - Mobile Optimized */
+  .hero-section {
+    padding: 60px 0 40px !important;
+    min-height: auto !important;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-description {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .hero-buttons .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  .hero-stats {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .stat-item {
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  .stat-item h3 {
+    font-size: 2rem !important;
+  }
+
+  .stat-item p {
+    font-size: 0.875rem !important;
+  }
+
+  /* Hero Image - Mobile */
+  .hero-visual {
+    margin-top: 2rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .academy-photo-wrapper {
+    max-width: 100% !important;
+  }
+
+  .academy-photo {
+    min-height: 300px !important;
+    border-radius: 12px !important;
+  }
+
+  .academy-img {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* Section Titles - Mobile */
+  .section-title {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 1rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .section-description {
+    font-size: 0.9375rem !important;
+    padding: 0 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Cards - Mobile Optimized */
+  .principle-card,
+  .program-card,
+  .contact-card {
+    margin-bottom: 1rem !important;
+    padding: 1.25rem !important;
+  }
+
+  .principle-card .card-body,
+  .program-card .card-body,
+  .contact-card .card-body {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .principle-title,
+  .program-card h4 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .principle-description,
+  .program-card p {
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Stats Cards - Mobile */
+  .stat-card {
+    padding: 1.25rem 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .stat-number {
+    font-size: 2rem !important;
+  }
+
+  .stat-label {
+    font-size: 0.875rem !important;
+  }
+
+  /* Carousel - Mobile Optimized */
+  .gallery-carousel {
+    margin: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+  }
+
+  .carousel-image-container {
+    height: 250px !important;
+    border-radius: 12px !important;
+  }
+
+  .carousel-image {
+    height: 250px !important;
+    object-fit: cover !important;
+  }
+
+  .carousel-content {
+    padding: 1rem !important;
+  }
+
+  .carousel-title {
+    font-size: 1.125rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .carousel-description {
+    font-size: 0.8125rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Professors Section - Mobile */
+  .professor-card {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .professor-image {
+    height: 280px !important;
+  }
+
+  .professor-name {
+    font-size: 1.25rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .professor-belt,
+  .professor-specialties {
+    font-size: 0.875rem !important;
+  }
+
+  /* Schedule Section - Mobile Enhanced */
+  .schedule-mobile {
+    padding: 0 !important;
+  }
+
+  .day-schedule-card {
+    margin-bottom: 1rem !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .day-header-mobile {
+    padding: 0.875rem 1rem !important;
+    background: linear-gradient(135deg, var(--gb-red), var(--gb-red-dark)) !important;
+  }
+
+  .day-header-mobile h4 {
+    font-size: 1.125rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .mobile-class-card {
+    padding: 0.875rem 1rem !important;
+    margin: 0.5rem 0.75rem !important;
+    border-radius: 8px !important;
+  }
+
+  .mobile-class-time {
+    font-size: 0.8125rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .mobile-class-name {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+
+  .mobile-class-level {
+    font-size: 0.75rem !important;
+    margin-top: 0.25rem !important;
+  }
+
+  /* Contact Section - Mobile */
+  .contact-icon {
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .contact-card h4 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .contact-card p {
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .whatsapp-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  .btn-whatsapp-contact {
+    width: 100% !important;
+    padding: 0.875rem 1rem !important;
+    font-size: 0.9375rem !important;
+    justify-content: center !important;
+  }
+
+  /* CTA Section - Mobile */
+  .simple-cta-section {
+    padding: 3rem 1rem !important;
+  }
+
+  .simple-cta-title {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .simple-cta-description {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .simple-cta-features {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .simple-feature {
+    justify-content: flex-start !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  .simple-cta-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .simple-cta-buttons .btn {
+    width: 100% !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Footer - Mobile */
+  .landing-footer {
+    padding: 2.5rem 0 1.5rem !important;
+  }
+
+  .footer-brand {
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+  }
+
+  .footer-logo {
+    font-size: 1.5rem !important;
+  }
+
+  .social-links {
+    justify-content: center !important;
+    gap: 1rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .social-link {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .footer-title {
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+
+  .footer-info,
+  .footer-hours {
+    text-align: center !important;
+  }
+
+  .footer-contact-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  .btn-footer-whatsapp {
+    width: 100% !important;
+    padding: 0.875rem 1rem !important;
+    font-size: 0.9375rem !important;
+  }
+
+  .footer-copyright {
+    text-align: center !important;
+    font-size: 0.8125rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .footer-links {
+    text-align: center !important;
+    margin-top: 1rem !important;
+    font-size: 0.8125rem !important;
+  }
+
+  /* Modal - Mobile Optimized */
+  .modal-dialog {
+    margin: 0.5rem !important;
+  }
+
+  .modal-body {
+    padding: 1.25rem !important;
+  }
+
+  .expanded-image-container {
+    max-height: 70vh !important;
+  }
+
+  .expanded-image {
+    max-height: 60vh !important;
+    object-fit: contain !important;
+  }
+
+  .expanded-image-info {
+    padding: 1rem !important;
+  }
+
+  .expanded-image-info h4 {
+    font-size: 1.125rem !important;
+  }
+
+  .expanded-image-info p {
+    font-size: 0.875rem !important;
+  }
+
+  /* Navigation - Mobile Optimized */
+  .landing-nav {
+    padding: 0.5rem 0 !important;
+  }
+
+  .logo-container {
+    max-width: 200px !important;
+  }
+
+  .academy-logo {
+    max-height: 35px !important;
+  }
+
+  .brand-text-main {
+    font-size: 1rem !important;
+  }
+
+  .brand-text-sub {
+    font-size: 0.75rem !important;
+  }
+
+  .btn-login-mobile {
+    padding: 0.5rem 0.875rem !important;
+    font-size: 1rem !important;
+  }
+
+  .mobile-menu-toggle {
+    padding: 0.5rem 0.875rem !important;
+    font-size: 1.125rem !important;
+  }
+
+  /* Quote Section - Mobile */
+  .quote-section-carlos {
+    padding: 3rem 1rem !important;
+  }
+
+  .quote-section-carlos blockquote {
+    font-size: 1.125rem !important;
+    line-height: 1.6 !important;
+    padding: 1.5rem !important;
+  }
+
+  .quote-section-carlos cite {
+    font-size: 1rem !important;
+    margin-top: 1rem !important;
+  }
+
+  /* About Section - Mobile */
+  .about-section {
+    padding: 3rem 0 !important;
+  }
+
+  .about-text-container {
+    padding: 0 1rem !important;
+  }
+
+  .about-subtitle {
+    font-size: 1.375rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .about-description,
+  .about-detailed-text {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .about-highlights {
+    gap: 0.75rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .highlight-item {
+    font-size: 0.875rem !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Programs Section - Mobile */
+  .programs-section {
+    padding: 3rem 0 !important;
+  }
+
+  .program-icon {
+    font-size: 2.5rem !important;
+    width: 70px !important;
+    height: 70px !important;
+    margin: 0 auto 1rem !important;
+  }
+}
+
+/* Very Small Devices (320px - 374px) */
+@media (max-width: 374px) {
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.25rem !important;
+    font-size: 0.9375rem !important;
+  }
+
+  .stat-item h3 {
+    font-size: 1.75rem !important;
+  }
+
+  .carousel-image-container {
+    height: 220px !important;
+  }
+
+  .professor-image {
+    height: 250px !important;
+  }
+
+  .mobile-class-card {
+    padding: 0.75rem !important;
+    margin: 0.5rem !important;
+  }
+}
+
+/* Landscape Mode - Mobile */
+@media (max-height: 450px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto !important;
+    padding: 40px 0 !important;
+  }
+
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-visual {
+    display: none;
+  }
+
+  .hero-stats {
+    flex-direction: row !important;
+    margin-top: 1rem !important;
+  }
+
+  .stat-item {
+    width: auto !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .social-link,
+  .mobile-nav-link {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  .btn {
+    padding: 0.875rem 1.5rem !important;
+  }
+
+  .hero-buttons .btn {
+    padding: 1rem 2rem !important;
+  }
+
+  .simple-cta-buttons .btn {
+    padding: 1.125rem 2rem !important;
+  }
+}
+
+/* Prevent text selection on double-tap */
+@media (max-width: 767.98px) {
+  .hero-title,
+  .section-title,
+  .btn {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Smooth scrolling for mobile */
+@media (max-width: 991.98px) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+  }
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  .hero-section {
+    min-height: -webkit-fill-available;
+  }
+
+  .modal-dialog {
+    max-height: -webkit-fill-available;
+  }
+}
+
+/* Final Mobile Polish */
+@media (max-width: 575.98px) {
+  /* Consistent spacing */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Improved readability */
+  p, li, td, th {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Better image loading */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Prevent layout shift */
+  .ratio {
+    contain: layout;
+  }
+}

@@ -1,0 +1,128 @@
+/* ========================================
+   LAYOUT MODERNIZADO - GRACIE BARRA
+   ======================================== */
+
+.layout-modern {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-left: 260px;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+/* ========================================
+   CONTENT CONTAINER
+   ======================================== */
+
+.content-container {
+  flex: 1;
+  padding: 24px;
+  background: #f8f9fa;
+}
+
+.content-wrapper {
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+  }
+
+  .main-content.sidebar-collapsed {
+    margin-left: 0;
+  }
+
+  .content-container {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    padding: 12px;
+  }
+}
+
+/* ========================================
+   MOBILE BACKDROP
+   ======================================== */
+
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 24px;
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .main-content,
+  .content-wrapper {
+    transition: none;
+    animation: none;
+  }
+}

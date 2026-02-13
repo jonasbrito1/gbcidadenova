@@ -1,0 +1,300 @@
+.turmas-page {
+  padding: 2rem 0;
+}
+
+.turmas-page h2 {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.turma-card {
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.turma-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  border-color: #dc2626;
+}
+
+.grade-horarios h5 {
+  border-bottom: 2px solid #dc2626;
+  padding-bottom: 0.5rem;
+}
+
+.nav-tabs .nav-link {
+  color: #6c757d;
+}
+
+.nav-tabs .nav-link.active {
+  color: #dc2626;
+  border-bottom: 2px solid #dc2626;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #dc2626;
+}
+
+/* ========================================
+   RESPONSIVIDADE PROFISSIONAL MOBILE-FIRST
+   ======================================== */
+
+/* Tablets e iPads (≤991px) */
+@media (max-width: 991px) {
+  .turmas-page {
+    padding: 1rem 0;
+  }
+
+  .turmas-page h2 {
+    font-size: 1.75rem;
+  }
+
+  .turma-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Tablets Pequenos (≤768px) */
+@media (max-width: 768px) {
+  .turmas-page {
+    padding: 0.75rem 0;
+  }
+
+  .turmas-page h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Grade Horários */
+  .grade-horarios h5 {
+    font-size: 1.1rem;
+  }
+
+  /* Tabs */
+  .nav-tabs .nav-link {
+    font-size: 0.9rem;
+    padding: 0.625rem 1rem;
+  }
+
+  /* Turma Cards */
+  .turma-card {
+    margin-bottom: 0.75rem;
+  }
+
+  .turma-card h6 {
+    font-size: 0.95rem;
+  }
+
+  .turma-card p {
+    font-size: 0.85rem;
+  }
+
+  /* Tabela */
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+  }
+
+  .table .btn-sm {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Smartphones (≤576px) - Foco Principal Mobile */
+@media (max-width: 576px) {
+  .turmas-page {
+    padding: 0.5rem 0;
+  }
+
+  .turmas-page h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Header com Botão */
+  .turmas-page .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .turmas-page .d-flex.justify-content-between .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Filtros */
+  .turmas-page .input-group,
+  .turmas-page .form-select {
+    min-height: 44px;
+  }
+
+  .turmas-page .form-control,
+  .turmas-page .form-select {
+    font-size: 0.95rem;
+    padding: 0.625rem 0.875rem;
+  }
+
+  /* Badge de Contagem */
+  .turmas-page .badge {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Tabs Responsivas */
+  .nav-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .nav-tabs .nav-link {
+    font-size: 0.85rem;
+    padding: 0.625rem 0.875rem;
+    white-space: nowrap;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-tabs .nav-link svg {
+    font-size: 0.9rem;
+  }
+
+  /* Grade de Horários */
+  .grade-horarios h5 {
+    font-size: 1rem;
+    padding-bottom: 0.375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Turma Cards Mobile */
+  .turma-card {
+    margin-bottom: 1rem;
+    border-radius: 10px;
+  }
+
+  .turma-card .card-body {
+    padding: 1rem;
+  }
+
+  .turma-card h6 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .turma-card p {
+    font-size: 0.8rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .turma-card:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+  }
+
+  /* Badges nos Cards */
+  .turma-card .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  /* Botões nos Cards - Touch Friendly */
+  .turma-card .btn-sm {
+    min-width: 44px;
+    min-height: 36px;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .turma-card .d-flex.gap-2 {
+    gap: 0.5rem !important;
+  }
+
+  /* Tabela Mobile */
+  .table-responsive {
+    border-radius: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    font-size: 0.8rem;
+    min-width: 600px;
+  }
+
+  .table th {
+    font-size: 0.75rem;
+    padding: 8px 6px;
+    white-space: nowrap;
+  }
+
+  .table td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
+  }
+
+  .table .btn-sm {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0.375rem;
+    font-size: 0.75rem;
+  }
+
+  .table .d-flex.gap-2 {
+    gap: 0.25rem !important;
+    flex-wrap: nowrap;
+  }
+
+  /* Empty State */
+  .text-center.py-5.text-muted {
+    padding: 2rem 1rem !important;
+    font-size: 0.875rem;
+  }
+}
+
+/* Smartphones Muito Pequenos (≤380px) */
+@media (max-width: 380px) {
+  .turmas-page h2 {
+    font-size: 1.25rem;
+  }
+
+  .turmas-page .d-flex.justify-content-between .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .grade-horarios h5 {
+    font-size: 0.95rem;
+  }
+
+  .turma-card h6 {
+    font-size: 0.85rem;
+  }
+
+  .turma-card p {
+    font-size: 0.75rem;
+  }
+
+  .nav-tabs .nav-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .table {
+    min-width: 550px;
+    font-size: 0.75rem;
+  }
+}

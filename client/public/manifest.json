@@ -1,0 +1,20 @@
+{
+  "short_name": "GB Cidade Nova",
+  "name": "Gracie Barra Cidade Nova - Sistema de Gestão",
+  "icons": [
+    {
+      "src": "/images/Gracie_Barra.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/Gracie_Barra.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#c8102e",
+  "background_color": "#ffffff"
+}

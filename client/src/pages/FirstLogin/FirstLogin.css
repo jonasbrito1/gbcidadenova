@@ -1,0 +1,55 @@
+.first-login-page {
+  background: linear-gradient(135deg, #c8102e 0%, #003d7a 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.first-login-page .card {
+  border-radius: 15px;
+  animation: slideInUp 0.5s ease;
+}
+
+.first-login-page .icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c8102e 0%, #ff1744 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: white;
+  box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
+}
+
+.first-login-page .text-gb-red {
+  color: #c8102e;
+}
+
+.first-login-page .progress {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.first-login-page .btn-danger {
+  background: linear-gradient(135deg, #c8102e 0%, #ff1744 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.first-login-page .btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(200, 16, 46, 0.4);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

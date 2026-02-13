@@ -1,0 +1,754 @@
+/* ========================================
+   DASHBOARD GRACIE BARRA - ESTILOS MODERNOS
+   ======================================== */
+
+/* Dashboard Container */
+.dashboard-gb {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   FIX: BOTÕES OUTLINE VISÍVEIS
+   ======================================== */
+
+/* Garantir visibilidade dos botões outline-danger */
+.btn-outline-danger {
+  color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-danger:hover {
+  color: #fff !important;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+/* Botões no ButtonGroup */
+.btn-group .btn-outline-danger {
+  border: 2px solid #dc3545 !important;
+  font-weight: 500;
+}
+
+.btn-group .btn-outline-danger:not(:hover) {
+  background-color: #fff !important;
+}
+
+/* ========================================
+   CARDS DASHBOARD GB
+   ======================================== */
+
+/* Card Base GB */
+.card-dashboard-gb {
+  border: none;
+  border-radius: 12px;
+  background: var(--gb-white);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card-dashboard-gb:hover {
+  transform: translateY(-5px);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Icon Box GB */
+.icon-box-gb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  min-height: 64px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-dashboard-gb:hover .icon-box-gb {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   BORDER BOTTOM GB (para títulos)
+   ======================================== */
+
+.border-bottom-gb-red {
+  border-bottom: 3px solid var(--gb-red) !important;
+}
+
+.border-bottom-gb-blue {
+  border-bottom: 3px solid var(--gb-blue) !important;
+}
+
+.border-bottom-gb-gray {
+  border-bottom: 3px solid var(--gb-gray-light) !important;
+}
+
+/* ========================================
+   TABELAS GB
+   ======================================== */
+
+.table-gb {
+  font-family: var(--font-body);
+}
+
+.table-gb thead {
+  border-bottom: 2px solid var(--gb-gray-light);
+}
+
+.table-gb thead th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border: none;
+}
+
+.table-gb tbody td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--gb-gray-light);
+}
+
+.table-gb tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(220, 53, 69, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+/* ========================================
+   BADGES GB ESPECÍFICOS
+   ======================================== */
+
+.badge-gb-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.badge-gb-gray {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: var(--gb-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* ========================================
+   ALERTAS GB
+   ======================================== */
+
+.alert-gb-warning {
+  background: linear-gradient(135deg, #fff4e6 0%, #fff9f0 100%);
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
+}
+
+.alert-gb-danger {
+  background: linear-gradient(135deg, #ffebee 0%, #fff5f5 100%);
+  border: 1px solid var(--gb-red);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+}
+
+.alert-gb-secondary {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 1px solid var(--gb-gray-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.1);
+}
+
+/* Border Start (lateral esquerda) */
+.border-start-warning {
+  border-left: 4px solid #ffc107 !important;
+}
+
+.border-start-danger {
+  border-left: 4px solid var(--gb-red) !important;
+}
+
+.border-start-secondary {
+  border-left: 4px solid var(--gb-gray) !important;
+}
+
+/* ========================================
+   SCROLLBAR CUSTOMIZADA GB
+   ======================================== */
+
+.custom-scrollbar-gb {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(220, 53, 69, 0.3) transparent;
+}
+
+.custom-scrollbar-gb::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar-gb::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar-gb::-webkit-scrollbar-thumb {
+  background: rgba(220, 53, 69, 0.3);
+  border-radius: 3px;
+}
+
+.custom-scrollbar-gb::-webkit-scrollbar-thumb:hover {
+  background: var(--gb-red);
+}
+
+/* ========================================
+   ANIMAÇÕES DASHBOARD
+   ======================================== */
+
+/* Animação de entrada para cards */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-dashboard-gb {
+  animation: slideInFromTop 0.6s ease-out;
+}
+
+/* Delay para animação em cascata */
+.mb-3:nth-child(1) .card-dashboard-gb {
+  animation-delay: 0.1s;
+}
+
+.mb-3:nth-child(2) .card-dashboard-gb {
+  animation-delay: 0.2s;
+}
+
+.mb-3:nth-child(3) .card-dashboard-gb {
+  animation-delay: 0.3s;
+}
+
+.mb-3:nth-child(4) .card-dashboard-gb {
+  animation-delay: 0.4s;
+}
+
+/* ========================================
+   RESPONSIVIDADE PROFISSIONAL MOBILE-FIRST
+   ======================================== */
+
+/* Tablets e iPads (≤991px) */
+@media (max-width: 991px) {
+  .dashboard-gb {
+    padding: 0 !important;
+  }
+
+  .card-dashboard-gb:hover {
+    transform: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  .card-dashboard-gb:hover .icon-box-gb {
+    transform: scale(1.05);
+  }
+
+  .icon-box-gb {
+    min-width: 56px;
+    min-height: 56px;
+  }
+}
+
+/* Tablets Pequenos (≤768px) */
+@media (max-width: 768px) {
+  /* Header do Dashboard */
+  .dashboard-gb .mb-4 h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dashboard-gb .mb-4 p {
+    font-size: 0.95rem;
+  }
+
+  /* Cards */
+  .icon-box-gb {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0.625rem !important;
+  }
+
+  .icon-box-gb svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .card-dashboard-gb .card-body {
+    padding: 1rem;
+  }
+
+  .card-dashboard-gb h6 {
+    font-size: 0.7rem !important;
+  }
+
+  .card-dashboard-gb h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Tabelas */
+  .table-gb thead th,
+  .table-gb tbody td {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Smartphones (≤576px) - Foco Principal Mobile */
+@media (max-width: 576px) {
+  /* Container Principal */
+  .dashboard-gb {
+    padding: 0 !important;
+  }
+
+  /* Header */
+  .dashboard-gb .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  .dashboard-gb .mb-4 h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .dashboard-gb .mb-4 p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* Cards de Métricas */
+  .card-dashboard-gb {
+    border-radius: 10px;
+    margin-bottom: 0.875rem;
+  }
+
+  .card-dashboard-gb .card-body {
+    padding: 0.875rem;
+    gap: 0.75rem;
+  }
+
+  .icon-box-gb {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem !important;
+    border-radius: 8px !important;
+  }
+
+  .icon-box-gb svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Títulos e Valores dos Cards */
+  .card-dashboard-gb h6.gb-heading {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.3px !important;
+    line-height: 1.3;
+  }
+
+  .card-dashboard-gb h3.gb-title {
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+
+  /* Cards de Boas-vindas (Aluno) */
+  .card-dashboard-gb .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-dashboard-gb .card-text,
+  .card-dashboard-gb p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* Tabelas Responsivas */
+  .table-gb {
+    font-size: 0.8rem;
+  }
+
+  .table-gb thead th {
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+
+  .table-gb tbody td {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+
+  /* Badges */
+  .badge-gb-warning,
+  .badge-gb-gray {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  /* Alertas */
+  .alert-gb-warning,
+  .alert-gb-danger,
+  .alert-gb-secondary {
+    padding: 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  /* Animações - Remover delays em mobile para performance */
+  .mb-3:nth-child(1) .card-dashboard-gb,
+  .mb-3:nth-child(2) .card-dashboard-gb,
+  .mb-3:nth-child(3) .card-dashboard-gb,
+  .mb-3:nth-child(4) .card-dashboard-gb {
+    animation-delay: 0s;
+  }
+}
+
+/* Smartphones Muito Pequenos (≤380px) */
+@media (max-width: 380px) {
+  /* Header */
+  .dashboard-gb .mb-4 h2 {
+    font-size: 1.35rem;
+  }
+
+  .dashboard-gb .mb-4 p {
+    font-size: 0.8rem;
+  }
+
+  /* Cards Ultra Compactos */
+  .card-dashboard-gb .card-body {
+    padding: 0.75rem;
+    gap: 0.625rem;
+  }
+
+  .icon-box-gb {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.45rem !important;
+  }
+
+  .icon-box-gb svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .card-dashboard-gb h6.gb-heading {
+    font-size: 0.6rem !important;
+  }
+
+  .card-dashboard-gb h3.gb-title {
+    font-size: 1rem;
+  }
+
+  .card-dashboard-gb .card-title {
+    font-size: 1rem;
+  }
+
+  .card-dashboard-gb .card-text,
+  .card-dashboard-gb p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   LEGACY SUPPORT (manter compatibilidade)
+   ======================================== */
+
+/* CMS Quick Access Styles - mantido para compatibilidade */
+.cms-quick-access-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 15px !important;
+}
+
+.cms-quick-access-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.8s ease;
+}
+
+.cms-quick-access-card:hover::before {
+  left: 100%;
+}
+
+.cms-quick-access-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3) !important;
+}
+
+.cms-quick-access-card .btn:hover {
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.cms-menu-item:hover {
+  background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)) !important;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+/* ========================================
+   CARDS CLICÁVEIS - NAVEGAÇÃO
+   ======================================== */
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.card-dashboard-gb.cursor-pointer:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  cursor: pointer;
+}
+
+.card-dashboard-gb.cursor-pointer:active {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ========================================
+   GRÁFICOS RECHARTS - RESPONSIVIDADE
+   ======================================== */
+
+/* Desktop e Tablets grandes (>992px) */
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+
+/* Tablets (≤991px) */
+@media (max-width: 991px) {
+  .recharts-wrapper {
+    font-size: 11px;
+  }
+
+  /* Ajustar altura dos gráficos em tablets */
+  .card-dashboard-gb .recharts-responsive-container {
+    min-height: 250px !important;
+  }
+}
+
+/* Tablets pequenos (≤768px) */
+@media (max-width: 768px) {
+  /* Botões de controle de período */
+  .btn-group-sm > .btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  /* Ajustar gráficos */
+  .card-dashboard-gb .recharts-responsive-container {
+    min-height: 220px !important;
+  }
+
+  .recharts-text {
+    font-size: 10px;
+  }
+
+  .recharts-legend-wrapper {
+    font-size: 11px !important;
+  }
+}
+
+/* Smartphones (≤576px) - FOCO PRINCIPAL */
+@media (max-width: 576px) {
+  /* Controles de Período */
+  .btn-group-sm {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .btn-group-sm > .btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+    flex: 1;
+  }
+
+  /* Cards de Gráficos */
+  .card-dashboard-gb .card-title {
+    font-size: 1rem !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Gráficos Recharts - Responsivos */
+  .card-dashboard-gb .recharts-responsive-container {
+    min-height: 200px !important;
+    max-height: 250px !important;
+  }
+
+  /* Texto dos gráficos */
+  .recharts-text {
+    font-size: 9px !important;
+  }
+
+  .recharts-cartesian-axis-tick-value {
+    font-size: 9px !important;
+  }
+
+  .recharts-legend-wrapper {
+    font-size: 10px !important;
+    padding-top: 8px !important;
+  }
+
+  .recharts-legend-item-text {
+    font-size: 10px !important;
+  }
+
+  /* Tooltip customizado */
+  .custom-tooltip {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .custom-tooltip .label {
+    font-size: 0.8rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .custom-tooltip p {
+    font-size: 0.75rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* Gráfico de Pizza - Ajustar labels */
+  .recharts-pie-label-text {
+    font-size: 9px !important;
+  }
+
+  /* Gráfico Radar - Ajustar */
+  .recharts-polar-angle-axis-tick-value {
+    font-size: 8px !important;
+  }
+
+  .recharts-polar-radius-axis-tick-value {
+    font-size: 8px !important;
+  }
+
+  /* Desabilitar animações hover em mobile para performance */
+  .card-dashboard-gb.cursor-pointer:hover {
+    transform: none !important;
+  }
+
+  .card-dashboard-gb.cursor-pointer:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Smartphones muito pequenos (≤380px) */
+@media (max-width: 380px) {
+  /* Gráficos ainda mais compactos */
+  .card-dashboard-gb .recharts-responsive-container {
+    min-height: 180px !important;
+    max-height: 220px !important;
+  }
+
+  /* Botões de período em coluna */
+  .btn-group-sm {
+    flex-direction: column;
+  }
+
+  .btn-group-sm > .btn {
+    width: 100%;
+    border-radius: 6px !important;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Texto ainda menor */
+  .recharts-text,
+  .recharts-cartesian-axis-tick-value,
+  .recharts-pie-label-text,
+  .recharts-polar-angle-axis-tick-value {
+    font-size: 7px !important;
+  }
+
+  .recharts-legend-item-text {
+    font-size: 8px !important;
+  }
+
+  .custom-tooltip {
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+/* ========================================
+   OTIMIZAÇÕES DE PERFORMANCE MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Reduzir sombras para melhor performance */
+  .card-dashboard-gb {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Simplificar transições */
+  .card-dashboard-gb,
+  .icon-box-gb,
+  .hover-lift {
+    transition: none;
+  }
+
+  /* Desabilitar animações complexas */
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0.5;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

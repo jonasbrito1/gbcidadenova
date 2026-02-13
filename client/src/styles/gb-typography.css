@@ -1,0 +1,195 @@
+/* ========================================
+   TIPOGRAFIA GRACIE BARRA
+   ======================================== */
+
+/* Títulos Principais - Estilo GB Logo */
+h1, .h1,
+.gb-title,
+.title-gb {
+  font-family: var(--font-title);
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Cabeçalhos - Estilo GB */
+h2, .h2,
+h3, .h3,
+.gb-heading,
+.heading-gb {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Corpo de Texto */
+body,
+p, .p,
+.gb-body,
+.text-gb {
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Tamanhos de Fonte GB */
+.text-gb-xs { font-size: 0.75rem; }
+.text-gb-sm { font-size: 0.875rem; }
+.text-gb-base { font-size: 1rem; }
+.text-gb-lg { font-size: 1.125rem; }
+.text-gb-xl { font-size: 1.25rem; }
+.text-gb-2xl { font-size: 1.5rem; }
+.text-gb-3xl { font-size: 1.875rem; }
+.text-gb-4xl { font-size: 2.25rem; }
+.text-gb-5xl { font-size: 3rem; }
+
+/* Pesos de Fonte GB */
+.font-gb-light { font-weight: 300; }
+.font-gb-normal { font-weight: 400; }
+.font-gb-medium { font-weight: 500; }
+.font-gb-semibold { font-weight: 600; }
+.font-gb-bold { font-weight: 700; }
+
+/* Classes de Cor para Texto */
+.text-gb-red { color: var(--gb-red) !important; }
+.text-gb-red-dark { color: var(--gb-red-dark) !important; }
+.text-gb-blue { color: var(--gb-blue) !important; }
+.text-gb-black { color: var(--gb-black) !important; }
+.text-gb-white { color: var(--gb-white) !important; }
+.text-gb-gray { color: var(--gb-gray) !important; }
+
+/* Gradientes de Texto GB */
+.text-gradient-gb-red {
+  background: var(--gb-red-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gb-blue {
+  background: var(--gb-blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Título Estilo Logo GB */
+.logo-title-gb {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--gb-red-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtítulo GB */
+.subtitle-gb {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gb-gray);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Badge de Texto GB */
+.badge-text-gb {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Botão Texto GB */
+.btn-text-gb {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Classes Utilitárias */
+.uppercase-gb {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.capitalize-gb {
+  text-transform: capitalize;
+}
+
+/* Animação de Texto */
+.text-animate-gb {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.text-animate-gb:hover {
+  transform: translateY(-2px);
+  color: var(--gb-red);
+}
+
+/* Título de Página */
+.page-title-gb {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gb-black);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle-gb {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--gb-gray);
+  margin-bottom: 1.5rem;
+}
+
+/* Título de Card */
+.card-title-gb {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gb-black);
+  margin-bottom: 0.75rem;
+}
+
+/* Texto Destacado */
+.text-highlight-gb {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--gb-red);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .logo-title-gb {
+    font-size: 2rem;
+  }
+
+  .page-title-gb {
+    font-size: 1.5rem;
+  }
+
+  .text-gb-5xl { font-size: 2.5rem; }
+  .text-gb-4xl { font-size: 2rem; }
+  .text-gb-3xl { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .logo-title-gb {
+    font-size: 1.75rem;
+    letter-spacing: 1px;
+  }
+
+  .page-title-gb {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,55 @@
+/* Dropdown Customizado para Students */
+.custom-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10000 !important;
+  min-width: 200px;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  margin-top: 0.125rem;
+  display: block;
+}
+
+.custom-dropdown-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.custom-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.custom-dropdown-divider {
+  border-top: 1px solid #dee2e6;
+  margin: 0.25rem 0;
+}
+
+.custom-dropdown-item-warning {
+  color: #ffc107;
+}
+
+.custom-dropdown-item-success {
+  color: #28a745;
+}
+
+.custom-dropdown-item-danger {
+  color: #dc3545;
+}

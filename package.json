@@ -1,0 +1,40 @@
+{
+  "name": "gracie-barra-sistema",
+  "version": "2.0.0",
+  "description": "Sistema de gestão da academia Gracie Barra - JavaScript Full-Stack",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "docker:up": "docker-compose -f docker-compose.modern.yml up -d",
+    "docker:down": "docker-compose -f docker-compose.modern.yml down",
+    "docker:build": "docker-compose -f docker-compose.modern.yml build --no-cache",
+    "docker:logs": "docker-compose -f docker-compose.modern.yml logs -f",
+    "docker:restart": "npm run docker:down && npm run docker:up",
+    "setup": "npm run install:all && echo '✅ Setup completo! Execute: npm run docker:up'",
+    "clean": "docker system prune -f && docker volume prune -f"
+  },
+  "keywords": [
+    "academia",
+    "gracie-barra",
+    "jiu-jitsu",
+    "gestao",
+    "react",
+    "node",
+    "javascript",
+    "fullstack"
+  ],
+  "author": "Gracie Barra System",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
